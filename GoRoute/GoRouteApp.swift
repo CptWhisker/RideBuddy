@@ -2,7 +2,7 @@
 //  GoRouteApp.swift
 //  GoRoute
 //
-//  Created by Александр Московцев on 10.11.2024.
+//  Created by Aleksandr Moskovtsev  on 10.11.2024.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct GoRouteApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainScreen()
         }
     }
 }

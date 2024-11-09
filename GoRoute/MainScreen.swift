@@ -2,12 +2,12 @@
 //  ContentView.swift
 //  GoRoute
 //
-//  Created by Александр Московцев on 10.11.2024.
+//  Created by Aleksandr Moskovtsev on 10.11.2024.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainScreen: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MainScreen()
 }
