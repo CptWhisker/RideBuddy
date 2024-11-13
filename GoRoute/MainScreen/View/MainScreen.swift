@@ -12,23 +12,43 @@ struct MainScreen: View {
     @ObservedObject var viewModel: MainScreenViewModel
     
     var body: some View {
-        VStack {
-            Button {
-                viewModel.getNearestStations()
-            } label: {
-                Text("Get nearest stations")
-                    .padding()
-                    .background(.blue)
-                    .foregroundStyle(.white)
-                    .clipShape(.buttonBorder)
-            }
+        ZStack {
+            Color.gray
+                .ignoresSafeArea()
+                .opacity(0.25)
             
-            Spacer()
+            VStack(spacing: 20) {
+                ForEach(MainScreenAction.allCases) { action in
+                    MainScreenButton(title: action.rawValue) {
+                        action.performAction(on: viewModel)
+                    }
+                }
+            }
         }
-        .padding(.top, 30)
     }
 }
 
 #Preview {
     MainScreen(viewModel: MainScreenViewModel())
+}
+
+private extension MainScreen {
+    
+    struct MainScreenButton: View {
+        
+        let title: String
+        let action: () -> Void
+        
+        var body: some View {
+            Button(action: action) {
+                Text(title)
+                    .font(.headline)
+                    .frame(width: 300, height: 60)
+                    .background(.blue)
+                    .foregroundStyle(.white)
+                    .clipShape(.buttonBorder)
+                    .shadow(radius: 5)
+            }
+        }
+    }
 }
