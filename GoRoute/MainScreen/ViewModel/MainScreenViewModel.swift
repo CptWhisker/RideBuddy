@@ -89,7 +89,7 @@ extension MainScreenViewModel: MainScreenViewModelProtocol {
             let randomRegion = randomCountry.regions?.randomElement(),
             let randomSettlement = randomRegion.settlements?.randomElement(),
             let stationsCount = randomSettlement.stations?.count {
-            print("Страна: \(randomCountry)\nРегион: \(randomRegion)\nГород: \(randomSettlement)\nКоличество станций: \(stationsCount)")
+            print("Страна: \(randomCountry.title ?? "Неизвестная страна")\nРегион: \(randomRegion.title ?? "Неизвестный регион")\nГород: \(randomSettlement.title ?? "Неизвестный город")\nКоличество станций: \(stationsCount)")
         }
     }
     

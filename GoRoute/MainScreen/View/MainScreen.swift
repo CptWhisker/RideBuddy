@@ -24,7 +24,7 @@ struct MainScreen: View {
                             do {
                                 try await action.performAction(on: viewModel)
                             } catch {
-                                print(action.errorDescription)
+                                print(action.errorDescription, error.localizedDescription)
                             }
                         }
                     }

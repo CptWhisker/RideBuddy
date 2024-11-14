@@ -312,7 +312,7 @@ paths:
         "200":
           description: success
           content:
-            application/json:
+            text/html:
               schema:
                 $ref: '#/components/schemas/StationsListResponse'
   /v3.0/copyright/:
@@ -358,8 +358,8 @@ components:
       type: object
       properties:
         station:
-          $ref: '#/components/schemas/GetStationsForThreadStation'
-    GetStationsForThreadStation:
+          $ref: '#/components/schemas/ThreadStation'
+    ThreadStation:
       type: object
       properties:
         title:
@@ -370,12 +370,12 @@ components:
         date:
           type: string
         station:
-          $ref: '#/components/schemas/GetScheduleFromStationStation'
+          $ref: '#/components/schemas/ScheduleStation'
         schedule:
           type: array
           items:
             $ref: '#/components/schemas/ScheduleItem'
-    GetScheduleFromStationStation:
+    ScheduleStation:
       type: object
       properties:
         code:
@@ -412,13 +412,13 @@ components:
       type: object
       properties:
         from:
-          $ref: '#/components/schemas/GetScheduleBetweenStationsStation'
+          $ref: '#/components/schemas/SegmentStation'
         thread:
           $ref: '#/components/schemas/Thread'
         departure_platform:
           type: string
         to:
-          $ref: '#/components/schemas/GetScheduleBetweenStationsStation'
+          $ref: '#/components/schemas/SegmentStation'
         duration:
           type: integer
         start_date:
@@ -429,18 +429,18 @@ components:
         arrival:
           type: string
         from:
-          $ref: '#/components/schemas/GetScheduleBetweenStationsStation'
+          $ref: '#/components/schemas/SegmentStation'
         thread:
           $ref: '#/components/schemas/Thread'
         departure_platform:
           type: string
         to:
-          $ref: '#/components/schemas/GetScheduleBetweenStationsStation'
+          $ref: '#/components/schemas/SegmentStation'
         duration:
           type: integer
         start_date:
           type: string
-    GetScheduleBetweenStationsStation:
+    SegmentStation:
       type: object
       properties:
         code:
@@ -480,41 +480,39 @@ components:
     Country:
       type: object
       properties:
-        title:
-          type: string
         regions:
           type: array
           items:
             $ref: '#/components/schemas/Region'
+        title:
+          type: string
     Region:
       type: object
       properties:
-        title:
-          type: string
         settlements:
           type: array
           items:
-            $ref: '#/components/schemas/GetStationsListSettlement'
-    GetStationsListSettlement:
-      type: object
-      properties:
+            $ref: '#/components/schemas/RegionSettlement'
         title:
           type: string
+    RegionSettlement:
+      type: object
+      properties:
         stations:
           type: array
           items:
-            $ref: '#/components/schemas/GetStationsListStation'
-    GetStationsListStation:
+            $ref: '#/components/schemas/SettlementStation'
+        title:
+          type: string
+    SettlementStation:
       type: object
       properties:
-        title:
+        direction:
           type: string
         station_type:
           type: string
-        latitude:
-          type: number
-        longtitude:
-          type: number
+        title:
+          type: string
     Carriers:
       type: object
       properties:

@@ -5,6 +5,7 @@
 //  Created by Aleksandr Moskovtsev on 13.11.2024.
 //
 
+import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
@@ -35,6 +36,7 @@ final class YandexScheduleService {
     // MARK: Properties
     private let client: Client
     private let apiKey: String
+    private let decoder = JSONDecoder()
     
     // MARK: Initialization
     init(client: Client, apiKey: String) {
@@ -125,8 +127,9 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
                 apikey: apiKey
             )
         )
+        let httpBody = try response.ok.body.html
         
-        return try response.ok.body.json
+        return try await decoder.decode(from: httpBody, to: Countries.self)
     }
     
     func getCopyright() async throws -> Copyright? {
