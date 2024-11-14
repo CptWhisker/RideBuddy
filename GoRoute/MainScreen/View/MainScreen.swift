@@ -20,7 +20,13 @@ struct MainScreen: View {
             VStack(spacing: 20) {
                 ForEach(MainScreenAction.allCases) { action in
                     MainScreenButton(title: action.rawValue) {
-                        action.performAction(on: viewModel)
+                        Task {
+                            do {
+                                try await action.performAction(on: viewModel)
+                            } catch {
+                                print(action.errorDescription)
+                            }
+                        }
                     }
                 }
             }

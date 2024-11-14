@@ -10,14 +10,14 @@ import OpenAPIURLSession
 
 // MARK: - Protocol
 protocol MainScreenViewModelProtocol: AnyObject {
-    func getScheduleBetweenStations()
-    func getScheduleFromStation()
-    func getStationsForThread()
-    func getNearestStations()
-    func getNearestSettlement()
-    func getCarrierInfo()
-    func getStationsList()
-    func getCopyright()
+    func getScheduleBetweenStations() async throws
+    func getScheduleFromStation() async throws
+    func getStationsForThread() async throws
+    func getNearestStations() async throws
+    func getNearestSettlement() async throws
+    func getCarrierInfo() async throws
+    func getStationsList() async throws
+    func getCopyright() async throws
 }
 
 final class MainScreenViewModel: ObservableObject {
@@ -45,104 +45,56 @@ final class MainScreenViewModel: ObservableObject {
 // MARK: - Protocol Implementation
 extension MainScreenViewModel: MainScreenViewModelProtocol {
     
-    func getScheduleBetweenStations() {
-        Task {
-            do {
-                let result = try await scheduleService?.getScheduleBetweenStations(stationFrom: "c213", stationTo: "c2")
-                if
-                    let schedule = result?.first,
-                    let routeTitle = schedule.thread?.title,
-                    let routeNumber = schedule.thread?.number,
-                    let departureDate = schedule.start_date {
-                    print("Отправление под номером '\(routeNumber)' проследует по маршруту '\(routeTitle)' \(departureDate)")
-                }
-            } catch {
-                print("Failed to fetch schedule for provided stations: \(error.localizedDescription)")
-            }
+    func getScheduleBetweenStations() async throws {
+        let result = try await scheduleService?.getScheduleBetweenStations(stationFrom: "c213", stationTo: "c2")
+        if
+            let schedule = result?.first,
+            let routeTitle = schedule.thread?.title,
+            let routeNumber = schedule.thread?.number,
+            let departureDate = schedule.start_date {
+            print("Отправление под номером '\(routeNumber)' проследует по маршруту '\(routeTitle)' \(departureDate)")
         }
     }
     
-    func getScheduleFromStation() {
-        Task {
-            do {
-                let result = try await scheduleService?.getScheduleFromStation(station: "s9600213")
-                print("Ближайшее отправление для станции '\(result?.station?.title ??  "Неизвестная станция")' проследует по маршруту '\(result?.schedule?.first?.thread?.title ?? "Неизвестный маршрут")'")
-            } catch {
-                print("Failed to fetch schedule for provided station: \(error.localizedDescription)")
-            }
+    func getScheduleFromStation() async throws {
+        let result = try await scheduleService?.getScheduleFromStation(station: "s9600213")
+        print("Ближайшее отправление для станции '\(result?.station?.title ??  "Неизвестная станция")' проследует по маршруту '\(result?.schedule?.first?.thread?.title ?? "Неизвестный маршрут")'")
+    }
+    
+    func getStationsForThread() async throws {
+        let result = try await scheduleService?.getStationsForThread(threadID: "727A_7_2")
+        let stops = result?.stops?.compactMap({$0.station?.title})
+        print("Отправление '\(result?.number ?? "Неизвестное отправление")', следующее по маршруту '\(result?.title ?? "Неизвестный маршрут")', проходит через станции: '\(stops?.joined(separator: ", ") ?? "Неизвестные станции")' ")
+    }
+    
+    func getNearestStations() async throws {
+        let result = try await scheduleService?.getNearestStations(lat: 59.864177, lon: 30.319163, distance: 50, limit: 5)
+        result?.stations?.forEach { print("Ближайшая станция: \($0.title ?? "Неизвестная станция")") }
+    }
+    
+    func getNearestSettlement() async throws {
+        let result = try await scheduleService?.getNearestSettlement(lat: 59.864177, lon: 30.319163, distance: 50)
+        print("Ближайший населенный пункт: \(result?.title ?? "Неизвестный населенный пункт")")
+    }
+    
+    func getCarrierInfo() async throws {
+        let result = try await scheduleService?.getCarrierInfo(code: 680)
+        print("Перевозчик: \(result?.carrier?.title ?? "Неизвестный перевозчик")")
+    }
+    
+    func getStationsList() async throws {
+        let result = try await scheduleService?.getStationsList()
+        if
+            let randomCountry = result?.countries?.randomElement(),
+            let randomRegion = randomCountry.regions?.randomElement(),
+            let randomSettlement = randomRegion.settlements?.randomElement(),
+            let stationsCount = randomSettlement.stations?.count {
+            print("Страна: \(randomCountry)\nРегион: \(randomRegion)\nГород: \(randomSettlement)\nКоличество станций: \(stationsCount)")
         }
     }
     
-    func getStationsForThread() {
-        Task {
-            do {
-                let result = try await scheduleService?.getStationsForThread(threadID: "727A_7_2")
-                let stops = result?.stops?.compactMap({$0.station?.title})
-                print("Отправление '\(result?.number ?? "Неизвестное отправление")', следующее по маршруту '\(result?.title ?? "Неизвестный маршрут")', проходит через станции: '\(stops?.joined(separator: ", ") ?? "Неизвестные станции")' ")
-            } catch {
-                print("Failed to fetch stations within provided thread: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func getNearestStations() {
-        Task {
-            do {
-                let result = try await scheduleService?.getNearestStations(lat: 59.864177, lon: 30.319163, distance: 50, limit: 5)
-                result?.stations?.forEach { print("Ближайшая станция: \($0.title ?? "Неизвестная станция")") }
-            } catch {
-                print("Failed to fetch nearest stations: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func getNearestSettlement() {
-        Task {
-            do {
-                let result = try await scheduleService?.getNearestSettlement(lat: 59.864177, lon: 30.319163, distance: 50)
-                print("Ближайший населенный пункт: \(result?.title ?? "Неизвестный населенный пункт")")
-            } catch {
-                print("Failed to fetch nearest settlement: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func getCarrierInfo() {
-        Task {
-            do {
-                let result = try await scheduleService?.getCarrierInfo(code: 680)
-                print("Перевозчик: \(result?.carrier?.title ?? "Неизвестный перевозчик")")
-            } catch {
-                print("Failed to fetch carrier info: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func getStationsList() {
-        Task {
-            do {
-                let result = try await scheduleService?.getStationsList()
-                if
-                    let randomCountry = result?.countries?.randomElement(),
-                    let randomRegion = randomCountry.regions?.randomElement(),
-                    let randomSettlement = randomRegion.settlements?.randomElement(),
-                    let stationsCount = randomSettlement.stations?.count {
-                    print("Страна: \(randomCountry)\nРегион: \(randomRegion)\nГород: \(randomSettlement)\nКоличество станций: \(stationsCount)")
-                }
-            } catch {
-                print("Сервер возвращает text/html вместо application/json. В файле openapi.yaml я могу поменять конфигурацию запроса на получение реального формата, но не совсем понятно, как обрабатывать получаемый в таком случае тип данных - HTTPBody. Уж не знаю, баг это или фича, что результат отличается от описанного в документации API.\nВот код ошибки: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func getCopyright() {
-        Task {
-            do {
-                let result = try await scheduleService?.getCopyright()
-                print("Копирайт: \(result?.text ?? "Информация недоступна")")
-            } catch {
-                print("Failed to fetch copyright data: \(error.localizedDescription)")
-            }
-        }
+    func getCopyright() async throws {
+        let result = try await scheduleService?.getCopyright()
+        print("Копирайт: \(result?.text ?? "Информация недоступна")")
     }
 }
