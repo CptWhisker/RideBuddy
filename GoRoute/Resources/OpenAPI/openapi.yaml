@@ -14,12 +14,6 @@ paths:
       summary: Cписок рейсов, следующих от станции оправления к станции прибытия
       operationId: getScheduleBetweenStations
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: false
-        schema:
-          type: string
       - name: from
         in: query
         description: код станции отправления
@@ -64,12 +58,6 @@ paths:
       summary: Cписок рейсов, отправляющихся от указанной станции
       operationId: getScheduleFromStation
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
       - name: station
         in: query
         description: код станции
@@ -102,12 +90,6 @@ paths:
       summary: Cписок станций следования нитки
       operationId: getStationsForThread
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
       - name: uid
         in: query
         description: идентификатор нитки
@@ -146,12 +128,6 @@ paths:
       summary: Cписок станций, находящихся в указанном радиусе от указанной точки
       operationId: getNearestStations
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
       - name: lat
         in: query
         description: широта
@@ -202,12 +178,6 @@ paths:
       summary: Информация о ближайшем к указанной точке городе
       operationId: getNearestSettlement
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
       - name: lat
         in: query
         description: широта
@@ -252,12 +222,6 @@ paths:
       summary: Информация о перевозчике по указанному коду перевозчика
       operationId: getCarrierInfo
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
       - name: code
         in: query
         description: код перевозчика
@@ -290,12 +254,6 @@ paths:
       summary: Полный список станций, информацию о которых предоставляют Яндекс.Расписания
       operationId: getStationsList
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
       - name: lang
         in: query
         description: lang
@@ -322,12 +280,6 @@ paths:
       summary: Данные о ЯндексюРасписаниях
       operationId: getCopyright
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
       - name: format
         in: query
         description: json или xml

@@ -32,10 +32,11 @@ final class MainScreenViewModel: ObservableObject {
         do {
             client = try Client(
                 serverURL: Servers.Server1.url(),
-                transport: URLSessionTransport()
+                transport: URLSessionTransport(),
+                middlewares: [AuthenticationMiddlewareService(authorizationHeaderValue: apiKey)]
             )
             guard let client else { return }
-            scheduleService = YandexScheduleService(client: client, apiKey: apiKey)
+            scheduleService = YandexScheduleService(client: client)
         } catch {
             print("Failed to create client with server URL: \(error.localizedDescription)")
         }

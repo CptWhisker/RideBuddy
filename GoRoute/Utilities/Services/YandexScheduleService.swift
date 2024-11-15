@@ -35,13 +35,11 @@ final class YandexScheduleService {
     
     // MARK: Properties
     private let client: Client
-    private let apiKey: String
     private let decoder = JSONDecoder()
     
     // MARK: Initialization
-    init(client: Client, apiKey: String) {
+    init(client: Client) {
         self.client = client
-        self.apiKey = apiKey
     }
 }
 
@@ -51,7 +49,6 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
     func getScheduleBetweenStations(stationFrom: String, stationTo: String) async throws -> [Segment]? {
         let response = try await client.getScheduleBetweenStations(
             query: .init(
-                apikey: apiKey,
                 from: stationFrom,
                 to: stationTo,
                 limit: 1
@@ -64,7 +61,6 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
     func getScheduleFromStation(station: String) async throws -> ScheduleResponse {
         let response = try await client.getScheduleFromStation(
             query: .init(
-                apikey: apiKey,
                 station: station
             )
         )
@@ -75,7 +71,6 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
     func getStationsForThread(threadID: String) async throws -> ThreadResponse {
         let response = try await client.getStationsForThread(
             query: .init(
-                apikey: apiKey,
                 uid: threadID
             )
         )
@@ -86,7 +81,6 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
     func getNearestStations(lat: Double, lon: Double, distance: Int, limit: Int) async throws -> NearestStations {
         let response = try await client.getNearestStations(
             query: .init(
-                apikey: apiKey,
                 lat: lat,
                 lng: lon,
                 distance: distance,
@@ -100,7 +94,6 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
     func getNearestSettlement(lat: Double, lon: Double, distance: Int) async throws -> NearestSettlement {
         let response = try await client.getNearestSettlement(
             query: .init(
-                apikey: apiKey,
                 lat: lat,
                 lng: lon,
                 distance: distance
@@ -113,7 +106,6 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
     func getCarrierInfo(code: Int) async throws -> Carrier {
         let response = try await client.getCarrierInfo(
             query: .init(
-                apikey: apiKey,
                 code: code
             )
         )
@@ -122,22 +114,14 @@ extension YandexScheduleService: YandexScheduleServiceProtocol {
     }
     
     func getStationsList() async throws -> Countries {
-        let response = try await client.getStationsList(
-            query: .init(
-                apikey: apiKey
-            )
-        )
+        let response = try await client.getStationsList()
         let httpBody = try response.ok.body.html
         
         return try await decoder.decode(from: httpBody, to: Countries.self)
     }
     
     func getCopyright() async throws -> Copyright? {
-        let response = try await client.getCopyright(
-            query: .init(
-                apikey: apiKey
-            )
-        )
+        let response = try await client.getCopyright()
         
         return try response.ok.body.json.copyright
     }
