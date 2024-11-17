@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct GoRouteApp: App {
+    
+    @StateObject var mainScreenViewModel = MainScreenViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            MainScreen()
+            MainScreen(viewModel: mainScreenViewModel)
         }
     }
 }
