@@ -52,7 +52,7 @@ private extension MainScreen {
                     .frame(width: 300, height: 60)
                     .background(.blue)
                     .foregroundStyle(.white)
-                    .clipShape(.buttonBorder)
+                    .clipShape(.rect(cornerRadius: 10))
                     .shadow(radius: 5)
             }
         }
