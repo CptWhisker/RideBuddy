@@ -9,6 +9,7 @@ import SwiftUI
 
 final class SettingsScreenViewModel: ObservableObject {
     
+    // MARK: Properties
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     
     var isDarkModeEnabled: Bool {

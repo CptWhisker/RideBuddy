@@ -10,8 +10,11 @@ import SwiftUI
 @main
 struct GoRouteApp: App {
     
-    @StateObject var mainScreenViewModel = MainScreenViewModel()
-    @StateObject var settingsScreenViewModel = SettingsScreenViewModel()
+    @StateObject private var mainScreenViewModel = MainScreenViewModel()
+    @StateObject private var mainScreenCoordinator = MainScreenCoordinator()
+    
+    @StateObject private var settingsScreenViewModel = SettingsScreenViewModel()
+    @StateObject private var settingsScreenCoordinator = SettingsScreenCoordinator()
     
     var body: some Scene {
         WindowGroup {
@@ -19,7 +22,9 @@ struct GoRouteApp: App {
                 mainScreenViewModel: mainScreenViewModel,
                 settingsScreenViewModel: settingsScreenViewModel
             )
-                .preferredColorScheme(settingsScreenViewModel.isDarkModeEnabled ? .dark : .light)
+            .environmentObject(mainScreenCoordinator)
+            .environmentObject(settingsScreenCoordinator)
+            .preferredColorScheme(settingsScreenViewModel.isDarkModeEnabled ? .dark : .light)
         }
     }
 }

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SettingsScreenView: View {
     
-    @State private var path: [SettingsNavigationModel] = []
+    @EnvironmentObject var coordinator: SettingsScreenCoordinator
     
     @ObservedObject var viewModel: SettingsScreenViewModel
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $coordinator.path) {
             ZStack {
                 Color.main
                     .ignoresSafeArea()
@@ -23,7 +23,7 @@ struct SettingsScreenView: View {
                     SettingsToggle(title: "Темная тема", isOn: $viewModel.isDarkModeEnabled)
                         
                     SettingsButton(title: "Пользовательское соглашение") {
-                        navigateTo(.userAgreement)
+                        coordinator.navigateToUserAgreement()
                     }
                     
                     Spacer()
@@ -36,6 +36,7 @@ struct SettingsScreenView: View {
                 switch destination {
                 case .userAgreement:
                     UserAgreementView()
+                        .toolbar(.hidden, for: .tabBar)
                 }
             }
         }
@@ -43,15 +44,8 @@ struct SettingsScreenView: View {
 }
 
 #Preview {
-    SettingsScreenView(viewModel: SettingsScreenViewModel())
-}
-
-// MARK: - Navigation
-private extension SettingsScreenView {
-    
-    func navigateTo(_ destination: SettingsNavigationModel) {
-        path.append(destination)
-    }
+    let coordinator = SettingsScreenCoordinator()
+    SettingsScreenView(viewModel: SettingsScreenViewModel()).environmentObject(coordinator)
 }
 
 // MARK: - SubViews

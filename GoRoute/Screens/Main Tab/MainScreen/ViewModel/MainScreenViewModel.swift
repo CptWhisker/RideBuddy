@@ -5,27 +5,27 @@
 //  Created by Aleksandr Moskovtsev on 29.11.2024.
 //
 
-import Foundation
+import SwiftUI
 
 final class MainScreenViewModel: ObservableObject {
     
+    // MARK: Properties
     @Published var reels = [ReelModel]()
     @Published var destinationFrom: String?
     @Published var destinationTo: String?
     
+    // MARK: Initialization
     init() {
-        reels = Array(repeating: ReelModel(), count: 10)
+        reels = generateReels()
     }
     
-    func fromButtonTapped() {
-        print("fromButtonTapped")
+    // MARK: Private Methods
+    private func generateReels() -> [ReelModel] {
+        (0..<10).map { _ in ReelModel() }
     }
     
-    func toButtonTapped() {
-        print("toButtonTapped")
-    }
-    
+    // MARK: Public Methods
     func changeButtonTapped() {
-        print("changeButtonTapped")
+        (destinationFrom, destinationTo) = (destinationTo, destinationFrom)
     }
 }
