@@ -16,11 +16,39 @@ struct MainScreenView: View {
             Color.main
                 .ignoresSafeArea()
             
-            Text("Main Screen")
+            VStack {
+                reelsView
+                
+                Spacer()
+            }
+            .padding(.top, 24)
         }
     }
 }
 
 #Preview {
     MainScreenView(viewModel: MainScreenViewModel())
+}
+
+// MARK: - SubViews
+private extension MainScreenView {
+    
+    var reelsView: some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 12) {
+                ForEach(viewModel.reels) { _ in
+                    Rectangle()
+                        .fill(Color.accent)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 16)
+                                .strokeBorder(Color.appBlue, lineWidth: 4)
+                        }
+                        .frame(width: 92, height: 140)
+                }
+            }
+            .padding(.horizontal, 16)
+        }
+        .scrollIndicators(.hidden)
+    }
 }

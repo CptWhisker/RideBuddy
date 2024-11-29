@@ -46,6 +46,7 @@ struct SettingsScreenView: View {
     SettingsScreenView(viewModel: SettingsScreenViewModel())
 }
 
+// MARK: - Navigation
 private extension SettingsScreenView {
     
     func navigateTo(_ destination: SettingsNavigationModel) {

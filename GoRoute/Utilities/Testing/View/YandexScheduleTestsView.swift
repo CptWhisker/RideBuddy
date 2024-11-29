@@ -9,7 +9,7 @@ import SwiftUI
 
 struct YandexScheduleTestsView: View {
     
-    @ObservedObject var viewModel: MainScreenViewModel
+    @ObservedObject var viewModel: YandexScheduleTestsViewModel
     
     var body: some View {
         ZStack {
@@ -34,6 +34,7 @@ struct YandexScheduleTestsView: View {
     }
 }
 
+// MARK: - SubViews
 private extension YandexScheduleTestsView {
     
     struct YandexScheduleTestsButton: View {
@@ -57,5 +58,5 @@ private extension YandexScheduleTestsView {
 
 
 #Preview {
-    YandexScheduleTestsView(viewModel: MainScreenViewModel())
+    YandexScheduleTestsView(viewModel: YandexScheduleTestsViewModel())
 }
