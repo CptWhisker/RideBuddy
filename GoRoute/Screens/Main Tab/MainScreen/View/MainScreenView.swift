@@ -22,7 +22,7 @@ struct MainScreenView: View {
                 Color.main
                     .ignoresSafeArea()
                 
-                VStack(spacing: 44) {
+                VStack(spacing: 16) {
                     ReelsView(reels: viewModel.reels)
                     
                     DestinationSelectionView(
@@ -39,6 +39,14 @@ struct MainScreenView: View {
                         destinationFrom: $viewModel.destinationFrom,
                         destinationTo: $viewModel.destinationTo
                     )
+                    
+                    if viewModel.isShowingSearchButton {
+                        AppButtonView(
+                            title: "Найти",
+                            dimensions: CGSize(width: 150, height: 60),
+                            action: { print("AppButton tapped") }
+                        )
+                    }
                     
                     Spacer()
                 }

@@ -18,6 +18,7 @@ final class MainScreenViewModel: ObservableObject {
     @Published var destinationTo: SelectionModel?
     @Published var searchCityText: String = ""
     @Published var searchStationText: String = ""
+    @Published var isShowingSearchButton: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -56,7 +57,7 @@ private extension MainScreenViewModel {
     func getStations() {
         filteredStations = selectedCity?.stations ?? []
     }
-
+    
     // MARK: Data Filtering
     func filterCities(by text: String) {
         if text.isEmpty {
@@ -83,6 +84,7 @@ private extension MainScreenViewModel {
     func makeSubscriptions() {
         makeCitySearchSubscription()
         makeStationSearchSubscription()
+        makeSearchButtonVisibilitySubscription()
     }
     
     func makeCitySearchSubscription() {
@@ -103,6 +105,16 @@ private extension MainScreenViewModel {
                 guard let self else { return }
                 
                 self.filterStations(by: newText)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func makeSearchButtonVisibilitySubscription() {
+        Publishers.CombineLatest($destinationFrom, $destinationTo)
+            .sink { [weak self] destinationFrom, destinationTo in
+                guard let self else { return }
+                
+                self.isShowingSearchButton = (destinationFrom != nil && destinationTo != nil)
             }
             .store(in: &cancellables)
     }
