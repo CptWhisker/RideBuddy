@@ -10,7 +10,7 @@ import Foundation
 enum MainNavigationModel {
     case cityList
     case stationList
-    case carrierList
+    case routeList
     case filterScreen
     case carrierDetails
 }

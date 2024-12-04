@@ -44,7 +44,7 @@ struct MainScreenView: View {
                         AppButtonView(
                             title: "Найти",
                             dimensions: CGSize(width: 150, height: 60),
-                            action: { print("AppButton tapped") }
+                            action: { coordinator.navigateTo(.routeList) }
                         )
                     }
                     
@@ -60,7 +60,16 @@ struct MainScreenView: View {
                         viewModel: viewModel,
                         cities: viewModel.filteredCities
                     )
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: Button(action: {
+                        coordinator.navigateBack()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundStyle(.accent)
+                    })
                     .toolbar(.hidden, for: .tabBar)
+#warning("REFACTOR THIS CUSTOM NAV BUTTON")
                     
                 case .stationList:
                     StationsListView(
@@ -68,6 +77,13 @@ struct MainScreenView: View {
                         viewModel: viewModel,
                         stations: viewModel.filteredStations
                     )
+                    
+                case .routeList:
+                    RouteListView(
+                        destinationFrom: viewModel.destinationFrom!,
+                        destinationTo: viewModel.destinationTo!
+                    )
+                    .toolbar(.hidden, for: .tabBar)
                     
                 default:
                     EmptyView()

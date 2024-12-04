@@ -44,4 +44,53 @@ struct MockDataProvider {
             ]
         )
     ]
+    
+    static let mockStations: [StationModel] = [
+        StationModel(name: "Белая Башня"),
+        StationModel(name: "Пеленнорские Поля"),
+        StationModel(name: "Речные Врата"),
+        StationModel(name: "Ортханк")
+    ]
+    
+    static let mockCarrier: CarrierModel = CarrierModel(
+        shortName: "РЖД",
+        fullName: "ОАО \"РЖД\"",
+        logo: .brandPlaceholder,
+        email: "rzd@rzd.ru",
+        phone: "+7-000-000-00-00"
+    )
+    
+    static let mockRoute: RouteModel = RouteModel(
+        origin: mockStations.first!,
+        destination: mockStations.last!,
+        carrier: mockCarrier,
+        travelDate: Date(timeIntervalSinceNow: 3600 * 5),
+        startTime: Date(timeIntervalSinceNow: 3600 * 5),
+        endTime: Date(timeIntervalSinceNow: 3600 * 17),
+        transfers: [mockCities[1]]
+    )
+    
+    static let mockRoutes: [RouteModel] = {
+        var routes: [RouteModel] = []
+        
+        for _ in 0..<20 {
+            let route = RouteModel(
+                origin: mockStations.randomElement()!,
+                destination: mockStations.randomElement()!,
+                carrier: mockCarrier,
+                travelDate: Date(timeIntervalSinceNow: 3600 * 5),
+                startTime: Date(timeIntervalSinceNow: 3600 * 5),
+                endTime: Date(timeIntervalSinceNow: Double.random(in: 3600 * 10 ... 3600 * 20)),
+                transfers: [mockCities.randomElement()!]
+            )
+            routes.append(route)
+        }
+        
+        return routes
+    }()
+    
+    static let mockSelections: [SelectionModel] = [
+        SelectionModel(cityName: mockCities.first!.name, station: mockCities.first!.stations.first!),
+        SelectionModel(cityName: mockCities.last!.name, station: mockCities.last!.stations.last!)
+    ]
 }
