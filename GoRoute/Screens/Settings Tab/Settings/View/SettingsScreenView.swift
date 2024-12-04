@@ -22,7 +22,7 @@ struct SettingsScreenView: View {
                 VStack(spacing: 0) {
                     SettingsToggle(title: "Темная тема", isOn: $viewModel.isDarkModeEnabled)
                         
-                    SettingsButton(title: "Пользовательское соглашение") {
+                    NavigationRowView(title: "Пользовательское соглашение") {
                         coordinator.navigateToUserAgreement()
                     }
                     
@@ -50,30 +50,7 @@ struct SettingsScreenView: View {
 
 // MARK: - SubViews
 private extension SettingsScreenView {
-    
-    struct SettingsButton: View {
-        
-        let title: String
-        let action: () -> Void
-        
-        var body: some View {
-            Button {
-                action()
-            } label: {
-                HStack {
-                    Text(title)
-                        .font(.system(size: 17, weight: .regular))
-                        .foregroundStyle(.accent)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundStyle(.accent)
-                }
-            }
-            .frame(height: 60)
-        }
-    }
-    
+
     struct SettingsToggle: View {
         
         let title: String
