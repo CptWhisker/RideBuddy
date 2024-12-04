@@ -8,5 +8,9 @@
 import Foundation
 
 enum MainNavigationModel {
-    case cityList, stationList, carrierList, filterScreen, carrierDetails
+    case cityList
+    case stationList
+    case carrierList
+    case filterScreen
+    case carrierDetails
 }

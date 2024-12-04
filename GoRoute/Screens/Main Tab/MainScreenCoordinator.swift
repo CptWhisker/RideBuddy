@@ -10,33 +10,19 @@ import SwiftUI
 final class MainScreenCoordinator: ObservableObject {
     
     @Published var path = NavigationPath()
+    @Published var navigationSource: NavigationSource = .none
     
-    func navigateToCitiesList() {
-        path.append(MainNavigationModel.cityList)
+    func navigateTo(_ destination: MainNavigationModel) {
+        path.append(destination)
     }
-    
-    func navigateToStationsList() {
-        path.append(MainNavigationModel.stationList)
-    }
-    
-    func navigateToCarrierList() {
-        path.append(MainNavigationModel.carrierList)
-    }
-    
-    func navigateToCarrierDetails() {
-        path.append(MainNavigationModel.carrierDetails)
-    }
-    
-    func navigateToFilterScreen() {
-        path.append(MainNavigationModel.filterScreen)
-    }
-    
+
     func navigateBack() {
         guard !path.isEmpty else { return }
         path.removeLast()
     }
     
     func returnToRoot() {
+        navigationSource = .none
         path = NavigationPath()
     }
 }

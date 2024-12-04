@@ -23,7 +23,7 @@ struct SettingsScreenView: View {
                     SettingsToggle(title: "Темная тема", isOn: $viewModel.isDarkModeEnabled)
                         
                     NavigationRowView(title: "Пользовательское соглашение") {
-                        coordinator.navigateToUserAgreement()
+                        coordinator.navigateTo(.userAgreement)
                     }
                     
                     Spacer()

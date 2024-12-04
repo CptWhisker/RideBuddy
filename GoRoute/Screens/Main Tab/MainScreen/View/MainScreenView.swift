@@ -27,8 +27,14 @@ struct MainScreenView: View {
                     
                     DestinationSelectionView(
                         buttonWidth: buttonWidth,
-                        actionFrom: { coordinator.navigateToCitiesList() },
-                        actionTo: { coordinator.navigateToCitiesList() },
+                        actionFrom: {
+                            coordinator.navigationSource = .from
+                            coordinator.navigateTo(.cityList)
+                        },
+                        actionTo: {
+                            coordinator.navigationSource = .to
+                            coordinator.navigateTo(.cityList)
+                        },
                         changeAction: { viewModel.changeButtonTapped() },
                         destinationFrom: $viewModel.destinationFrom,
                         destinationTo: $viewModel.destinationTo
@@ -41,10 +47,20 @@ struct MainScreenView: View {
             .navigationDestination(for: MainNavigationModel.self) { destination in
                 switch destination {
                 case .cityList:
-                    SelectionListView(coordinator: coordinator)
-                        .toolbar(.hidden, for: .tabBar)
+                    CitiesListView(
+                        coordinator: coordinator,
+                        viewModel: viewModel,
+                        cities: viewModel.filteredCities
+                    )
+                    .toolbar(.hidden, for: .tabBar)
+                    
                 case .stationList:
-                    SelectionListView(coordinator: coordinator)
+                    StationsListView(
+                        coordinator: coordinator,
+                        viewModel: viewModel,
+                        stations: viewModel.filteredStations
+                    )
+                    
                 default:
                     EmptyView()
                 }

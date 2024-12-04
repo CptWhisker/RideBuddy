@@ -14,8 +14,8 @@ struct DestinationSelectionView: View {
     let actionTo: () -> Void
     let changeAction: () -> Void
     
-    @Binding var destinationFrom: String?
-    @Binding var destinationTo: String?
+    @Binding var destinationFrom: SelectionModel?
+    @Binding var destinationTo: SelectionModel?
     
     var body: some View {
         ZStack {
@@ -87,22 +87,29 @@ private extension DestinationSelectionView {
     
     struct DestinationButton: View {
         
-        @Binding var destination: String?
+        @Binding var destination: SelectionModel?
         
         let buttonWidth: CGFloat
         let destinationType: DestinationType
         let action: () -> Void
         
+        private var formattedDestinationString: String {
+            guard let destination else { return destinationType.rawValue }
+            
+            return "\(destination.cityName ?? "") (\(destination.station.name))"
+        }
+        
         var body: some View {
             Button {
                 action()
             } label: {
-                Text(destination ?? destinationType.rawValue)
+                Text(formattedDestinationString)
+                    .padding(.horizontal, 16)
                     .frame(width: buttonWidth, height: 48, alignment: .leading)
-                    .padding(.leading, 16)
                     .background(.white)
-                    .foregroundStyle(.appGray)
+                    .foregroundStyle((destination != nil) ? .appBlack : .appGray)
                     .font(.system(size: 17, weight: .regular))
+                    .lineLimit(1)
             }
             .buttonStyle(.plain)
         }

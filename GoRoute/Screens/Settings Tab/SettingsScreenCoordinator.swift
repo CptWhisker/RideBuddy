@@ -11,8 +11,8 @@ final class SettingsScreenCoordinator: ObservableObject {
     
     @Published var path = NavigationPath()
     
-    func navigateToUserAgreement() {
-        path.append(SettingsNavigationModel.userAgreement)
+    func navigateTo(_ destination: SettingsNavigationModel) {
+        path.append(destination)
     }
     
     func navigateBack() {
