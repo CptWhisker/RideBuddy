@@ -9,18 +9,7 @@ import SwiftUI
 
 final class SettingsScreenCoordinator: CoordinatorProtocol {
     
+    typealias Destination = SettingsNavigationModel
+    
     @Published var path = NavigationPath()
-    
-    func navigateTo(_ destination: SettingsNavigationModel) {
-        path.append(destination)
-    }
-    
-    func navigateBack() {
-        guard !path.isEmpty else { return }
-        path.removeLast()
-    }
-    
-    func returnToRoot() {
-        path = NavigationPath()
-    }
 }

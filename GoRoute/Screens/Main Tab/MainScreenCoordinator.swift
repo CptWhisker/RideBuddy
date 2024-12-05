@@ -9,20 +9,16 @@ import SwiftUI
 
 final class MainScreenCoordinator: CoordinatorProtocol {
     
+    typealias Destination = MainNavigationModel
+    
     @Published var path = NavigationPath()
     @Published var navigationSource: NavigationSource = .none
-    
-    func navigateTo(_ destination: MainNavigationModel) {
-        path.append(destination)
-    }
+}
 
-    func navigateBack() {
-        guard !path.isEmpty else { return }
-        path.removeLast()
-    }
+// MARK: - Custom Implementation
+extension MainScreenCoordinator {
     
-    func returnToRoot() {
+    func prepareForRootReset() {
         navigationSource = .none
-        path = NavigationPath()
     }
 }
