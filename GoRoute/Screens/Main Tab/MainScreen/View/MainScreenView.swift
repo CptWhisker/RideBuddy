@@ -29,32 +29,20 @@ struct MainScreenView: View {
                     DestinationSelectionView(
                         buttonWidth: buttonWidth,
                         actionFrom: {
-                            coordinator.navigationSource = .from
-                            coordinator.navigateTo(.cityList)
+                            fromButtonTapped()
                         },
                         actionTo: {
-                            coordinator.navigationSource = .to
-                            coordinator.navigateTo(.cityList)
+                            toButtonTapped()
                         },
                         changeAction: {
-                            mainViewModel.changeButtonTapped()
+                            changeButtonTapped()
                         },
                         destinationFrom: $mainViewModel.destinationFrom,
                         destinationTo: $mainViewModel.destinationTo
                     )
                     
                     if mainViewModel.isShowingSearchButton {
-                        AppButtonView(
-                            title: "Найти",
-                            dimensions: CGSize(width: 150, height: 60),
-                            action: {
-                                routeViewModel.updateDestinations(
-                                    destinationFrom: mainViewModel.destinationFrom,
-                                    destinationTo: mainViewModel.destinationTo
-                                )
-                                coordinator.navigateTo(.routeList)
-                            }
-                        )
+                        searchButton
                     }
                     
                     Spacer()
@@ -63,6 +51,7 @@ struct MainScreenView: View {
             }
             .navigationDestination(for: MainNavigationModel.self) { destination in
                 switch destination {
+                    
                 case .cityList:
                     CitiesListView(
                         coordinator: coordinator,
@@ -81,12 +70,12 @@ struct MainScreenView: View {
                     .navigationBackButton(coordinator: coordinator)
                     
                 case .routeList:
-                        RouteListView(
-                            viewModel: routeViewModel,
-                            coordinator: coordinator
-                        )
-                        .navigationBackButton(coordinator: coordinator)
-                        .toolbar(.hidden, for: .tabBar)
+                    RouteListView(
+                        viewModel: routeViewModel,
+                        coordinator: coordinator
+                    )
+                    .navigationBackButton(coordinator: coordinator)
+                    .toolbar(.hidden, for: .tabBar)
                     
                 case .carrierDetails:
                     if let carrier = routeViewModel.selectedCarrier {
@@ -95,14 +84,56 @@ struct MainScreenView: View {
                     }
                     
                 case .filterScreen:
-                    FilterView(viewModel: routeViewModel)
+                    FilterView(
+                        viewModel: routeViewModel,
+                        coordinator: coordinator
+                    )
                         .navigationBackButton(coordinator: coordinator)
                 }
             }
         }
     }
+    
+    // MARK: Subviews
+    private var searchButton: some View {
+        AppButtonView(
+            isPresented: .constant(false),
+            title: "Найти",
+            dimensions: CGSize(width: 150, height: 60),
+            action: {
+                searchButtonTapped()
+            }
+        )
+    }
 }
 
+// MARK: - Private Methods
+private extension MainScreenView {
+    
+    func fromButtonTapped() {
+        coordinator.navigationSource = .from
+        coordinator.navigateTo(.cityList)
+    }
+    
+    func toButtonTapped() {
+        coordinator.navigationSource = .to
+        coordinator.navigateTo(.cityList)
+    }
+    
+    func changeButtonTapped() {
+        mainViewModel.changeButtonTapped()
+    }
+    
+    func searchButtonTapped() {
+        routeViewModel.updateDestinations(
+            destinationFrom: mainViewModel.destinationFrom,
+            destinationTo: mainViewModel.destinationTo
+        )
+        coordinator.navigateTo(.routeList)
+    }
+}
+
+// MARK: - Preview
 #Preview {
     let coordinator = MainScreenCoordinator()
     MainScreenView(

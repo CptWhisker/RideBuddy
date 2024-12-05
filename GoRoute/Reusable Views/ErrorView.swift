@@ -23,6 +23,7 @@ struct ErrorView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     ErrorView(image: .noInternet, title: "Нет интернета")
 }

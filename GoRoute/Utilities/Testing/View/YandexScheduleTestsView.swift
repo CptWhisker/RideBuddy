@@ -56,7 +56,7 @@ private extension YandexScheduleTestsView {
     }
 }
 
-
+// MARK: - Preview
 #Preview {
     YandexScheduleTestsView(viewModel: YandexScheduleTestsViewModel())
 }

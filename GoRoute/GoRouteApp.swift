@@ -16,7 +16,7 @@ struct GoRouteApp: App {
     
     @StateObject private var settingsScreenViewModel = SettingsScreenViewModel()
     @StateObject private var settingsScreenCoordinator = SettingsScreenCoordinator()
-        
+    
     var body: some Scene {
         WindowGroup {
             TabBarView(

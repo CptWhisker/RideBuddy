@@ -32,7 +32,7 @@ struct CarrierDetailsView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    // MARK: - Subviews
+    // MARK: Subviews
     private var carrierLogo: some View {
         Image(carrier.fullLogo)
             .resizable()
@@ -52,8 +52,12 @@ struct CarrierDetailsView: View {
             contactRow(title: "Телефон", value: carrier.phone)
         }
     }
+}
+
+// MARK: - Private Methods
+private extension CarrierDetailsView {
     
-    private func contactRow(title: String, value: String) -> some View {
+    func contactRow(title: String, value: String) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title)
                 .font(.system(size: 17, weight: .regular))
@@ -67,6 +71,7 @@ struct CarrierDetailsView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     CarrierDetailsView(carrier: MockDataProvider.mockCarrier)
 }

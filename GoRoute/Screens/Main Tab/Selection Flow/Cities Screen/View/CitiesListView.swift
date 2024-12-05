@@ -19,20 +19,10 @@ struct CitiesListView: View {
             Color.main
                 .ignoresSafeArea()
             
-            List {
-                ForEach(cities) { city in
-                    NavigationRowView(title: city.name) {
-                        handleSelection(of: city)
-                    }
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
-                }
-            }
+            citiesList
             
             if viewModel.filteredCities.isEmpty {
-                Text("Город не найден")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(.accent)
+                PlaceholderTextView(title: "Город не найден")
             }
         }
         .listStyle(.plain)
@@ -45,12 +35,30 @@ struct CitiesListView: View {
         )
     }
     
-    private func handleSelection(of city: CityModel) {
+    // MARK: Subviews
+    private var citiesList: some View {
+        List {
+            ForEach(cities) { city in
+                NavigationRowView(title: city.name) {
+                    rowTapped(for: city)
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            }
+        }
+    }
+}
+
+// MARK: - Private Methods
+private extension CitiesListView {
+    
+    func rowTapped(for city: CityModel) {
         viewModel.selectCity(city)
         coordinator.navigateTo(.stationList)
     }
 }
 
+// MARK: - Preview
 #Preview {
     CitiesListView(
         coordinator: MainScreenCoordinator(),

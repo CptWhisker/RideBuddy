@@ -37,6 +37,7 @@ struct CarrierInfoView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     CarrierInfoView(route: MockDataProvider.mockRoute)
 }

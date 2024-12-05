@@ -38,6 +38,7 @@ struct RouteTimeView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     RouteTimeView(route: MockDataProvider.mockRoute)
 }

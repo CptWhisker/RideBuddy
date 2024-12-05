@@ -20,6 +20,7 @@ enum MainScreenAction: String, CaseIterable {
     
     var errorDescription: String {
         switch self {
+            
         case .scheduleBetweenStations:
             return "Unable to retrieve schedule between the specified stations."
         case .scheduleFromStation:
@@ -41,6 +42,7 @@ enum MainScreenAction: String, CaseIterable {
     
     func performAction(on viewModel: MainScreenViewModelProtocol) async throws {
         switch self {
+            
         case .scheduleBetweenStations: try await viewModel.getScheduleBetweenStations()
         case .scheduleFromStation: try await viewModel.getScheduleFromStation()
         case .stationsForThread: try await viewModel.getStationsForThread()

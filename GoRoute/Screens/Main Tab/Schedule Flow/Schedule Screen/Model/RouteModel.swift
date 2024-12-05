@@ -25,6 +25,10 @@ extension RouteModel {
         Int(startTime.distance(to: endTime) / 3600)
     }
     
+    var startTimeInSeconds: Int {
+        startTime.timeInSecondsSinceStartOfDay
+    }
+    
     var formattedTravelDate: String {
         travelDate.formatted(by: "dd MMMM")
     }

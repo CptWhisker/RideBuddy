@@ -52,20 +52,6 @@ struct DestinationSelectionView: View {
     }
 }
 
-#Preview {
-    let screenWidth: CGFloat = UIScreen.main.bounds.width
-    let buttonWidth: CGFloat = screenWidth - 16 - 16 - 16 - 36 - 16 - 16
-    
-    DestinationSelectionView(
-        buttonWidth: buttonWidth,
-        actionFrom: { print("From") },
-        actionTo: { print("To") },
-        changeAction: { print("Change") },
-        destinationFrom: .constant(nil),
-        destinationTo: .constant(nil)
-    )
-}
-
 // MARK: - SubViews
 private extension DestinationSelectionView {
     
@@ -114,4 +100,19 @@ private extension DestinationSelectionView {
             .buttonStyle(.plain)
         }
     }
+}
+
+// MARK: - Preview
+#Preview {
+    let screenWidth: CGFloat = UIScreen.main.bounds.width
+    let buttonWidth: CGFloat = screenWidth - 16 - 16 - 16 - 36 - 16 - 16
+    
+    DestinationSelectionView(
+        buttonWidth: buttonWidth,
+        actionFrom: { print("From") },
+        actionTo: { print("To") },
+        changeAction: { print("Change") },
+        destinationFrom: .constant(nil),
+        destinationTo: .constant(nil)
+    )
 }

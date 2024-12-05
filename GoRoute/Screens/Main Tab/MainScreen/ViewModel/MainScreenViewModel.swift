@@ -129,6 +129,7 @@ extension MainScreenViewModel {
     
     func selectStation(_ station: StationModel, for navigationSource: NavigationSource) {
         switch navigationSource {
+            
         case .from:
             destinationFrom = SelectionModel(
                 cityName: selectedCity?.name,

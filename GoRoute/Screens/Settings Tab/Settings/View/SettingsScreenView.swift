@@ -23,7 +23,7 @@ struct SettingsScreenView: View {
                     SettingsToggle(title: "Темная тема", isOn: $viewModel.isDarkModeEnabled)
                         
                     NavigationRowView(title: "Пользовательское соглашение") {
-                        coordinator.navigateTo(.userAgreement)
+                        userAgreementButtonTapped()
                     }
                     
                     Spacer()
@@ -34,6 +34,7 @@ struct SettingsScreenView: View {
             }
             .navigationDestination(for: SettingsNavigationModel.self) { destination in
                 switch destination {
+                    
                 case .userAgreement:
                     UserAgreementView()
                         .navigationBackButton(coordinator: coordinator)
@@ -42,11 +43,6 @@ struct SettingsScreenView: View {
             }
         }
     }
-}
-
-#Preview {
-    let coordinator = SettingsScreenCoordinator()
-    SettingsScreenView(viewModel: SettingsScreenViewModel()).environmentObject(coordinator)
 }
 
 // MARK: - SubViews
@@ -76,4 +72,18 @@ private extension SettingsScreenView {
             .lineSpacing(16)
             .padding(.bottom, 24)
     }
+}
+
+// MARK: - SubViews
+private extension SettingsScreenView {
+    
+    func userAgreementButtonTapped() {
+        coordinator.navigateTo(.userAgreement)
+    }
+}
+
+// MARK: - Preview
+#Preview {
+    let coordinator = SettingsScreenCoordinator()
+    SettingsScreenView(viewModel: SettingsScreenViewModel()).environmentObject(coordinator)
 }

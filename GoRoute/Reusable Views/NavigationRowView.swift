@@ -32,6 +32,7 @@ struct NavigationRowView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     NavigationRowView(title: "Test title", action: { print("Test action") })
 }

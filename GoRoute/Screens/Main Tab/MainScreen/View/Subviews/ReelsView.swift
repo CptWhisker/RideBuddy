@@ -31,6 +31,7 @@ struct ReelsView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     ReelsView(reels: Array(repeating: ReelModel(), count: 10))
 }

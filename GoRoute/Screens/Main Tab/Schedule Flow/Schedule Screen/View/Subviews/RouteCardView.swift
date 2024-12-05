@@ -30,6 +30,7 @@ struct RouteCardView: View {
         }
     }
     
+    // MARK: Subviews
     private var dateOverlay: some View {
         Text(route.formattedTravelDate)
             .font(.system(size: 12, weight: .regular))
@@ -39,6 +40,7 @@ struct RouteCardView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let buttonWidth: CGFloat = screenWidth - 32

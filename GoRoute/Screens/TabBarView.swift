@@ -33,6 +33,7 @@ struct TabBarView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     let mainScreenCoordinator = MainScreenCoordinator()
     let settingsScreenCoordinator = SettingsScreenCoordinator()

@@ -17,6 +17,7 @@ struct UserAgreementView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     UserAgreementView()
 }

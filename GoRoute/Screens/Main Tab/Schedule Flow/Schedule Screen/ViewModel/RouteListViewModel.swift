@@ -12,7 +12,12 @@ final class RouteListViewModel: ObservableObject {
     // MARK: Properties
     @Published private(set) var filteredRoutes = [RouteModel]()
     @Published private(set) var selectedRoute: RouteModel?
-    
+    @Published var selectedTimeFilters = Set<TimeFilterModel>()
+    @Published var selectedTransferFilter: TransferFilterModel = .include
+    @Published var areFiltersApplied = false
+        
+    private var storedTimeFilters = Set<TimeFilterModel>()
+    private var storedTransferFilter: TransferFilterModel = .include
     private var destinationFrom: SelectionModel?
     private var destinationTo: SelectionModel?
     private var routes = [RouteModel]()
@@ -44,18 +49,6 @@ private extension RouteListViewModel {
         routes = MockDataProvider.mockRoutes
         filteredRoutes = routes
     }
-    
-    func filterRoutes(by timePeriod: (start: Date, end: Date)? = nil, and includeTransfers: Bool) {
-        filteredRoutes = routes.filter { route in
-            let matchesTimePeriod = timePeriod.map {
-                $0.start <= route.startTime && route.startTime <= $0.end
-            } ?? true
-            
-            let matchesTransfers = includeTransfers ? !route.transfers.isEmpty : route.transfers.isEmpty
-            
-            return matchesTimePeriod && matchesTransfers
-        }
-    }
 }
 
 // MARK: - Public Methods
@@ -68,5 +61,50 @@ extension RouteListViewModel {
     
     func selectCarrier(_ carrier: CarrierModel) {
         selectedCarrier = carrier
+    }
+    
+    func selectTimeFilter(_ timeFilter: TimeFilterModel) {
+        if selectedTimeFilters.contains(timeFilter) {
+            selectedTimeFilters.remove(timeFilter)
+        } else {
+            selectedTimeFilters.insert(timeFilter)
+        }
+    }
+    
+    func selectTransferFilter(_ transferFilter: TransferFilterModel) {
+        selectedTransferFilter = transferFilter
+    }
+    
+    func getTimeFilterImageName(_ timeFilter: TimeFilterModel) -> String {
+        selectedTimeFilters.contains(timeFilter) ? "checkmark.square" : "square"
+    }
+    
+    func getTransferFilterImageName(_ transferFilter: TransferFilterModel) -> String {
+        selectedTransferFilter == transferFilter ? "record.circle" : "circle"
+    }
+    
+    func applyRoutesFilter() {
+        storedTimeFilters = selectedTimeFilters
+        storedTransferFilter = selectedTransferFilter
+        
+        filteredRoutes = routes.filter { route in
+            let matchesTimePeriod = selectedTimeFilters.isEmpty || selectedTimeFilters.contains(where: {
+                let filterPerod = $0.timePeriod
+                
+                return filterPerod.start <= route.startTimeInSeconds && route.startTimeInSeconds <= filterPerod.end
+            })
+            
+            let matchesTransfers = selectedTransferFilter == .include ? !route.transfers.isEmpty : route.transfers.isEmpty
+            
+            
+            return matchesTimePeriod && matchesTransfers
+        }
+        
+        areFiltersApplied = !(selectedTimeFilters.isEmpty && selectedTransferFilter == .include)
+    }
+    
+    func resetTemporarySelections() {
+        selectedTimeFilters = storedTimeFilters
+        selectedTransferFilter = storedTransferFilter
     }
 }

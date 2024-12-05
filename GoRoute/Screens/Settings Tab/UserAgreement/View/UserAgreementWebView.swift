@@ -21,6 +21,7 @@ struct UserAgreementWebView: UIViewRepresentable {
     }
 }
 
+// MARK: - Preview
 #Preview {
     UserAgreementWebView(htmlContent: UserAgreementProvider.userAgreemet)
 }

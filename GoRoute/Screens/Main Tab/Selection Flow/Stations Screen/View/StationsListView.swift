@@ -19,20 +19,10 @@ struct StationsListView: View {
             Color.main
                 .ignoresSafeArea()
             
-            List {
-                ForEach(stations) { station in
-                    NavigationRowView(title: station.name) {
-                        handleSelection(of: station)
-                    }
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
-                }
-            }
+            stationsList
             
             if viewModel.filteredStations.isEmpty {
-                Text("Станция не найдена")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(.accent)
+                PlaceholderTextView(title: "Станция не найдена")
             }
         }
         .listStyle(.plain)
@@ -45,12 +35,33 @@ struct StationsListView: View {
         )
     }
     
-    private func handleSelection(of station: StationModel) {
-        viewModel.selectStation(station, for: coordinator.navigationSource)
+    // MARK: Subviews
+    private var stationsList: some View {
+        List {
+            ForEach(stations) { station in
+                NavigationRowView(title: station.name) {
+                    rowTapped(for: station)
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            }
+        }
+    }
+}
+
+// MARK: - Private Methods
+private extension StationsListView {
+    
+    private func rowTapped(for station: StationModel) {
+        viewModel.selectStation(
+            station,
+            for: coordinator.navigationSource
+        )
         coordinator.returnToRoot()
     }
 }
 
+// MARK: - Preview
 #Preview {
     StationsListView(
         coordinator: MainScreenCoordinator(),
