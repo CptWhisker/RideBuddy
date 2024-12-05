@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct RouteListView: View {
-    
-    @EnvironmentObject var appState: AppState
-    
-    @StateObject var viewModel: RouteListViewModel
-    
+        
+    @ObservedObject var viewModel: RouteListViewModel
     @ObservedObject var coordinator: MainScreenCoordinator
     
     private let buttonWidth: CGFloat = UIScreen.main.bounds.width - 32
@@ -38,7 +35,7 @@ struct RouteListView: View {
                                 buttonWidth: buttonWidth,
                                 route: route,
                                 action: {
-                                    appState.selectCarrier(route.carrier)
+                                    viewModel.selectCarrier(route.carrier)
                                     coordinator.navigateTo(.carrierDetails)
                                 }
                             )
@@ -57,13 +54,15 @@ struct RouteListView: View {
             .font(.system(size: 24, weight: .bold))
             .foregroundStyle(.accent)
             .padding(.bottom, 8)
+            .padding(.top, 16)
+            .padding(.horizontal, 16)
     }
     
     private var filterButton: some View {
         AppButtonView(
             title: "Уточнить время",
             dimensions: CGSize(width: buttonWidth, height: 60),
-            action: { print("AppButton tapped") }
+            action: { coordinator.navigateTo(.filterScreen) }
         )
         .padding(.bottom, 24)
     }
@@ -71,10 +70,7 @@ struct RouteListView: View {
 
 #Preview {
     RouteListView(
-        viewModel: RouteListViewModel(
-            destinationFrom: MockDataProvider.mockSelections.first!,
-            destinationTo: MockDataProvider.mockSelections.last!
-        ),
+        viewModel: RouteListViewModel(),
         coordinator: MainScreenCoordinator()
     )
 }

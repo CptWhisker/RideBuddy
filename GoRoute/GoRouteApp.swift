@@ -11,22 +11,21 @@ import SwiftUI
 struct GoRouteApp: App {
     
     @StateObject private var mainScreenViewModel = MainScreenViewModel()
+    @StateObject private var routeListViewModel = RouteListViewModel()
     @StateObject private var mainScreenCoordinator = MainScreenCoordinator()
     
     @StateObject private var settingsScreenViewModel = SettingsScreenViewModel()
     @StateObject private var settingsScreenCoordinator = SettingsScreenCoordinator()
-    
-    @StateObject private var appState = AppState()
-    
+        
     var body: some Scene {
         WindowGroup {
             TabBarView(
                 mainScreenViewModel: mainScreenViewModel,
+                routeListViewModel: routeListViewModel,
                 settingsScreenViewModel: settingsScreenViewModel
             )
             .environmentObject(mainScreenCoordinator)
             .environmentObject(settingsScreenCoordinator)
-            .environmentObject(appState)
             .preferredColorScheme(settingsScreenViewModel.isDarkModeEnabled ? .dark : .light)
         }
     }

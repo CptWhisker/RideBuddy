@@ -10,19 +10,25 @@ import SwiftUI
 struct TabBarView: View {
     
     @ObservedObject var mainScreenViewModel: MainScreenViewModel
+    @ObservedObject var routeListViewModel: RouteListViewModel
     @ObservedObject var settingsScreenViewModel: SettingsScreenViewModel
     
     var body: some View {
         TabView {
-            MainScreenView(viewModel: mainScreenViewModel)
-                .tabItem { Image(systemName: "arrow.up.message") }
-                .toolbarBackground(.visible, for: .tabBar)
-                .toolbarBackground(.main, for: .tabBar)
+            MainScreenView(
+                mainViewModel: mainScreenViewModel,
+                routeViewModel: routeListViewModel
+            )
+            .tabItem { Image(systemName: "arrow.up.message") }
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarBackground(.main, for: .tabBar)
             
-            SettingsScreenView(viewModel: settingsScreenViewModel)
-                .tabItem { Image(systemName: "gearshape") }
-                .toolbarBackground(.visible, for: .tabBar)
-                .toolbarBackground(.main, for: .tabBar)
+            SettingsScreenView(
+                viewModel: settingsScreenViewModel
+            )
+            .tabItem { Image(systemName: "gearshape") }
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarBackground(.main, for: .tabBar)
         }
     }
 }
@@ -33,6 +39,7 @@ struct TabBarView: View {
     
     TabBarView(
         mainScreenViewModel: MainScreenViewModel(),
+        routeListViewModel: RouteListViewModel(),
         settingsScreenViewModel: SettingsScreenViewModel()
     )
     .environmentObject(mainScreenCoordinator)
