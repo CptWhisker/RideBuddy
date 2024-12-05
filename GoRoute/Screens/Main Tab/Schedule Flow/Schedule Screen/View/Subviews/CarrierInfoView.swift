@@ -13,7 +13,7 @@ struct CarrierInfoView: View {
     
     var body: some View {
         HStack(spacing: 8) {
-            Image(route.carrier.logo)
+            Image(route.carrier.smallLogo)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 38, height: 38)

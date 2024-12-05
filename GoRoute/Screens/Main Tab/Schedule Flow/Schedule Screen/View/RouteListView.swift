@@ -19,28 +19,35 @@ struct RouteListView: View {
     
     var body: some View {
         routeList
-        
-        filterButton
+            .overlay(alignment: .bottom) {
+                filterButton
+            }
     }
     
     // MARK: - Subviews
     private var routeList: some View {
-        ScrollView {
-            LazyVStack(spacing: 8) {
-                Section {
-                    ForEach(viewModel.filteredRoutes) { route in
-                        RouteCardView(
-                            buttonWidth: buttonWidth,
-                            route: route,
-                            action: {
-                                appState.selectCarrier(route.carrier)
-                                coordinator.navigateTo(.carrierDetails)
-                            }
-                        )
+        ZStack {
+            Color.main
+                .ignoresSafeArea()
+            
+            ScrollView(showsIndicators: false) {
+                LazyVStack(spacing: 8) {
+                    Section {
+                        ForEach(viewModel.filteredRoutes) { route in
+                            RouteCardView(
+                                buttonWidth: buttonWidth,
+                                route: route,
+                                action: {
+                                    appState.selectCarrier(route.carrier)
+                                    coordinator.navigateTo(.carrierDetails)
+                                }
+                            )
+                        }
+                    } header: {
+                        scheduleHeader
                     }
-                } header: {
-                    scheduleHeader
                 }
+                .padding(.bottom, 92)
             }
         }
     }
@@ -48,7 +55,7 @@ struct RouteListView: View {
     private var scheduleHeader: some View {
         Text(viewModel.scheduleHeader)
             .font(.system(size: 24, weight: .bold))
-            .foregroundStyle(.appBlack)
+            .foregroundStyle(.accent)
             .padding(.bottom, 8)
     }
     

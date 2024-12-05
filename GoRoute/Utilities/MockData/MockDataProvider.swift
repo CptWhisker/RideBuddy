@@ -55,7 +55,8 @@ struct MockDataProvider {
     static let mockCarrier: CarrierModel = CarrierModel(
         shortName: "РЖД",
         fullName: "ОАО \"РЖД\"",
-        logo: .brandPlaceholder,
+        smallLogo: .brandSmallLogo,
+        fullLogo: .brandFullLogo,
         email: "rzd@rzd.ru",
         phone: "+7-000-000-00-00"
     )

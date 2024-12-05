@@ -16,12 +16,16 @@ struct CitiesListView: View {
     
     var body: some View {
         ZStack {
+            Color.main
+                .ignoresSafeArea()
+            
             List {
                 ForEach(cities) { city in
                     NavigationRowView(title: city.name) {
                         handleSelection(of: city)
                     }
                     .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
                 }
             }
             

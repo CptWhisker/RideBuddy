@@ -10,7 +10,8 @@ import Foundation
 struct CarrierModel {
     let shortName: String
     let fullName: String
-    let logo: ImageResource
+    let smallLogo: ImageResource
+    let fullLogo: ImageResource
     let email: String
     let phone: String
 }
