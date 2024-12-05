@@ -28,8 +28,11 @@ struct CarrierDetailsView: View {
             .padding(.top, 16)
             .padding(.horizontal, 16)
         }
+        .navigationTitle("Информация о перевозчике")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
+    // MARK: - Subviews
     private var carrierLogo: some View {
         Image(carrier.fullLogo)
             .resizable()

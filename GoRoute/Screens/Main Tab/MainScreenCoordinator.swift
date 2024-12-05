@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class MainScreenCoordinator: ObservableObject {
+final class MainScreenCoordinator: CoordinatorProtocol {
     
     @Published var path = NavigationPath()
     @Published var navigationSource: NavigationSource = .none

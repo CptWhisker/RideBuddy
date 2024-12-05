@@ -36,6 +36,7 @@ struct SettingsScreenView: View {
                 switch destination {
                 case .userAgreement:
                     UserAgreementView()
+                        .navigationBackButton(coordinator: coordinator)
                         .toolbar(.hidden, for: .tabBar)
                 }
             }

@@ -26,14 +26,14 @@ extension RouteModel {
     }
     
     var formattedTravelDate: String {
-        travelDate.formatted("dd MMMM")
+        travelDate.formatted(by: "dd MMMM")
     }
     
     var formattedStartTime: String {
-        startTime.formatted("HH:mm")
+        startTime.formatted(by: "HH:mm")
     }
     
     var formattedEndTime: String {
-        endTime.formatted("HH:mm")
+        endTime.formatted(by: "HH:mm")
     }
 }

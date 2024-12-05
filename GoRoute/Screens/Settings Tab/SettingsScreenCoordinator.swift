@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class SettingsScreenCoordinator: ObservableObject {
+final class SettingsScreenCoordinator: CoordinatorProtocol {
     
     @Published var path = NavigationPath()
     

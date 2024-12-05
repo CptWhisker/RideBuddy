@@ -61,16 +61,8 @@ struct MainScreenView: View {
                         viewModel: viewModel,
                         cities: viewModel.filteredCities
                     )
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: Button(action: {
-                        coordinator.navigateBack()
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 17, weight: .semibold))
-                            .foregroundStyle(.accent)
-                    })
+                    .navigationBackButton(coordinator: coordinator)
                     .toolbar(.hidden, for: .tabBar)
-#warning("REFACTOR THIS CUSTOM NAV BUTTON")
                     
                 case .stationList:
                     StationsListView(
@@ -78,6 +70,7 @@ struct MainScreenView: View {
                         viewModel: viewModel,
                         stations: viewModel.filteredStations
                     )
+                    .navigationBackButton(coordinator: coordinator)
                     
                 case .routeList:
                     if
@@ -90,12 +83,14 @@ struct MainScreenView: View {
                             ),
                             coordinator: coordinator
                         )
+                        .navigationBackButton(coordinator: coordinator)
                         .toolbar(.hidden, for: .tabBar)
                     }
                     
                 case .carrierDetails:
                     if let carrier = appState.selectedCarrier {
                         CarrierDetailsView(carrier: carrier)
+                            .navigationBackButton(coordinator: coordinator)
                     }
                     
                 default:
