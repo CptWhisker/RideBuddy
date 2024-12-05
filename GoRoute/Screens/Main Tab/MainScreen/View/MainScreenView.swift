@@ -10,6 +10,7 @@ import SwiftUI
 struct MainScreenView: View {
     
     @EnvironmentObject var coordinator: MainScreenCoordinator
+    @EnvironmentObject var appState: AppState
     
     @ObservedObject var viewModel: MainScreenViewModel
     
@@ -79,11 +80,23 @@ struct MainScreenView: View {
                     )
                     
                 case .routeList:
-                    RouteListView(
-                        destinationFrom: viewModel.destinationFrom!,
-                        destinationTo: viewModel.destinationTo!
-                    )
-                    .toolbar(.hidden, for: .tabBar)
+                    if
+                        let destinationFrom = viewModel.destinationFrom,
+                        let destinationTo = viewModel.destinationTo {
+                        RouteListView(
+                            viewModel: RouteListViewModel(
+                                destinationFrom: destinationFrom,
+                                destinationTo: destinationTo
+                            ),
+                            coordinator: coordinator
+                        )
+                        .toolbar(.hidden, for: .tabBar)
+                    }
+                    
+                case .carrierDetails:
+                    if let carrier = appState.selectedCarrier {
+                        CarrierDetailsView(carrier: carrier)
+                    }
                     
                 default:
                     EmptyView()

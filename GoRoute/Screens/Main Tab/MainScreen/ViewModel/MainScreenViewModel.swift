@@ -12,8 +12,8 @@ final class MainScreenViewModel: ObservableObject {
     
     // MARK: Properties
     @Published private(set) var reels = [ReelModel]()
-    @Published private(set) var filteredCities: [CityModel] = []
-    @Published private(set) var filteredStations: [StationModel] = []
+    @Published private(set) var filteredCities = [CityModel]()
+    @Published private(set) var filteredStations = [StationModel]()
     @Published var destinationFrom: SelectionModel?
     @Published var destinationTo: SelectionModel?
     @Published var searchCityText: String = ""
@@ -22,7 +22,7 @@ final class MainScreenViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var cities: [CityModel] = []
+    private var cities = [CityModel]()
     private var selectedCity: CityModel? {
         didSet {
             getStations()

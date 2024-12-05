@@ -14,16 +14,19 @@ struct RouteCardView: View {
     let action: () -> Void
     
     var body: some View {
-        VStack(spacing: 4) {
-            CarrierInfoView(route: route)
-            
-            RouteTimeView(route: route)
-        }
-        .frame(width: buttonWidth, height: 104)
-        .background(.appLightGray)
-        .clipShape(.rect(cornerRadius: 24))
-        .overlay(alignment: .topTrailing) {
-            dateOverlay
+        
+        Button(action: action) {
+            VStack(spacing: 4) {
+                CarrierInfoView(route: route)
+                
+                RouteTimeView(route: route)
+            }
+            .frame(width: buttonWidth, height: 104)
+            .background(.appLightGray)
+            .clipShape(.rect(cornerRadius: 24))
+            .overlay(alignment: .topTrailing) {
+                dateOverlay
+            }
         }
     }
     

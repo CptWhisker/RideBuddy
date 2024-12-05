@@ -16,6 +16,8 @@ struct GoRouteApp: App {
     @StateObject private var settingsScreenViewModel = SettingsScreenViewModel()
     @StateObject private var settingsScreenCoordinator = SettingsScreenCoordinator()
     
+    @StateObject private var appState = AppState()
+    
     var body: some Scene {
         WindowGroup {
             TabBarView(
@@ -24,6 +26,7 @@ struct GoRouteApp: App {
             )
             .environmentObject(mainScreenCoordinator)
             .environmentObject(settingsScreenCoordinator)
+            .environmentObject(appState)
             .preferredColorScheme(settingsScreenViewModel.isDarkModeEnabled ? .dark : .light)
         }
     }
