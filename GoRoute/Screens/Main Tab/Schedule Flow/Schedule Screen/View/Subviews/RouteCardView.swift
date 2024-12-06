@@ -26,9 +26,12 @@ struct RouteCardView: View {
         }
         .routeCardStandardStyle()
     }
+}
+
+// MARK: - Subviews
+private extension RouteCardView {
     
-    // MARK: Subviews
-    private var dateOverlay: some View {
+    var dateOverlay: some View {
         Text(route.formattedTravelDate)
             .captionTextStyle(.appBlack)
             .padding(.top, LayoutProvider.Padding.medium)

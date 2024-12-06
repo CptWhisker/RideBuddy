@@ -27,9 +27,12 @@ struct CitiesListView: View {
         }
         .listStandardStyle(searchText: $viewModel.searchCityText, title: "Выбор города")
     }
+}
+
+// MARK: - Subviews
+private extension CitiesListView {
     
-    // MARK: Subviews
-    private var citiesList: some View {
+    var citiesList: some View {
         List {
             ForEach(cities) { city in
                 NavigationRowView(title: city.name) {

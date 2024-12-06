@@ -18,9 +18,9 @@ struct CarrierDetailsView: View {
             
             VStack(alignment: .leading, spacing: LayoutProvider.Spacing.extraLarge) {
                 carrierLogo
-
+                
                 carrierName
-
+                
                 contactInfo
                 
                 Spacer()
@@ -31,21 +31,22 @@ struct CarrierDetailsView: View {
         .navigationTitle("Информация о перевозчике")
         .navigationBarTitleDisplayMode(.inline)
     }
+}
+
+// MARK: - Subviews
+private extension CarrierDetailsView {
     
-    // MARK: Subviews
-    private var carrierLogo: some View {
+    var carrierLogo: some View {
         Image(carrier.fullLogo)
-            .resizable()
-            .scaledToFit()
-            .frame(maxWidth: .infinity)
+            .carrierLogoStyle()
     }
     
-    private var carrierName: some View {
+    var carrierName: some View {
         Text(carrier.fullName)
             .titleStyle()
     }
     
-    private var contactInfo: some View {
+    var contactInfo: some View {
         VStack(alignment: .leading, spacing: LayoutProvider.Spacing.none) {
             contactRow(title: "E-mail", value: carrier.email)
             contactRow(title: "Телефон", value: carrier.phone)

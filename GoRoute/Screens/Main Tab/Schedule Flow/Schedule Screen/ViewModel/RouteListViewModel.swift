@@ -15,7 +15,7 @@ final class RouteListViewModel: ObservableObject {
     @Published var selectedTimeFilters = Set<TimeFilterModel>()
     @Published var selectedTransferFilter: TransferFilterModel = .include
     @Published var areFiltersApplied = false
-        
+    
     private var storedTimeFilters = Set<TimeFilterModel>()
     private var storedTransferFilter: TransferFilterModel = .include
     private var destinationFrom: SelectionModel?
@@ -35,6 +35,7 @@ final class RouteListViewModel: ObservableObject {
     // MARK: Initialization
     init() {
         getData()
+        sortRoutes()
     }
 }
 
@@ -48,6 +49,14 @@ private extension RouteListViewModel {
     func getRoutes() {
         routes = MockDataProvider.mockRoutes
         filteredRoutes = routes
+    }
+    
+    func sortRoutes() {
+        filteredRoutes.sort { $0.travelDate < $1.travelDate }
+    }
+    
+    func checkIfFiltersAreApplied() {
+        areFiltersApplied = !(selectedTimeFilters.isEmpty && selectedTransferFilter == .include)
     }
 }
 
@@ -94,13 +103,13 @@ extension RouteListViewModel {
                 return filterPerod.start <= route.startTimeInSeconds && route.startTimeInSeconds <= filterPerod.end
             })
             
-            let matchesTransfers = selectedTransferFilter == .include ? !route.transfers.isEmpty : route.transfers.isEmpty
-            
+            let matchesTransfers = selectedTransferFilter == .include ? true : route.transfers.isEmpty
             
             return matchesTimePeriod && matchesTransfers
         }
         
-        areFiltersApplied = !(selectedTimeFilters.isEmpty && selectedTransferFilter == .include)
+        sortRoutes()
+        checkIfFiltersAreApplied()
     }
     
     func resetTemporarySelections() {

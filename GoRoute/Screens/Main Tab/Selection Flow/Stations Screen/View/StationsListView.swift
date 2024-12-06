@@ -27,9 +27,12 @@ struct StationsListView: View {
         }
         .listStandardStyle(searchText: $viewModel.searchStationText, title: "Выбор станции")
     }
+}
+
+// MARK: - Subviews
+private extension StationsListView {
     
-    // MARK: Subviews
-    private var stationsList: some View {
+    var stationsList: some View {
         List {
             ForEach(stations) { station in
                 NavigationRowView(title: station.name) {
@@ -45,7 +48,7 @@ struct StationsListView: View {
 // MARK: - Private Methods
 private extension StationsListView {
     
-    private func rowTapped(for station: StationModel) {
+    func rowTapped(for station: StationModel) {
         viewModel.selectStation(
             station,
             for: coordinator.navigationSource

@@ -16,19 +16,7 @@ struct ReelsView: View {
             HStack(spacing: LayoutProvider.Spacing.large) {
                 ForEach(reels) { _ in
                     Rectangle()
-                        .fill(Color.accent)
-                        .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small)
-                                .strokeBorder(
-                                    Color.appBlue,
-                                    lineWidth: LayoutProvider.BorderWidth.large
-                                )
-                        }
-                        .frame(
-                            width: LayoutProvider.Dimensions.Reel.width,
-                            height: LayoutProvider.Dimensions.Reel.height
-                        )
+                        .mockReelStyle()
                 }
             }
             .padding(.horizontal, LayoutProvider.Padding.medium)

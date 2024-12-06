@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DestinationSelectionView: View {
     
-//    let buttonWidth: CGFloat
     let actionFrom: () -> Void
     let actionTo: () -> Void
     let changeAction: () -> Void

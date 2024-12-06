@@ -11,7 +11,7 @@ struct FilterView: View {
     
     @ObservedObject var viewModel: RouteListViewModel
     @ObservedObject var coordinator: MainScreenCoordinator
-        
+    
     var body: some View {
         ZStack {
             Color.main
@@ -33,9 +33,12 @@ struct FilterView: View {
             }
         }
     }
+}
+
+// MARK: - Subviews
+private extension FilterView {
     
-    // MARK: Subviews
-    private var timeFilterSection: some View {
+    var timeFilterSection: some View {
         FilterSection(
             title: "Время отправления",
             filters: TimeFilterModel.allCases,
@@ -48,7 +51,7 @@ struct FilterView: View {
         )
     }
     
-    private var transferFilterSection: some View {
+    var transferFilterSection: some View {
         FilterSection(
             title: "Показывать варианты с пересадками",
             filters: TransferFilterModel.allCases,
@@ -61,7 +64,7 @@ struct FilterView: View {
         )
     }
     
-    private var filterButton: some View {
+    var filterButton: some View {
         AppButtonView(
             isNotificationPresented: .constant(false),
             title: "Применить",
@@ -77,7 +80,7 @@ struct FilterView: View {
 // MARK: - Private Methods
 private extension FilterView {
     
-    private func filterButtonTapped() {
+    func filterButtonTapped() {
         viewModel.applyRoutesFilter()
         coordinator.navigateBack()
     }

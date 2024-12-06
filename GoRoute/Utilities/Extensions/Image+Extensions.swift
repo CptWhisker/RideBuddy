@@ -35,4 +35,21 @@ extension Image {
             )
             .background(.appWhite, in: Circle())
     }
+    
+    func carrierThumbnailStyle() -> some View {
+        self
+            .resizable()
+            .scaledToFit()
+            .frame(
+                width: LayoutProvider.Dimensions.Carrier.logo,
+                height: LayoutProvider.Dimensions.Carrier.logo
+            )
+    }
+    
+    func carrierLogoStyle() -> some View {
+        self
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: .infinity)
+    }
 }

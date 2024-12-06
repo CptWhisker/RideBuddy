@@ -46,52 +46,16 @@ struct MainScreenView: View {
                 .padding(.top, LayoutProvider.Padding.large)
             }
             .navigationDestination(for: MainNavigationModel.self) { destination in
-                switch destination {
-                    
-                case .cityList:
-                    CitiesListView(
-                        coordinator: coordinator,
-                        viewModel: mainViewModel,
-                        cities: mainViewModel.filteredCities
-                    )
-                    .navigationBackButton(coordinator: coordinator)
-                    .toolbar(.hidden, for: .tabBar)
-                    
-                case .stationList:
-                    StationsListView(
-                        coordinator: coordinator,
-                        viewModel: mainViewModel,
-                        stations: mainViewModel.filteredStations
-                    )
-                    .navigationBackButton(coordinator: coordinator)
-                    
-                case .routeList:
-                    RouteListView(
-                        viewModel: routeViewModel,
-                        coordinator: coordinator
-                    )
-                    .navigationBackButton(coordinator: coordinator)
-                    .toolbar(.hidden, for: .tabBar)
-                    
-                case .carrierDetails:
-                    if let carrier = routeViewModel.selectedCarrier {
-                        CarrierDetailsView(carrier: carrier)
-                            .navigationBackButton(coordinator: coordinator)
-                    }
-                    
-                case .filterScreen:
-                    FilterView(
-                        viewModel: routeViewModel,
-                        coordinator: coordinator
-                    )
-                        .navigationBackButton(coordinator: coordinator)
-                }
+                destinationView(for: destination)
             }
         }
     }
+}
+
+// MARK: - Subviews
+private extension MainScreenView {
     
-    // MARK: Subviews
-    private var searchButton: some View {
+    var searchButton: some View {
         AppButtonView(
             isNotificationPresented: .constant(false),
             title: "Найти",
@@ -100,6 +64,50 @@ struct MainScreenView: View {
                 searchButtonTapped()
             }
         )
+    }
+    
+    @ViewBuilder
+    func destinationView(for destination: MainNavigationModel) -> some View {
+        switch destination {
+            
+        case .cityList:
+            CitiesListView(
+                coordinator: coordinator,
+                viewModel: mainViewModel,
+                cities: mainViewModel.filteredCities
+            )
+            .navigationBackButton(coordinator: coordinator)
+            .toolbar(.hidden, for: .tabBar)
+            
+        case .stationList:
+            StationsListView(
+                coordinator: coordinator,
+                viewModel: mainViewModel,
+                stations: mainViewModel.filteredStations
+            )
+            .navigationBackButton(coordinator: coordinator)
+            
+        case .routeList:
+            RouteListView(
+                viewModel: routeViewModel,
+                coordinator: coordinator
+            )
+            .navigationBackButton(coordinator: coordinator)
+            .toolbar(.hidden, for: .tabBar)
+            
+        case .carrierDetails:
+            if let carrier = routeViewModel.selectedCarrier {
+                CarrierDetailsView(carrier: carrier)
+                    .navigationBackButton(coordinator: coordinator)
+            }
+            
+        case .filterScreen:
+            FilterView(
+                viewModel: routeViewModel,
+                coordinator: coordinator
+            )
+                .navigationBackButton(coordinator: coordinator)
+        }
     }
 }
 

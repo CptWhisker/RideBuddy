@@ -14,12 +14,7 @@ struct CarrierInfoView: View {
     var body: some View {
         HStack(spacing: LayoutProvider.Spacing.medium) {
             Image(route.carrier.smallLogo)
-                .resizable()
-                .scaledToFit()
-                .frame(
-                    width: LayoutProvider.Dimensions.Carrier.logo,
-                    height: LayoutProvider.Dimensions.Carrier.logo
-                )
+                .carrierThumbnailStyle()
             
             VStack(alignment: .leading, spacing: LayoutProvider.Spacing.tiny) {
                 Text(route.carrier.shortName)

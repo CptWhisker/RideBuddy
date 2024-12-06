@@ -27,9 +27,12 @@ struct RouteListView: View {
             }
         }
     }
+}
+
+// MARK: - Subviews
+private extension RouteListView {
     
-    // MARK: Subviews
-    private var routeList: some View {
+    var routeList: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: LayoutProvider.Spacing.medium) {
                 Section {
@@ -49,7 +52,7 @@ struct RouteListView: View {
         }
     }
     
-    private var scheduleHeader: some View {
+    var scheduleHeader: some View {
         Text(viewModel.scheduleHeader)
             .titleStyle()
             .padding(.bottom, LayoutProvider.Padding.small)
@@ -57,7 +60,7 @@ struct RouteListView: View {
             .padding(.horizontal, LayoutProvider.Padding.medium)
     }
     
-    private var filterButton: some View {
+    var filterButton: some View {
         AppButtonView(
             isNotificationPresented: $viewModel.areFiltersApplied,
             title: "Уточнить время",

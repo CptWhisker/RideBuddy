@@ -74,15 +74,30 @@ struct MockDataProvider {
     static let mockRoutes: [RouteModel] = {
         var routes: [RouteModel] = []
         
-        for _ in 0..<20 {
+        let routeCount = Int.random(in: 20...30)
+        
+        for _ in 0..<routeCount {
+            let origin = mockStations.randomElement()!
+            let destination = mockStations.randomElement()!
+            
+            guard origin.name != destination.name else { continue }
+            
+            let travelDate = Date(timeIntervalSinceNow: TimeInterval.random(in: 3600 * 1 ... 3600 * 24 * 14))
+            
+            let startTime = travelDate
+            let endTime = startTime.addingTimeInterval(TimeInterval.random(in: 3600 * 3 ... 3600 * 10))
+            
+            let hasTransfers = Bool.random()
+            let transfers = hasTransfers ? [mockCities.randomElement()!] : []
+            
             let route = RouteModel(
-                origin: mockStations.randomElement()!,
-                destination: mockStations.randomElement()!,
+                origin: origin,
+                destination: destination,
                 carrier: mockCarrier,
-                travelDate: Date(timeIntervalSinceNow: 3600 * 5),
-                startTime: Date(timeIntervalSinceNow: 3600 * 5),
-                endTime: Date(timeIntervalSinceNow: Double.random(in: 3600 * 10 ... 3600 * 20)),
-                transfers: [mockCities.randomElement()!]
+                travelDate: travelDate,
+                startTime: startTime,
+                endTime: endTime,
+                transfers: transfers
             )
             routes.append(route)
         }
