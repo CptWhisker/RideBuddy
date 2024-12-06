@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsScreenView: View {
     
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var coordinator: SettingsScreenCoordinator
     
     @ObservedObject var viewModel: SettingsScreenViewModel
@@ -31,6 +32,8 @@ struct SettingsScreenView: View {
                     copyright
                 }
                 .padding(.horizontal, LayoutProvider.Padding.medium)
+                
+                ErrorViewFactory.errorView(for: appState.errorState)
             }
             .navigationDestination(for: SettingsNavigationModel.self) { destination in
                 switch destination {
@@ -45,7 +48,7 @@ struct SettingsScreenView: View {
     }
 }
 
-// MARK: - SubViews
+// MARK: - Subviews
 private extension SettingsScreenView {
 
     struct SettingsToggle: View {
@@ -69,7 +72,7 @@ private extension SettingsScreenView {
     }
 }
 
-// MARK: - SubViews
+// MARK: - Private Methods
 private extension SettingsScreenView {
     
     func userAgreementButtonTapped() {

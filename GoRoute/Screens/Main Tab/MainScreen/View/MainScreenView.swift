@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainScreenView: View {
     
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var coordinator: MainScreenCoordinator
     
     @ObservedObject var mainViewModel: MainScreenViewModel
@@ -44,6 +45,8 @@ struct MainScreenView: View {
                     Spacer()
                 }
                 .padding(.top, LayoutProvider.Padding.large)
+                
+                ErrorViewFactory.errorView(for: appState.errorState)
             }
             .navigationDestination(for: MainNavigationModel.self) { destination in
                 destinationView(for: destination)
@@ -139,10 +142,13 @@ private extension MainScreenView {
 
 // MARK: - Preview
 #Preview {
+    let appState = AppState()
     let coordinator = MainScreenCoordinator()
+    
     MainScreenView(
         mainViewModel: MainScreenViewModel(),
         routeViewModel: RouteListViewModel()
     )
+    .environmentObject(appState)
     .environmentObject(coordinator)
 }

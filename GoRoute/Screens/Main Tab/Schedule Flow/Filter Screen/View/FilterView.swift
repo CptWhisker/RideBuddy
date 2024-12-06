@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FilterView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @ObservedObject var viewModel: RouteListViewModel
     @ObservedObject var coordinator: MainScreenCoordinator
     
@@ -31,6 +33,8 @@ struct FilterView: View {
             .onAppear {
                 viewModel.resetTemporarySelections()
             }
+            
+            ErrorViewFactory.errorView(for: appState.errorState)
         }
     }
 }

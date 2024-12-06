@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CarrierDetailsView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     let carrier: CarrierModel
     
     var body: some View {
@@ -27,6 +29,8 @@ struct CarrierDetailsView: View {
             }
             .padding(.top, LayoutProvider.Padding.medium)
             .padding(.horizontal, LayoutProvider.Padding.medium)
+            
+            ErrorViewFactory.errorView(for: appState.errorState)
         }
         .navigationTitle("Информация о перевозчике")
         .navigationBarTitleDisplayMode(.inline)

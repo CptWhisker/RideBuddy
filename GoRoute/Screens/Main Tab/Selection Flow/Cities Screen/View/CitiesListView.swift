@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CitiesListView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @ObservedObject var coordinator: MainScreenCoordinator
     @ObservedObject var viewModel: MainScreenViewModel
     
@@ -24,6 +26,8 @@ struct CitiesListView: View {
             if viewModel.filteredCities.isEmpty {
                 PlaceholderTextView(title: "Город не найден")
             }
+            
+            ErrorViewFactory.errorView(for: appState.errorState)
         }
         .listStandardStyle(searchText: $viewModel.searchCityText, title: "Выбор города")
     }

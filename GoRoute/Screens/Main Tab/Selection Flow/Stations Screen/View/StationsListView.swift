@@ -9,6 +9,8 @@ import SwiftUI
 
 struct StationsListView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @ObservedObject var coordinator: MainScreenCoordinator
     @ObservedObject var viewModel: MainScreenViewModel
     
@@ -24,6 +26,8 @@ struct StationsListView: View {
             if viewModel.filteredStations.isEmpty {
                 PlaceholderTextView(title: "Станция не найдена")
             }
+            
+            ErrorViewFactory.errorView(for: appState.errorState)
         }
         .listStandardStyle(searchText: $viewModel.searchStationText, title: "Выбор станции")
     }

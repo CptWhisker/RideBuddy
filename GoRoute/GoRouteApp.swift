@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct GoRouteApp: App {
     
+    @StateObject private var appState = AppState()
+    
     @StateObject private var mainScreenViewModel = MainScreenViewModel()
     @StateObject private var routeListViewModel = RouteListViewModel()
     @StateObject private var mainScreenCoordinator = MainScreenCoordinator()
@@ -24,6 +26,7 @@ struct GoRouteApp: App {
                 routeListViewModel: routeListViewModel,
                 settingsScreenViewModel: settingsScreenViewModel
             )
+            .environmentObject(appState)
             .environmentObject(mainScreenCoordinator)
             .environmentObject(settingsScreenCoordinator)
             .preferredColorScheme(settingsScreenViewModel.isDarkModeEnabled ? .dark : .light)

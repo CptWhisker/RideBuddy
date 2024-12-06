@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RouteListView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @ObservedObject var viewModel: RouteListViewModel
     @ObservedObject var coordinator: MainScreenCoordinator
         
@@ -25,6 +27,8 @@ struct RouteListView: View {
             if viewModel.filteredRoutes.isEmpty {
                 PlaceholderTextView(title: "Вариантов нет")
             }
+            
+            ErrorViewFactory.errorView(for: appState.errorState)
         }
     }
 }

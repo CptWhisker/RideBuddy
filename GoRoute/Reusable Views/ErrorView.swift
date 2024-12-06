@@ -13,11 +13,16 @@ struct ErrorView: View {
     let title: String
     
     var body: some View {
-        VStack(spacing: LayoutProvider.Spacing.extraLarge) {
-            Image(image)
+        ZStack {
+            Color.main
+                .ignoresSafeArea()
             
-            Text(title)
-                .titleStyle()
+            VStack(spacing: LayoutProvider.Spacing.extraLarge) {
+                Image(image)
+                
+                Text(title)
+                    .titleStyle()
+            }
         }
     }
 }
