@@ -11,9 +11,7 @@ struct RouteListView: View {
     
     @ObservedObject var viewModel: RouteListViewModel
     @ObservedObject var coordinator: MainScreenCoordinator
-    
-    private let buttonWidth: CGFloat = UIScreen.main.bounds.width - 32
-    
+        
     var body: some View {
         ZStack {
             Color.main
@@ -33,11 +31,10 @@ struct RouteListView: View {
     // MARK: Subviews
     private var routeList: some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 8) {
+            LazyVStack(spacing: LayoutProvider.Spacing.medium) {
                 Section {
                     ForEach(viewModel.filteredRoutes) { route in
                         RouteCardView(
-                            buttonWidth: buttonWidth,
                             route: route,
                             action: {
                                 rowTapped(for: route)
@@ -48,27 +45,27 @@ struct RouteListView: View {
                     scheduleHeader
                 }
             }
-            .padding(.bottom, 92)
+            .padding(.bottom, LayoutProvider.Padding.scrollViewBottomInset)
         }
     }
     
     private var scheduleHeader: some View {
         Text(viewModel.scheduleHeader)
-            .font(.system(size: 24, weight: .bold))
+            .font(ResourcesProvider.FontStyle.title)
             .foregroundStyle(.accent)
-            .padding(.bottom, 8)
-            .padding(.top, 16)
-            .padding(.horizontal, 16)
+            .padding(.bottom, LayoutProvider.Padding.small)
+            .padding(.top, LayoutProvider.Padding.medium)
+            .padding(.horizontal, LayoutProvider.Padding.medium)
     }
     
     private var filterButton: some View {
         AppButtonView(
             isPresented: $viewModel.areFiltersApplied,
             title: "Уточнить время",
-            dimensions: CGSize(width: buttonWidth, height: 60),
+            width: LayoutProvider.Dimensions.General.standardWidth,
             action: { filterButtonTapped() }
         )
-        .padding(.bottom, 24)
+        .padding(.bottom, LayoutProvider.Padding.large)
     }
 }
 

@@ -12,28 +12,31 @@ struct AppButtonView: View {
     @Binding var isPresented: Bool
     
     let title: String
-    let dimensions: CGSize
+    let width: CGFloat
     let action: () -> Void
     
     var body: some View {
         Button {
             action()
         } label: {
-            HStack(spacing: 4) {
+            HStack(spacing: LayoutProvider.Spacing.small) {
                 Text(title)
-                    .font(.system(size: 17, weight: .bold))
+                    .font(ResourcesProvider.FontStyle.buttonLabel)
                 
                 if isPresented {
                     Circle()
-                        .frame(width: 8)
+                        .frame(width: LayoutProvider.Dimensions.General.badge)
                         .foregroundStyle(.appRed)
                 }
             }
         }
-        .frame(width: dimensions.width, height: dimensions.height)
+        .frame(
+            width: width,
+            height: LayoutProvider.Dimensions.General.standardHeight
+        )
         .background(.appBlue)
         .foregroundStyle(.appWhite)
-        .clipShape(.rect(cornerRadius: 16))
+        .clipShape(.rect(cornerRadius: LayoutProvider.CornerRadius.small))
     }
 }
 
@@ -42,7 +45,7 @@ struct AppButtonView: View {
     AppButtonView(
         isPresented: .constant(true),
         title: "Test Title",
-        dimensions: CGSize(width: 150, height: 60),
+        width: LayoutProvider.Dimensions.Button.appSmallWidth,
         action: { print("AppButton tapped") }
     )
 }

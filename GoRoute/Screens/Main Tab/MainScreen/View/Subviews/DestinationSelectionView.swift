@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DestinationSelectionView: View {
     
-    let buttonWidth: CGFloat
+//    let buttonWidth: CGFloat
     let actionFrom: () -> Void
     let actionTo: () -> Void
     let changeAction: () -> Void
@@ -19,36 +19,33 @@ struct DestinationSelectionView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.medium)
                 .fill(.appBlue)
             
             HStack {
-                VStack(spacing: 0) {
+                VStack(spacing: LayoutProvider.Spacing.none) {
                     DestinationButton(
                         destination: $destinationFrom,
-                        buttonWidth: buttonWidth,
                         destinationType: .destinationFrom) {
                             actionFrom()
                         }
                     
                     DestinationButton(
                         destination: $destinationTo,
-                        buttonWidth: buttonWidth,
                         destinationType: .destinationTo) {
                             actionTo()
                         }
                 }
-                .frame(width: buttonWidth, height: 96)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.leading, 16)
+                .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.medium))
+                .padding(.leading, LayoutProvider.Padding.medium)
                 
                 Spacer()
                 
                 changeButton
             }
         }
-        .frame(height: 128)
-        .padding(.horizontal, 16)
+        .frame(height: LayoutProvider.Dimensions.DestinationSelection.height)
+        .padding(.horizontal, LayoutProvider.Padding.medium)
     }
 }
 
@@ -59,15 +56,21 @@ private extension DestinationSelectionView {
         Button {
             changeAction()
         } label: {
-            Image(systemName: "arrow.2.squarepath")
+            Image(systemName: ResourcesProvider.Icon.changeButton)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 24, height: 24)
+                .frame(
+                    width: LayoutProvider.Dimensions.General.icon,
+                    height: LayoutProvider.Dimensions.General.icon
+                )
                 .foregroundStyle(.appBlue)
                 .fontWeight(.bold)
-                .frame(width: 36, height: 36)
+                .frame(
+                    width: LayoutProvider.Dimensions.Button.changeButton,
+                    height: LayoutProvider.Dimensions.Button.changeButton
+                )
                 .background(.appWhite, in: Circle())
-                .padding(.trailing, 16)
+                .padding(.trailing, LayoutProvider.Padding.medium)
         }
     }
     
@@ -75,7 +78,6 @@ private extension DestinationSelectionView {
         
         @Binding var destination: SelectionModel?
         
-        let buttonWidth: CGFloat
         let destinationType: DestinationType
         let action: () -> Void
         
@@ -90,11 +92,15 @@ private extension DestinationSelectionView {
                 action()
             } label: {
                 Text(formattedDestinationString)
-                    .padding(.horizontal, 16)
-                    .frame(width: buttonWidth, height: 48, alignment: .leading)
+                    .padding(.horizontal, LayoutProvider.Padding.medium)
+                    .frame(
+                        width: LayoutProvider.Dimensions.Button.destinationWidth,
+                        height: LayoutProvider.Dimensions.Button.destinationHeight,
+                        alignment: .leading
+                    )
                     .background(.white)
                     .foregroundStyle((destination != nil) ? .appBlack : .appGray)
-                    .font(.system(size: 17, weight: .regular))
+                    .font(ResourcesProvider.FontStyle.bodyText)
                     .lineLimit(1)
             }
             .buttonStyle(.plain)
@@ -104,11 +110,7 @@ private extension DestinationSelectionView {
 
 // MARK: - Preview
 #Preview {
-    let screenWidth: CGFloat = UIScreen.main.bounds.width
-    let buttonWidth: CGFloat = screenWidth - 16 - 16 - 16 - 36 - 16 - 16
-    
     DestinationSelectionView(
-        buttonWidth: buttonWidth,
         actionFrom: { print("From") },
         actionTo: { print("To") },
         changeAction: { print("Change") },

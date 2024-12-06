@@ -18,17 +18,17 @@ struct NavigationRowView: View {
         } label: {
             HStack {
                 Text(title)
-                    .font(.system(size: 17, weight: .regular))
+                    .font(ResourcesProvider.FontStyle.bodyText)
                     .foregroundStyle(.accent)
                 
                 Spacer()
                 
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 20, weight: .semibold))
+                Image(systemName: ResourcesProvider.Icon.navigationRowIcon)
+                    .font(ResourcesProvider.FontStyle.bodyText)
                     .foregroundStyle(.accent)
             }
         }
-        .frame(height: 60)
+        .frame(height: LayoutProvider.Dimensions.General.standardHeight)
     }
 }
 

@@ -12,29 +12,29 @@ struct RouteTimeView: View {
     let route: RouteModel
     
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: LayoutProvider.Spacing.small) {
             Text(route.formattedStartTime)
-                .font(.system(size: 17, weight: .regular))
+                .font(ResourcesProvider.FontStyle.bodyText)
                 .foregroundStyle(.appBlack)
             
             Rectangle()
                 .fill(.appGray)
-                .frame(height: 1)
+                .frame(height: LayoutProvider.Dimensions.General.line)
             
             Text("\(route.travelDuration) часов")
-                .font(.system(size: 12, weight: .regular))
+                .font(ResourcesProvider.FontStyle.captionText)
                 .foregroundStyle(.appBlack)
             
             Rectangle()
                 .fill(.appGray)
-                .frame(height: 1)
+                .frame(height: LayoutProvider.Dimensions.General.line)
             
             Text(route.formattedEndTime)
-                .font(.system(size: 17, weight: .regular))
+                .font(ResourcesProvider.FontStyle.bodyText)
                 .foregroundStyle(.appBlack)
         }
-        .frame(height: 48)
-        .padding(.horizontal, 14)
+        .frame(height: LayoutProvider.Dimensions.RouteCard.timeViewHeight)
+        .padding(.horizontal, LayoutProvider.Padding.medium)
     }
 }
 

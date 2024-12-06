@@ -11,15 +11,13 @@ struct FilterView: View {
     
     @ObservedObject var viewModel: RouteListViewModel
     @ObservedObject var coordinator: MainScreenCoordinator
-    
-    private let buttonWidth: CGFloat = UIScreen.main.bounds.width - 32
-    
+        
     var body: some View {
         ZStack {
             Color.main
                 .ignoresSafeArea()
             
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: LayoutProvider.Spacing.extraLarge) {
                 timeFilterSection
                 
                 transferFilterSection
@@ -28,8 +26,8 @@ struct FilterView: View {
                 
                 filterButton
             }
-            .padding(.top, 16)
-            .padding(.horizontal, 16)
+            .padding(.top, LayoutProvider.Padding.medium)
+            .padding(.horizontal, LayoutProvider.Padding.medium)
             .onAppear {
                 viewModel.resetTemporarySelections()
             }
@@ -67,12 +65,12 @@ struct FilterView: View {
         AppButtonView(
             isPresented: .constant(false),
             title: "Применить",
-            dimensions: CGSize(width: buttonWidth, height: 60),
+            width: LayoutProvider.Dimensions.General.standardWidth,
             action: {
                 filterButtonTapped()
             }
         )
-        .padding(.bottom, 24)
+        .padding(.bottom, LayoutProvider.Padding.large)
     }
 }
 

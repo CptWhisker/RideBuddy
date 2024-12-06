@@ -12,28 +12,31 @@ struct CarrierInfoView: View {
     let route: RouteModel
     
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: LayoutProvider.Spacing.medium) {
             Image(route.carrier.smallLogo)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 38, height: 38)
+                .frame(
+                    width: LayoutProvider.Dimensions.Carrier.logo,
+                    height: LayoutProvider.Dimensions.Carrier.logo
+                )
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: LayoutProvider.Spacing.tiny) {
                 Text(route.carrier.shortName)
-                    .font(.system(size: 17, weight: .regular))
+                    .font(ResourcesProvider.FontStyle.bodyText)
                     .foregroundStyle(.appBlack)
                 
                 if let transfer = route.transfers.first {
                     Text("С пересадкой в \(transfer.name)")
-                        .font(.system(size: 12, weight: .regular))
+                        .font(ResourcesProvider.FontStyle.captionText)
                         .foregroundStyle(.appRed)
                 }
             }
             
             Spacer()
         }
-        .padding(.horizontal, 14)
-        .padding(.top, 14)
+        .padding(.horizontal, LayoutProvider.Padding.medium)
+        .padding(.top, LayoutProvider.Padding.medium)
     }
 }
 

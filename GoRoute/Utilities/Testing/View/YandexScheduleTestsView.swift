@@ -17,7 +17,7 @@ struct YandexScheduleTestsView: View {
                 .ignoresSafeArea()
                 .opacity(0.25)
             
-            VStack(spacing: 20) {
+            VStack(spacing: LayoutProvider.Spacing.extraLarge) {
                 ForEach(MainScreenAction.allCases) { action in
                     YandexScheduleTestsButton(title: action.rawValue) {
                         Task {
@@ -46,10 +46,10 @@ private extension YandexScheduleTestsView {
             Button(action: action) {
                 Text(title)
                     .font(.headline)
-                    .frame(width: 300, height: 60)
+                    .frame(width: 300, height: LayoutProvider.Dimensions.General.standardHeight)
                     .background(.blue)
                     .foregroundStyle(.white)
-                    .clipShape(.rect(cornerRadius: 10))
+                    .clipShape(.rect(cornerRadius: LayoutProvider.CornerRadius.small))
                     .shadow(radius: 5)
             }
         }

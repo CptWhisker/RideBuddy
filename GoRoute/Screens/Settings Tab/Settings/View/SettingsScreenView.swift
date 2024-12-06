@@ -19,7 +19,7 @@ struct SettingsScreenView: View {
                 Color.main
                     .ignoresSafeArea()
                 
-                VStack(spacing: 0) {
+                VStack(spacing: LayoutProvider.Spacing.none) {
                     SettingsToggle(title: "Темная тема", isOn: $viewModel.isDarkModeEnabled)
                         
                     NavigationRowView(title: "Пользовательское соглашение") {
@@ -30,7 +30,7 @@ struct SettingsScreenView: View {
                     
                     copyright
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, LayoutProvider.Padding.medium)
             }
             .navigationDestination(for: SettingsNavigationModel.self) { destination in
                 switch destination {
@@ -56,21 +56,21 @@ private extension SettingsScreenView {
         var body: some View {
             Toggle(isOn: isOn) {
                 Text(title)
-                    .font(.system(size: 17, weight: .regular))
+                    .font(ResourcesProvider.FontStyle.bodyText)
                     .foregroundStyle(.accent)
             }
             .tint(.appGray)
-            .frame(height: 60)
+            .frame(height: LayoutProvider.Dimensions.General.standardHeight)
         }
     }
     
     var copyright: some View {
         Text("Приложение использует API «Яндекс.Расписания»\nВерсия 1.0 (beta)")
-            .font(.system(size: 12, weight: .regular))
+            .font(ResourcesProvider.FontStyle.captionText)
             .foregroundStyle(.accent)
             .multilineTextAlignment(.center)
-            .lineSpacing(16)
-            .padding(.bottom, 24)
+            .lineSpacing(LayoutProvider.Spacing.extraLarge)
+            .padding(.bottom, LayoutProvider.Padding.large)
     }
 }
 

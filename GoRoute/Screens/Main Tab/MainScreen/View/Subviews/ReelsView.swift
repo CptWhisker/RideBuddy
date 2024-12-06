@@ -13,20 +13,26 @@ struct ReelsView: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
+            HStack(spacing: LayoutProvider.Spacing.large) {
                 ForEach(reels) { _ in
                     Rectangle()
                         .fill(Color.accent)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small))
                         .overlay {
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(Color.appBlue, lineWidth: 4)
+                            RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small)
+                                .strokeBorder(
+                                    Color.appBlue,
+                                    lineWidth: LayoutProvider.BorderWidth.large
+                                )
                         }
-                        .frame(width: 92, height: 140)
+                        .frame(
+                            width: LayoutProvider.Dimensions.Reel.width,
+                            height: LayoutProvider.Dimensions.Reel.height
+                        )
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 24)
+            .padding(.horizontal, LayoutProvider.Padding.medium)
+            .padding(.vertical, LayoutProvider.Padding.large)
         }
     }
 }

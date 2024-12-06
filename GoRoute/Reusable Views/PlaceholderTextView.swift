@@ -13,7 +13,7 @@ struct PlaceholderTextView: View {
     
     var body: some View {
         Text(title)
-            .font(.system(size: 24, weight: .bold))
+            .font(ResourcesProvider.FontStyle.title)
             .foregroundStyle(.accent)
     }
 }

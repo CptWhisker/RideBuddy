@@ -17,8 +17,8 @@ struct NavigationBackButtonModifier<C: CoordinatorProtocol>: ViewModifier {
             .navigationBarItems(leading: Button(action: {
                 coordinator.navigateBack()
             }) {
-                Image(systemName: "chevron.left")
-                    .font(.system(size: 17, weight: .semibold))
+                Image(systemName: ResourcesProvider.Icon.navigationBackButton)
+                    .font(ResourcesProvider.FontStyle.bodyText)
                     .foregroundStyle(.accent)
             })
     }

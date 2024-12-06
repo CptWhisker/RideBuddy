@@ -9,21 +9,23 @@ import SwiftUI
 
 struct RouteCardView: View {
     
-    let buttonWidth: CGFloat
     let route: RouteModel
     let action: () -> Void
     
     var body: some View {
         
         Button(action: action) {
-            VStack(spacing: 4) {
+            VStack(spacing: LayoutProvider.Spacing.small) {
                 CarrierInfoView(route: route)
                 
                 RouteTimeView(route: route)
             }
-            .frame(width: buttonWidth, height: 104)
+            .frame(
+                width: LayoutProvider.Dimensions.General.standardWidth,
+                height: LayoutProvider.Dimensions.RouteCard.height
+            )
             .background(.appLightGray)
-            .clipShape(.rect(cornerRadius: 24))
+            .clipShape(.rect(cornerRadius: LayoutProvider.CornerRadius.large))
             .overlay(alignment: .topTrailing) {
                 dateOverlay
             }
@@ -33,20 +35,16 @@ struct RouteCardView: View {
     // MARK: Subviews
     private var dateOverlay: some View {
         Text(route.formattedTravelDate)
-            .font(.system(size: 12, weight: .regular))
+            .font(ResourcesProvider.FontStyle.captionText)
             .foregroundStyle(.appBlack)
-            .padding(.top, 14)
-            .padding(.trailing, 8)
+            .padding(.top, LayoutProvider.Padding.medium)
+            .padding(.trailing, LayoutProvider.Padding.small)
     }
 }
 
 // MARK: - Preview
 #Preview {
-    let screenWidth: CGFloat = UIScreen.main.bounds.width
-    let buttonWidth: CGFloat = screenWidth - 32
-    
     RouteCardView(
-        buttonWidth: buttonWidth,
         route: MockDataProvider.mockRoute,
         action: { print("Action") }
     )

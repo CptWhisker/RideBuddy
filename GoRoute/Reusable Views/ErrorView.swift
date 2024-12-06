@@ -13,11 +13,11 @@ struct ErrorView: View {
     let title: String
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: LayoutProvider.Spacing.extraLarge) {
             Image(image)
             
             Text(title)
-                .font(.system(size: 24, weight: .bold))
+                .font(ResourcesProvider.FontStyle.title)
                 .foregroundStyle(.accent)
         }
     }

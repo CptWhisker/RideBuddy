@@ -76,11 +76,11 @@ extension RouteListViewModel {
     }
     
     func getTimeFilterImageName(_ timeFilter: TimeFilterModel) -> String {
-        selectedTimeFilters.contains(timeFilter) ? "checkmark.square" : "square"
+        selectedTimeFilters.contains(timeFilter) ? ResourcesProvider.Icon.markedRectCheckbox : ResourcesProvider.Icon.emptyRectCheckbox
     }
     
     func getTransferFilterImageName(_ transferFilter: TransferFilterModel) -> String {
-        selectedTransferFilter == transferFilter ? "record.circle" : "circle"
+        selectedTransferFilter == transferFilter ? ResourcesProvider.Icon.markedCircleCheckbox : ResourcesProvider.Icon.emptyCircleCheckbox
     }
     
     func applyRoutesFilter() {

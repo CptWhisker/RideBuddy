@@ -14,20 +14,16 @@ struct MainScreenView: View {
     @ObservedObject var mainViewModel: MainScreenViewModel
     @ObservedObject var routeViewModel: RouteListViewModel
     
-    private let screenWidth: CGFloat = UIScreen.main.bounds.width
-    private var buttonWidth: CGFloat { screenWidth - 16 - 16 - 16 - 36 - 16 - 16 }
-    
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             ZStack {
                 Color.main
                     .ignoresSafeArea()
                 
-                VStack(spacing: 16) {
+                VStack(spacing: LayoutProvider.Spacing.extraLarge) {
                     ReelsView(reels: mainViewModel.reels)
                     
                     DestinationSelectionView(
-                        buttonWidth: buttonWidth,
                         actionFrom: {
                             fromButtonTapped()
                         },
@@ -47,7 +43,7 @@ struct MainScreenView: View {
                     
                     Spacer()
                 }
-                .padding(.top, 24)
+                .padding(.top, LayoutProvider.Padding.large)
             }
             .navigationDestination(for: MainNavigationModel.self) { destination in
                 switch destination {
@@ -99,7 +95,7 @@ struct MainScreenView: View {
         AppButtonView(
             isPresented: .constant(false),
             title: "Найти",
-            dimensions: CGSize(width: 150, height: 60),
+            width: LayoutProvider.Dimensions.Button.appSmallWidth,
             action: {
                 searchButtonTapped()
             }

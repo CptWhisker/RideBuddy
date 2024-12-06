@@ -19,14 +19,14 @@ struct TabBarView: View {
                 mainViewModel: mainScreenViewModel,
                 routeViewModel: routeListViewModel
             )
-            .tabItem { Image(systemName: "arrow.up.message") }
+            .tabItem { Image(systemName: ResourcesProvider.Icon.mainTabIcon) }
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarBackground(.main, for: .tabBar)
             
             SettingsScreenView(
                 viewModel: settingsScreenViewModel
             )
-            .tabItem { Image(systemName: "gearshape") }
+            .tabItem { Image(systemName: ResourcesProvider.Icon.settingsTabIcon) }
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarBackground(.main, for: .tabBar)
         }

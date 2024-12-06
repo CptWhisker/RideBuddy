@@ -16,7 +16,7 @@ struct CarrierDetailsView: View {
             Color.main
                 .ignoresSafeArea()
             
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: LayoutProvider.Spacing.extraLarge) {
                 carrierLogo
 
                 carrierName
@@ -25,8 +25,8 @@ struct CarrierDetailsView: View {
                 
                 Spacer()
             }
-            .padding(.top, 16)
-            .padding(.horizontal, 16)
+            .padding(.top, LayoutProvider.Padding.medium)
+            .padding(.horizontal, LayoutProvider.Padding.medium)
         }
         .navigationTitle("Информация о перевозчике")
         .navigationBarTitleDisplayMode(.inline)
@@ -42,12 +42,12 @@ struct CarrierDetailsView: View {
     
     private var carrierName: some View {
         Text(carrier.fullName)
-            .font(.system(size: 24, weight: .bold))
+            .font(ResourcesProvider.FontStyle.title)
             .foregroundStyle(.accent)
     }
     
     private var contactInfo: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: LayoutProvider.Spacing.none) {
             contactRow(title: "E-mail", value: carrier.email)
             contactRow(title: "Телефон", value: carrier.phone)
         }
@@ -58,16 +58,16 @@ struct CarrierDetailsView: View {
 private extension CarrierDetailsView {
     
     func contactRow(title: String, value: String) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: LayoutProvider.Spacing.none) {
             Text(title)
-                .font(.system(size: 17, weight: .regular))
+                .font(ResourcesProvider.FontStyle.bodyText)
                 .foregroundStyle(.accent)
             
             Text(value)
-                .font(.system(size: 12, weight: .regular))
+                .font(ResourcesProvider.FontStyle.captionText)
                 .foregroundStyle(.appBlue)
         }
-        .frame(height: 60)
+        .frame(height: LayoutProvider.Dimensions.General.standardHeight)
     }
 }
 

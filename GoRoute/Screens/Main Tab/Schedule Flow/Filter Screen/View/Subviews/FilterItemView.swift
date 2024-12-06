@@ -16,19 +16,22 @@ struct FilterItemView: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.system(size: 17, weight: .regular))
+                .font(ResourcesProvider.FontStyle.bodyText)
                 .foregroundStyle(.accent)
             Spacer()
             
             Image(systemName: imageName)
                 .resizable()
-                .frame(width: 20, height: 20)
+                .frame(
+                    width: LayoutProvider.Dimensions.General.checkBox,
+                    height: LayoutProvider.Dimensions.General.checkBox
+                )
                 .foregroundStyle(.accent)
                 .onTapGesture {
                     onTap()
                 }
         }
-        .frame(height: 60)
+        .frame(height: LayoutProvider.Dimensions.General.standardHeight)
     }
 }
 
