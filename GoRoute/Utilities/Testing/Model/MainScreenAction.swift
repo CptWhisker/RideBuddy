@@ -40,7 +40,7 @@ enum MainScreenAction: String, CaseIterable {
         }
     }
     
-    func performAction(on viewModel: MainScreenViewModelProtocol) async throws {
+    func performAction(on viewModel: TestViewModelProtocol) async throws {
         switch self {
             
         case .scheduleBetweenStations: try await viewModel.getScheduleBetweenStations()

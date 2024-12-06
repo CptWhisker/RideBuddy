@@ -17,8 +17,7 @@ struct ErrorView: View {
             Image(image)
             
             Text(title)
-                .font(ResourcesProvider.FontStyle.title)
-                .foregroundStyle(.accent)
+                .titleStyle()
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppButtonView: View {
     
-    @Binding var isPresented: Bool
+    @Binding var isNotificationPresented: Bool
     
     let title: String
     let width: CGFloat
@@ -23,27 +23,20 @@ struct AppButtonView: View {
                 Text(title)
                     .font(ResourcesProvider.FontStyle.buttonLabel)
                 
-                if isPresented {
+                if isNotificationPresented {
                     Circle()
-                        .frame(width: LayoutProvider.Dimensions.General.badge)
-                        .foregroundStyle(.appRed)
+                        .notificationStyle()
                 }
             }
         }
-        .frame(
-            width: width,
-            height: LayoutProvider.Dimensions.General.standardHeight
-        )
-        .background(.appBlue)
-        .foregroundStyle(.appWhite)
-        .clipShape(.rect(cornerRadius: LayoutProvider.CornerRadius.small))
+        .appButtonStandardStyle(width: width)
     }
 }
 
 // MARK: - Preview
 #Preview {
     AppButtonView(
-        isPresented: .constant(true),
+        isNotificationPresented: .constant(true),
         title: "Test Title",
         width: LayoutProvider.Dimensions.Button.appSmallWidth,
         action: { print("AppButton tapped") }

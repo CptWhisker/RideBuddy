@@ -18,14 +18,11 @@ struct NavigationRowView: View {
         } label: {
             HStack {
                 Text(title)
-                    .font(ResourcesProvider.FontStyle.bodyText)
-                    .foregroundStyle(.accent)
+                    .bodyTextStyle(.accent)
                 
                 Spacer()
                 
                 Image(systemName: ResourcesProvider.Icon.navigationRowIcon)
-                    .font(ResourcesProvider.FontStyle.bodyText)
-                    .foregroundStyle(.accent)
             }
         }
         .frame(height: LayoutProvider.Dimensions.General.standardHeight)

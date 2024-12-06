@@ -23,13 +23,11 @@ struct CarrierInfoView: View {
             
             VStack(alignment: .leading, spacing: LayoutProvider.Spacing.tiny) {
                 Text(route.carrier.shortName)
-                    .font(ResourcesProvider.FontStyle.bodyText)
-                    .foregroundStyle(.appBlack)
+                    .bodyTextStyle(.appBlack)
                 
                 if let transfer = route.transfers.first {
                     Text("С пересадкой в \(transfer.name)")
-                        .font(ResourcesProvider.FontStyle.captionText)
-                        .foregroundStyle(.appRed)
+                        .captionTextStyle(.appRed)
                 }
             }
             

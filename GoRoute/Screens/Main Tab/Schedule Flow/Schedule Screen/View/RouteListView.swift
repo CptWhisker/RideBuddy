@@ -51,8 +51,7 @@ struct RouteListView: View {
     
     private var scheduleHeader: some View {
         Text(viewModel.scheduleHeader)
-            .font(ResourcesProvider.FontStyle.title)
-            .foregroundStyle(.accent)
+            .titleStyle()
             .padding(.bottom, LayoutProvider.Padding.small)
             .padding(.top, LayoutProvider.Padding.medium)
             .padding(.horizontal, LayoutProvider.Padding.medium)
@@ -60,7 +59,7 @@ struct RouteListView: View {
     
     private var filterButton: some View {
         AppButtonView(
-            isPresented: $viewModel.areFiltersApplied,
+            isNotificationPresented: $viewModel.areFiltersApplied,
             title: "Уточнить время",
             width: LayoutProvider.Dimensions.General.standardWidth,
             action: { filterButtonTapped() }

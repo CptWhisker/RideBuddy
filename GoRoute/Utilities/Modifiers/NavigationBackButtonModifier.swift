@@ -14,12 +14,12 @@ struct NavigationBackButtonModifier<C: CoordinatorProtocol>: ViewModifier {
     func body(content: Content) -> some View {
         content
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: Button(action: {
-                coordinator.navigateBack()
-            }) {
-                Image(systemName: ResourcesProvider.Icon.navigationBackButton)
-                    .font(ResourcesProvider.FontStyle.bodyText)
-                    .foregroundStyle(.accent)
-            })
+            .navigationBarItems(
+                leading: Button(
+                    action: {
+                        coordinator.navigateBack()
+                    }) {
+                        Image(systemName: ResourcesProvider.Icon.navigationBackButton)
+                    })
     }
 }

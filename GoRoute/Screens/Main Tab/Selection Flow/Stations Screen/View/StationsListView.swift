@@ -25,14 +25,7 @@ struct StationsListView: View {
                 PlaceholderTextView(title: "Станция не найдена")
             }
         }
-        .listStyle(.plain)
-        .navigationTitle("Выбор станции")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(
-            text: $viewModel.searchStationText,
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: "Введите запрос"
-        )
+        .listStandardStyle(searchText: $viewModel.searchStationText, title: "Выбор станции")
     }
     
     // MARK: Subviews

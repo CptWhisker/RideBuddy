@@ -9,7 +9,7 @@ import SwiftUI
 
 enum LayoutProvider {
     
-    // MARK: - Globar layout constants
+    // MARK: - Global layout constants
     enum Screen {
         static let width: CGFloat = UIScreen.main.bounds.width
     }
@@ -84,7 +84,7 @@ enum LayoutProvider {
              
              This value calculates the remaining width by subtracting:
              - Two medium paddings for the horizontal margins of the underlying view.
-             - The width of the 'changeButton' (36).
+             - The width of the 'changeButton'.
              - Two medium paddings for the horizontal margins of the 'changeButton'.
              - The medium padding for the leading margin of the 'DestinationButton'.
              

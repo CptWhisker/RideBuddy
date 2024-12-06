@@ -63,7 +63,7 @@ struct FilterView: View {
     
     private var filterButton: some View {
         AppButtonView(
-            isPresented: .constant(false),
+            isNotificationPresented: .constant(false),
             title: "Применить",
             width: LayoutProvider.Dimensions.General.standardWidth,
             action: {

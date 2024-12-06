@@ -93,7 +93,7 @@ struct MainScreenView: View {
     // MARK: Subviews
     private var searchButton: some View {
         AppButtonView(
-            isPresented: .constant(false),
+            isNotificationPresented: .constant(false),
             title: "Найти",
             width: LayoutProvider.Dimensions.Button.appSmallWidth,
             action: {

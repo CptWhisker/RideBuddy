@@ -12,4 +12,8 @@ extension View {
     func navigationBackButton<C: CoordinatorProtocol>(coordinator: C) -> some View {
         self.modifier(NavigationBackButtonModifier(coordinator: coordinator))
     }
+    
+    func listStandardStyle(searchText: Binding<String>, title: String) -> some View {
+        self.modifier(ListStandardStyleModifier(searchText: searchText, title: title))
+    }
 }

@@ -56,8 +56,7 @@ private extension SettingsScreenView {
         var body: some View {
             Toggle(isOn: isOn) {
                 Text(title)
-                    .font(ResourcesProvider.FontStyle.bodyText)
-                    .foregroundStyle(.accent)
+                    .bodyTextStyle(.accent)
             }
             .tint(.appGray)
             .frame(height: LayoutProvider.Dimensions.General.standardHeight)
@@ -66,11 +65,7 @@ private extension SettingsScreenView {
     
     var copyright: some View {
         Text("Приложение использует API «Яндекс.Расписания»\nВерсия 1.0 (beta)")
-            .font(ResourcesProvider.FontStyle.captionText)
-            .foregroundStyle(.accent)
-            .multilineTextAlignment(.center)
-            .lineSpacing(LayoutProvider.Spacing.extraLarge)
-            .padding(.bottom, LayoutProvider.Padding.large)
+            .copyrightStyle()
     }
 }
 

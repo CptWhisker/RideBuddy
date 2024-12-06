@@ -14,24 +14,19 @@ struct RouteTimeView: View {
     var body: some View {
         HStack(spacing: LayoutProvider.Spacing.small) {
             Text(route.formattedStartTime)
-                .font(ResourcesProvider.FontStyle.bodyText)
-                .foregroundStyle(.appBlack)
+                .bodyTextStyle(.appBlack)
             
             Rectangle()
-                .fill(.appGray)
-                .frame(height: LayoutProvider.Dimensions.General.line)
+                .lineStyle()
             
             Text("\(route.travelDuration) часов")
-                .font(ResourcesProvider.FontStyle.captionText)
-                .foregroundStyle(.appBlack)
+                .bodyTextStyle(.appBlack)
             
             Rectangle()
-                .fill(.appGray)
-                .frame(height: LayoutProvider.Dimensions.General.line)
+                .lineStyle()
             
             Text(route.formattedEndTime)
-                .font(ResourcesProvider.FontStyle.bodyText)
-                .foregroundStyle(.appBlack)
+                .bodyTextStyle(.appBlack)
         }
         .frame(height: LayoutProvider.Dimensions.RouteCard.timeViewHeight)
         .padding(.horizontal, LayoutProvider.Padding.medium)

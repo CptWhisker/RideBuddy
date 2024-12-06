@@ -49,7 +49,7 @@ struct DestinationSelectionView: View {
     }
 }
 
-// MARK: - SubViews
+// MARK: - Subviews
 private extension DestinationSelectionView {
     
     var changeButton: some View {
@@ -57,19 +57,7 @@ private extension DestinationSelectionView {
             changeAction()
         } label: {
             Image(systemName: ResourcesProvider.Icon.changeButton)
-                .resizable()
-                .scaledToFit()
-                .frame(
-                    width: LayoutProvider.Dimensions.General.icon,
-                    height: LayoutProvider.Dimensions.General.icon
-                )
-                .foregroundStyle(.appBlue)
-                .fontWeight(.bold)
-                .frame(
-                    width: LayoutProvider.Dimensions.Button.changeButton,
-                    height: LayoutProvider.Dimensions.Button.changeButton
-                )
-                .background(.appWhite, in: Circle())
+                .changeButtonStyle()
                 .padding(.trailing, LayoutProvider.Padding.medium)
         }
     }

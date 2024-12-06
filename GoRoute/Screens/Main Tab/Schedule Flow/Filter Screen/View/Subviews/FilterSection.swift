@@ -27,8 +27,7 @@ struct FilterSection<T: FilterProtocol>: View {
             }
         } header: {
             Text(title)
-                .font(ResourcesProvider.FontStyle.title)
-                .foregroundStyle(.accent)
+                .titleStyle()
         }
     }
 }

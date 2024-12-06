@@ -42,8 +42,7 @@ struct CarrierDetailsView: View {
     
     private var carrierName: some View {
         Text(carrier.fullName)
-            .font(ResourcesProvider.FontStyle.title)
-            .foregroundStyle(.accent)
+            .titleStyle()
     }
     
     private var contactInfo: some View {
@@ -60,12 +59,10 @@ private extension CarrierDetailsView {
     func contactRow(title: String, value: String) -> some View {
         VStack(alignment: .leading, spacing: LayoutProvider.Spacing.none) {
             Text(title)
-                .font(ResourcesProvider.FontStyle.bodyText)
-                .foregroundStyle(.accent)
+                .bodyTextStyle(.accent)
             
             Text(value)
-                .font(ResourcesProvider.FontStyle.captionText)
-                .foregroundStyle(.appBlue)
+                .captionTextStyle(.appBlue)
         }
         .frame(height: LayoutProvider.Dimensions.General.standardHeight)
     }

@@ -20,23 +20,17 @@ struct RouteCardView: View {
                 
                 RouteTimeView(route: route)
             }
-            .frame(
-                width: LayoutProvider.Dimensions.General.standardWidth,
-                height: LayoutProvider.Dimensions.RouteCard.height
-            )
-            .background(.appLightGray)
-            .clipShape(.rect(cornerRadius: LayoutProvider.CornerRadius.large))
             .overlay(alignment: .topTrailing) {
                 dateOverlay
             }
         }
+        .routeCardStandardStyle()
     }
     
     // MARK: Subviews
     private var dateOverlay: some View {
         Text(route.formattedTravelDate)
-            .font(ResourcesProvider.FontStyle.captionText)
-            .foregroundStyle(.appBlack)
+            .captionTextStyle(.appBlack)
             .padding(.top, LayoutProvider.Padding.medium)
             .padding(.trailing, LayoutProvider.Padding.small)
     }

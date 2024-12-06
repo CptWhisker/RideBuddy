@@ -25,14 +25,7 @@ struct CitiesListView: View {
                 PlaceholderTextView(title: "Город не найден")
             }
         }
-        .listStyle(.plain)
-        .navigationTitle("Выбор города")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(
-            text: $viewModel.searchCityText,
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: "Введите запрос"
-        )
+        .listStandardStyle(searchText: $viewModel.searchCityText, title: "Выбор города")
     }
     
     // MARK: Subviews

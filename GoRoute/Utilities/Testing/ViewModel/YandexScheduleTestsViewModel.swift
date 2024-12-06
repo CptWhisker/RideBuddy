@@ -9,7 +9,7 @@ import SwiftUI
 import OpenAPIURLSession
 
 // MARK: - Protocol
-protocol MainScreenViewModelProtocol: AnyObject {
+protocol TestViewModelProtocol: AnyObject {
     func getScheduleBetweenStations() async throws
     func getScheduleFromStation() async throws
     func getStationsForThread() async throws
@@ -44,7 +44,7 @@ final class YandexScheduleTestsViewModel: ObservableObject {
 }
 
 // MARK: - Protocol Implementation
-extension YandexScheduleTestsViewModel: MainScreenViewModelProtocol {
+extension YandexScheduleTestsViewModel: TestViewModelProtocol {
     
     func getScheduleBetweenStations() async throws {
         let result = try await scheduleService?.getScheduleBetweenStations(stationFrom: "c213", stationTo: "c2")
