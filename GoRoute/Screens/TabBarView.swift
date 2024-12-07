@@ -21,6 +21,7 @@ struct TabBarView: View {
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarBackground(.main, for: .tabBar)
         }
+        .accentColor(.accent)
     }
 }
 
