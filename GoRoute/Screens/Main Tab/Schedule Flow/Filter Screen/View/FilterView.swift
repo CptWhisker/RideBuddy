@@ -11,8 +11,9 @@ struct FilterView: View {
     
     @EnvironmentObject var appState: AppState
     
-    @ObservedObject var viewModel: RouteListViewModel
-    @ObservedObject var coordinator: MainScreenCoordinator
+    @EnvironmentObject var viewModel: RouteListViewModel
+    
+    @EnvironmentObject var coordinator: MainScreenCoordinator
     
     var body: some View {
         ZStack {
@@ -92,8 +93,12 @@ private extension FilterView {
 
 // MARK: - Preview
 #Preview {
-    FilterView(
-        viewModel: RouteListViewModel(),
-        coordinator: MainScreenCoordinator()
-    )
+    let appState = AppState()
+    let viewModel = RouteListViewModel()
+    let coordinator = MainScreenCoordinator()
+    
+    FilterView()
+        .environmentObject(appState)
+        .environmentObject(viewModel)
+        .environmentObject(coordinator)
 }

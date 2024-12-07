@@ -9,40 +9,35 @@ import SwiftUI
 
 struct TabBarView: View {
     
-    @ObservedObject var mainScreenViewModel: MainScreenViewModel
-    @ObservedObject var routeListViewModel: RouteListViewModel
-    @ObservedObject var settingsScreenViewModel: SettingsScreenViewModel
-    
     var body: some View {
         TabView {
-            MainScreenView(
-                mainViewModel: mainScreenViewModel,
-                routeViewModel: routeListViewModel
-            )
-            .tabItem { Image(systemName: ResourcesProvider.Icon.mainTabIcon) }
-            .toolbarBackground(.visible, for: .tabBar)
-            .toolbarBackground(.main, for: .tabBar)
+            MainScreenView()
+                .tabItem { Image(systemName: ResourcesProvider.Icon.mainTabIcon) }
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(.main, for: .tabBar)
             
-            SettingsScreenView(
-                viewModel: settingsScreenViewModel
-            )
-            .tabItem { Image(systemName: ResourcesProvider.Icon.settingsTabIcon) }
-            .toolbarBackground(.visible, for: .tabBar)
-            .toolbarBackground(.main, for: .tabBar)
+            SettingsScreenView()
+                .tabItem { Image(systemName: ResourcesProvider.Icon.settingsTabIcon) }
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(.main, for: .tabBar)
         }
     }
 }
 
 // MARK: - Preview
 #Preview {
+    let appState = AppState()
+    let mainScreenViewModel = MainScreenViewModel()
+    let routeListViewModel = RouteListViewModel()
     let mainScreenCoordinator = MainScreenCoordinator()
+    let settingsScreenViewModel = SettingsScreenViewModel()
     let settingsScreenCoordinator = SettingsScreenCoordinator()
     
-    TabBarView(
-        mainScreenViewModel: MainScreenViewModel(),
-        routeListViewModel: RouteListViewModel(),
-        settingsScreenViewModel: SettingsScreenViewModel()
-    )
-    .environmentObject(mainScreenCoordinator)
-    .environmentObject(settingsScreenCoordinator)
+    TabBarView()
+        .environmentObject(appState)
+        .environmentObject(mainScreenViewModel)
+        .environmentObject(routeListViewModel)
+        .environmentObject(mainScreenCoordinator)
+        .environmentObject(settingsScreenViewModel)
+        .environmentObject(settingsScreenCoordinator)
 }

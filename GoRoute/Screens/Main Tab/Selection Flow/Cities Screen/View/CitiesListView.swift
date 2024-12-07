@@ -11,8 +11,9 @@ struct CitiesListView: View {
     
     @EnvironmentObject var appState: AppState
     
-    @ObservedObject var coordinator: MainScreenCoordinator
-    @ObservedObject var viewModel: MainScreenViewModel
+    @EnvironmentObject var viewModel: MainScreenViewModel
+    
+    @EnvironmentObject var coordinator: MainScreenCoordinator
     
     let cities: [CityModel]
     
@@ -60,9 +61,14 @@ private extension CitiesListView {
 
 // MARK: - Preview
 #Preview {
+    let appState = AppState()
+    let viewModel = MainScreenViewModel()
+    let coordinator = MainScreenCoordinator()
+    
     CitiesListView(
-        coordinator: MainScreenCoordinator(),
-        viewModel: MainScreenViewModel(),
         cities: MockDataProvider.mockCities
     )
+    .environmentObject(appState)
+    .environmentObject(viewModel)
+    .environmentObject(coordinator)
 }

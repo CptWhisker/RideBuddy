@@ -75,5 +75,10 @@ private extension CarrierDetailsView {
 
 // MARK: - Preview
 #Preview {
-    CarrierDetailsView(carrier: MockDataProvider.mockCarrier)
+    let appState = AppState()
+    
+    CarrierDetailsView(
+        carrier: MockDataProvider.mockCarrier
+    )
+    .environmentObject(appState)
 }

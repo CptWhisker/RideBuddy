@@ -11,8 +11,9 @@ struct RouteListView: View {
     
     @EnvironmentObject var appState: AppState
     
-    @ObservedObject var viewModel: RouteListViewModel
-    @ObservedObject var coordinator: MainScreenCoordinator
+    @EnvironmentObject var viewModel: RouteListViewModel
+    
+    @EnvironmentObject var coordinator: MainScreenCoordinator
         
     var body: some View {
         ZStack {
@@ -90,8 +91,12 @@ private extension RouteListView {
 
 // MARK: - Preview
 #Preview {
-    RouteListView(
-        viewModel: RouteListViewModel(),
-        coordinator: MainScreenCoordinator()
-    )
+    let appState = AppState()
+    let viewModel = RouteListViewModel()
+    let coordinator = MainScreenCoordinator()
+    
+    RouteListView()
+        .environmentObject(appState)
+        .environmentObject(viewModel)
+        .environmentObject(coordinator)
 }

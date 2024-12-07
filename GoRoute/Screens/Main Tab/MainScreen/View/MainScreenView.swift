@@ -10,10 +10,11 @@ import SwiftUI
 struct MainScreenView: View {
     
     @EnvironmentObject var appState: AppState
-    @EnvironmentObject var coordinator: MainScreenCoordinator
     
-    @ObservedObject var mainViewModel: MainScreenViewModel
-    @ObservedObject var routeViewModel: RouteListViewModel
+    @EnvironmentObject var mainViewModel: MainScreenViewModel
+    @EnvironmentObject var routeViewModel: RouteListViewModel
+    
+    @EnvironmentObject var coordinator: MainScreenCoordinator
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
@@ -74,29 +75,18 @@ private extension MainScreenView {
         switch destination {
             
         case .cityList:
-            CitiesListView(
-                coordinator: coordinator,
-                viewModel: mainViewModel,
-                cities: mainViewModel.filteredCities
-            )
-            .navigationBackButton(coordinator: coordinator)
-            .toolbar(.hidden, for: .tabBar)
+            CitiesListView(cities: mainViewModel.filteredCities)
+                .navigationBackButton(coordinator: coordinator)
+                .toolbar(.hidden, for: .tabBar)
             
         case .stationList:
-            StationsListView(
-                coordinator: coordinator,
-                viewModel: mainViewModel,
-                stations: mainViewModel.filteredStations
-            )
-            .navigationBackButton(coordinator: coordinator)
+            StationsListView(stations: mainViewModel.filteredStations)
+                .navigationBackButton(coordinator: coordinator)
             
         case .routeList:
-            RouteListView(
-                viewModel: routeViewModel,
-                coordinator: coordinator
-            )
-            .navigationBackButton(coordinator: coordinator)
-            .toolbar(.hidden, for: .tabBar)
+            RouteListView()
+                .navigationBackButton(coordinator: coordinator)
+                .toolbar(.hidden, for: .tabBar)
             
         case .carrierDetails:
             if let carrier = routeViewModel.selectedCarrier {
@@ -105,10 +95,7 @@ private extension MainScreenView {
             }
             
         case .filterScreen:
-            FilterView(
-                viewModel: routeViewModel,
-                coordinator: coordinator
-            )
+            FilterView()
                 .navigationBackButton(coordinator: coordinator)
         }
     }
@@ -143,12 +130,13 @@ private extension MainScreenView {
 // MARK: - Preview
 #Preview {
     let appState = AppState()
+    let mainViewModel = MainScreenViewModel()
+    let routeViewModel = RouteListViewModel()
     let coordinator = MainScreenCoordinator()
     
-    MainScreenView(
-        mainViewModel: MainScreenViewModel(),
-        routeViewModel: RouteListViewModel()
-    )
-    .environmentObject(appState)
-    .environmentObject(coordinator)
+    MainScreenView()
+        .environmentObject(appState)
+        .environmentObject(mainViewModel)
+        .environmentObject(routeViewModel)
+        .environmentObject(coordinator)
 }

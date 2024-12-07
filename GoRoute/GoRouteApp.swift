@@ -21,15 +21,14 @@ struct GoRouteApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabBarView(
-                mainScreenViewModel: mainScreenViewModel,
-                routeListViewModel: routeListViewModel,
-                settingsScreenViewModel: settingsScreenViewModel
-            )
-            .environmentObject(appState)
-            .environmentObject(mainScreenCoordinator)
-            .environmentObject(settingsScreenCoordinator)
-            .preferredColorScheme(settingsScreenViewModel.isDarkModeEnabled ? .dark : .light)
+            TabBarView()
+                .environmentObject(appState)
+                .environmentObject(mainScreenViewModel)
+                .environmentObject(routeListViewModel)
+                .environmentObject(mainScreenCoordinator)
+                .environmentObject(settingsScreenViewModel)
+                .environmentObject(settingsScreenCoordinator)
+                .preferredColorScheme(settingsScreenViewModel.isDarkModeEnabled ? .dark : .light)
         }
     }
 }

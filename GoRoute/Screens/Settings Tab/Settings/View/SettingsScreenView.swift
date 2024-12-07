@@ -10,9 +10,10 @@ import SwiftUI
 struct SettingsScreenView: View {
     
     @EnvironmentObject var appState: AppState
-    @EnvironmentObject var coordinator: SettingsScreenCoordinator
     
-    @ObservedObject var viewModel: SettingsScreenViewModel
+    @EnvironmentObject var viewModel: SettingsScreenViewModel
+    
+    @EnvironmentObject var coordinator: SettingsScreenCoordinator
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
@@ -22,7 +23,7 @@ struct SettingsScreenView: View {
                 
                 VStack(spacing: LayoutProvider.Spacing.none) {
                     SettingsToggle(title: "Темная тема", isOn: $viewModel.isDarkModeEnabled)
-                        
+                    
                     NavigationRowView(title: "Пользовательское соглашение") {
                         userAgreementButtonTapped()
                     }
@@ -50,7 +51,7 @@ struct SettingsScreenView: View {
 
 // MARK: - Subviews
 private extension SettingsScreenView {
-
+    
     struct SettingsToggle: View {
         
         let title: String
@@ -61,7 +62,7 @@ private extension SettingsScreenView {
                 Text(title)
                     .bodyTextStyle(.accent)
             }
-            .tint(.appGray)
+            .tint(isOn.wrappedValue ? .appBlue : .appGray)
             .frame(height: LayoutProvider.Dimensions.General.standardHeight)
         }
     }
@@ -82,6 +83,12 @@ private extension SettingsScreenView {
 
 // MARK: - Preview
 #Preview {
+    let appState = AppState()
+    let viewModel = SettingsScreenViewModel()
     let coordinator = SettingsScreenCoordinator()
-    SettingsScreenView(viewModel: SettingsScreenViewModel()).environmentObject(coordinator)
+    
+    SettingsScreenView()
+        .environmentObject(appState)
+        .environmentObject(viewModel)
+        .environmentObject(coordinator)
 }
