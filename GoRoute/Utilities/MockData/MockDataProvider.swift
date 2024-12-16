@@ -10,6 +10,74 @@ import Foundation
 // MARK: - Mock Data
 struct MockDataProvider {
     
+    // MARK: Reels
+    static let mockReelGroups: [ReelGroupModel] = [
+        ReelGroupModel(
+            thumbnail: .reelPreview1,
+            reels: [
+                ReelModel(contentImage: .reelBig11, title: "Reel 1_1", description: "Description 1_1"),
+                ReelModel(contentImage: .reelBig12, title: "Reel 1_2", description: "Description 1_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview2,
+            reels: [
+                ReelModel(contentImage: .reelBig21, title: "Reel 2_1", description: "Description 2_1"),
+                ReelModel(contentImage: .reelBig22, title: "Reel 2_2", description: "Description 2_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview3,
+            reels: [
+                ReelModel(contentImage: .reelBig31, title: "Reel 3_1", description: "Description 3_1"),
+                ReelModel(contentImage: .reelBig32, title: "Reel 3_2", description: "Description 3_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview4,
+            reels: [
+                ReelModel(contentImage: .reelBig41, title: "Reel 4_1", description: "Description 4_1"),
+                ReelModel(contentImage: .reelBig42, title: "Reel 4_2", description: "Description 4_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview5,
+            reels: [
+                ReelModel(contentImage: .reelBig51, title: "Reel 5_1", description: "Description 5_1"),
+                ReelModel(contentImage: .reelBig52, title: "Reel 5_2", description: "Description 5_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview6,
+            reels: [
+                ReelModel(contentImage: .reelBig61, title: "Reel 6_1", description: "Description 6_1"),
+                ReelModel(contentImage: .reelBig62, title: "Reel 6_2", description: "Description 6_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview7,
+            reels: [
+                ReelModel(contentImage: .reelBig71, title: "Reel 7_1", description: "Description 7_1"),
+                ReelModel(contentImage: .reelBig72, title: "Reel 7_2", description: "Description 7_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview8,
+            reels: [
+                ReelModel(contentImage: .reelBig81, title: "Reel 8_1", description: "Description 8_1"),
+                ReelModel(contentImage: .reelBig82, title: "Reel 8_2", description: "Description 8_2")
+            ]
+        ),
+        ReelGroupModel(
+            thumbnail: .reelPreview9,
+            reels: [
+                ReelModel(contentImage: .reelBig91, title: "Reel 9_1", description: "Description 9_1"),
+                ReelModel(contentImage: .reelBig92, title: "Reel 9_2", description: "Description 9_2")
+            ]
+        )
+    ]
+    
+    // MARK: Cities
     static let mockCities: [CityModel] = [
         CityModel(
             name: "Минас Тирит",
@@ -45,6 +113,7 @@ struct MockDataProvider {
         )
     ]
     
+    // MARK: Stations
     static let mockStations: [StationModel] = [
         StationModel(name: "Белая Башня"),
         StationModel(name: "Пеленнорские Поля"),
@@ -52,6 +121,7 @@ struct MockDataProvider {
         StationModel(name: "Ортханк")
     ]
     
+    // MARK: Carriers
     static let mockCarrier: CarrierModel = CarrierModel(
         shortName: "РЖД",
         fullName: "ОАО \"РЖД\"",
@@ -61,6 +131,7 @@ struct MockDataProvider {
         phone: "+7-000-000-00-00"
     )
     
+    // MARK: Routes
     static let mockRoute: RouteModel = RouteModel(
         origin: mockStations.first!,
         destination: mockStations.last!,
@@ -105,6 +176,7 @@ struct MockDataProvider {
         return routes
     }()
     
+    // MARK: Selections
     static let mockSelections: [SelectionModel] = [
         SelectionModel(cityName: mockCities.first!.name, station: mockCities.first!.stations.first!),
         SelectionModel(cityName: mockCities.last!.name, station: mockCities.last!.stations.last!)

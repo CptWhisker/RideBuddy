@@ -23,7 +23,7 @@ struct MainScreenView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: LayoutProvider.Spacing.extraLarge) {
-                    ReelsView(reels: mainViewModel.reels)
+                    ReelsView()
                     
                     DestinationSelectionView(
                         actionFrom: {
@@ -131,12 +131,14 @@ private extension MainScreenView {
 #Preview {
     let appState = AppState()
     let mainViewModel = MainScreenViewModel()
+    let reelsViewModel = ReelsViewModel()
     let routeViewModel = RouteListViewModel()
     let coordinator = MainScreenCoordinator()
     
     MainScreenView()
         .environmentObject(appState)
         .environmentObject(mainViewModel)
+        .environmentObject(reelsViewModel)
         .environmentObject(routeViewModel)
         .environmentObject(coordinator)
 }

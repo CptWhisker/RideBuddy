@@ -56,6 +56,12 @@ enum LayoutProvider {
         static let large: CGFloat = 4
     }
     
+    enum Opacity {
+        static let invisible: CGFloat = 0.0
+        static let halfVisible: CGFloat = 0.5
+        static let visible: CGFloat = 1.0
+    }
+    
     //MARK: - Component-specific dimensions
     enum Dimensions {
         

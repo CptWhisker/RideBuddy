@@ -11,7 +11,6 @@ import Combine
 final class MainScreenViewModel: ObservableObject {
     
     // MARK: Properties
-    @Published private(set) var reels = [ReelModel]()
     @Published private(set) var filteredCities = [CityModel]()
     @Published private(set) var filteredStations = [StationModel]()
     @Published var destinationFrom: SelectionModel?
@@ -41,12 +40,7 @@ private extension MainScreenViewModel {
     
     // MARK: Data Acquisition
     func getData() {
-        getReels()
         getCities()
-    }
-    
-    func getReels() {
-        reels = (0..<10).map { _ in ReelModel() }
     }
     
     func getCities() {

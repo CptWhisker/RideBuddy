@@ -13,6 +13,7 @@ struct GoRouteApp: App {
     @StateObject private var appState = AppState()
     
     @StateObject private var mainScreenViewModel = MainScreenViewModel()
+    @StateObject private var reelsViewModel = ReelsViewModel()
     @StateObject private var routeListViewModel = RouteListViewModel()
     @StateObject private var mainScreenCoordinator = MainScreenCoordinator()
     
@@ -24,6 +25,7 @@ struct GoRouteApp: App {
             TabBarView()
                 .environmentObject(appState)
                 .environmentObject(mainScreenViewModel)
+                .environmentObject(reelsViewModel)
                 .environmentObject(routeListViewModel)
                 .environmentObject(mainScreenCoordinator)
                 .environmentObject(settingsScreenViewModel)

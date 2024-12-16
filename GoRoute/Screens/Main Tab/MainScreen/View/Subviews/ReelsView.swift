@@ -9,14 +9,33 @@ import SwiftUI
 
 struct ReelsView: View {
     
-    let reels: [ReelModel]
+    @EnvironmentObject var reelsViewModel: ReelsViewModel
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: LayoutProvider.Spacing.large) {
-                ForEach(reels) { _ in
-                    Rectangle()
-                        .mockReelStyle()
+                ForEach(reelsViewModel.reelGroups) { reelGroup in
+                    Image(reelGroup.thumbnail)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(
+                            width: LayoutProvider.Dimensions.Reel.width,
+                            height: LayoutProvider.Dimensions.Reel.height
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small))
+                        .opacity(reelGroup.isSeen ? LayoutProvider.Opacity.halfVisible : LayoutProvider.Opacity.visible)
+                        .overlay {
+                            if !reelGroup.isSeen {
+                                RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small)
+                                    .strokeBorder(
+                                        Color.appBlue,
+                                        lineWidth: LayoutProvider.BorderWidth.large
+                                    )
+                            }
+                        }
+                        .onTapGesture {
+                            reelsViewModel.markReelGroupAsSeen(reelGroup)
+                        }
                 }
             }
             .padding(.horizontal, LayoutProvider.Padding.medium)
@@ -27,5 +46,8 @@ struct ReelsView: View {
 
 // MARK: - Preview
 #Preview {
-    ReelsView(reels: Array(repeating: ReelModel(), count: 10))
+    let reelsViewModel = ReelsViewModel()
+    
+    ReelsView()
+        .environmentObject(reelsViewModel)
 }
