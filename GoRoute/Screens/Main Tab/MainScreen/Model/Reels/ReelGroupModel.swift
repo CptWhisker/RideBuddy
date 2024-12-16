@@ -21,10 +21,13 @@ struct ReelGroupModel: Identifiable {
     }
 }
 
-// MARK: - Equatable
+//MARK: - Equatable
 extension ReelGroupModel: Equatable {
-    
-    static func == (lhs: ReelGroupModel, rhs: ReelGroupModel) -> Bool {
-        lhs.id == rhs.id
-    }
+   
+   static func == (lhs: ReelGroupModel, rhs: ReelGroupModel) -> Bool {
+       return lhs.id == rhs.id &&
+       lhs.thumbnail == rhs.thumbnail &&
+       lhs.reels == rhs.reels &&
+       lhs.isSeen == rhs.isSeen
+   }
 }

@@ -16,7 +16,7 @@ struct ReelsView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: LayoutProvider.Spacing.large) {
                 ForEach(reelsViewModel.reelGroups) { reelGroup in
-                    reelPreview(for: reelGroup)
+                    ReelPreview(reelGroup: reelGroup)
                         .onTapGesture {
                             handleReelGroupSelection(reelGroup)
                         }
@@ -28,24 +28,7 @@ struct ReelsView: View {
     }
 }
 
-// MARK: - Subviews
-private extension ReelsView {
-    
-    @ViewBuilder
-    func reelPreview(for reelGroup: ReelGroupModel) -> some View {
-        Image(reelGroup.thumbnail)
-            .reelPreviewStyle(isSeen: reelGroup.isSeen)
-            .overlay(alignment: .bottom) {
-                Text(reelGroup.description)
-                    .font(ResourcesProvider.FontStyle.captionText)
-                    .foregroundStyle(.appWhite)
-                    .lineLimit(ResourcesProvider.TextLineLimit.storyDescription)
-                    .padding(.bottom, LayoutProvider.Padding.semiSmall)
-                    .padding(.horizontal, LayoutProvider.Padding.small)
-            }
-    }
-}
-
+// MARK: - Private Methods
 private extension ReelsView {
     
     func handleReelGroupSelection(_ reelGroup: ReelGroupModel) {

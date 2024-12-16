@@ -14,3 +14,14 @@ struct ReelModel: Identifiable {
     let title: String
     let description: String
 }
+
+//MARK: - Equatable
+extension ReelModel: Equatable {
+   
+   static func == (lhs: ReelModel, rhs: ReelModel) -> Bool {
+       return lhs.id == rhs.id &&
+       lhs.contentImage == rhs.contentImage &&
+       lhs.title == rhs.title &&
+       lhs.description == rhs.description
+   }
+}
