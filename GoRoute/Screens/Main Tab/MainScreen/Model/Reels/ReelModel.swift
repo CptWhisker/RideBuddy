@@ -25,3 +25,11 @@ extension ReelModel: Equatable {
        lhs.description == rhs.description
    }
 }
+
+// MARK: - Hashable
+extension ReelModel: Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

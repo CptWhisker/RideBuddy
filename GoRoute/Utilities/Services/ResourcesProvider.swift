@@ -10,7 +10,9 @@ import SwiftUI
 enum ResourcesProvider {
     
     enum FontStyle {
+        static let largeTitle: Font = Font.system(size: 34, weight: .bold)
         static let title: Font = Font.system(size: 24, weight: .bold)
+        static let subtitle: Font = Font.system(size: 20, weight: .regular)
         static let buttonLabel: Font = .system(size: 17, weight: .bold)
         static let bodyText: Font = .system(size: 17, weight: .regular)
         static let captionText: Font = .system(size: 12, weight: .regular)
@@ -29,6 +31,7 @@ enum ResourcesProvider {
     }
     
     enum TextLineLimit {
-        static let storyDescription: Int = 3
+        static let reelTitle: Int = 2
+        static let reelDescription: Int = 3
     }
 }

@@ -20,6 +20,25 @@ enum LayoutProvider {
         static let medium: CGFloat = 16
         static let large: CGFloat = 24
         
+        enum Reel {
+            static let top: CGFloat = 7
+            static let bottom: CGFloat = 17
+            static let horizontal: CGFloat = 0
+        }
+        
+        enum ReelText {
+            static let top: CGFloat = 0
+            static let horizontal: CGFloat = 16
+            static var bottom: CGFloat {
+                Padding.Reel.bottom + 40
+            }
+        }
+        
+        enum CLoseButton {
+            static let top: CGFloat = 57
+            static let trailing: CGFloat = 12
+        }
+        
         /*
          A computed value representing the bottom inset for a scroll view.
          
@@ -49,6 +68,7 @@ enum LayoutProvider {
         static let small: CGFloat = 16
         static let medium: CGFloat = 20
         static let large: CGFloat = 24
+        static let extraLarge: CGFloat = 40
     }
     
     enum BorderWidth {

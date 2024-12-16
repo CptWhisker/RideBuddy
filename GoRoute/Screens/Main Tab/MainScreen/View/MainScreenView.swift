@@ -23,7 +23,7 @@ struct MainScreenView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: LayoutProvider.Spacing.extraLarge) {
-                    ReelsView()
+                    ReelsCarouselView()
                     
                     DestinationSelectionView(
                         actionFrom: {
@@ -75,8 +75,8 @@ private extension MainScreenView {
         switch destination {
             
         case .reelDetail:
-            EmptyView()
-                .navigationBackButton(coordinator: coordinator)
+            ReelGroupDetailView()
+                .toolbar(.hidden, for: .navigationBar)
                 .toolbar(.hidden, for: .tabBar)
             
         case .cityList:

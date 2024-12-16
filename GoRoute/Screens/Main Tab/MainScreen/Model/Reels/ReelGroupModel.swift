@@ -31,3 +31,11 @@ extension ReelGroupModel: Equatable {
        lhs.isSeen == rhs.isSeen
    }
 }
+
+// MARK: - Hashable
+extension ReelGroupModel: Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

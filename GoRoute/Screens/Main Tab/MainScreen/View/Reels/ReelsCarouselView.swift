@@ -1,5 +1,5 @@
 //
-//  ReelsView.swift
+//  ReelsCarouselView.swift
 //  GoRoute
 //
 //  Created by Aleksandr Moskovtsev on 29.11.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReelsView: View {
+struct ReelsCarouselView: View {
     
     @EnvironmentObject var reelsViewModel: ReelsViewModel
     @EnvironmentObject var coordinator: MainScreenCoordinator
@@ -18,7 +18,7 @@ struct ReelsView: View {
                 ForEach(reelsViewModel.reelGroups) { reelGroup in
                     ReelPreview(reelGroup: reelGroup)
                         .onTapGesture {
-                            handleReelGroupSelection(reelGroup)
+                            selectReelGroup(reelGroup)
                         }
                 }
             }
@@ -29,11 +29,11 @@ struct ReelsView: View {
 }
 
 // MARK: - Private Methods
-private extension ReelsView {
+private extension ReelsCarouselView {
     
-    func handleReelGroupSelection(_ reelGroup: ReelGroupModel) {
+    func selectReelGroup(_ reelGroup: ReelGroupModel) {
+        reelsViewModel.selectReelGroup(reelGroup)
         coordinator.navigateTo(.reelDetail(reelGroup: reelGroup))
-        reelsViewModel.markReelGroupAsSeen(reelGroup)
     }
 }
 
@@ -41,6 +41,6 @@ private extension ReelsView {
 #Preview {
     let reelsViewModel = ReelsViewModel()
     
-    ReelsView()
+    ReelsCarouselView()
         .environmentObject(reelsViewModel)
 }

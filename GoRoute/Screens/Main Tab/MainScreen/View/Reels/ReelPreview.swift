@@ -18,7 +18,7 @@ struct ReelPreview: View {
                 Text(reelGroup.description)
                     .font(ResourcesProvider.FontStyle.captionText)
                     .foregroundStyle(.appWhite)
-                    .lineLimit(ResourcesProvider.TextLineLimit.storyDescription)
+                    .lineLimit(ResourcesProvider.TextLineLimit.reelDescription)
                     .padding(.bottom, LayoutProvider.Padding.semiSmall)
                     .padding(.horizontal, LayoutProvider.Padding.small)
             }
