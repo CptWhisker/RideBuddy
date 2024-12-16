@@ -27,4 +27,8 @@ enum ResourcesProvider {
         static let emptyCircleCheckbox: String = "circle"
         static let markedCircleCheckbox: String = "record.circle"
     }
+    
+    enum TextLineLimit {
+        static let storyDescription: Int = 3
+    }
 }

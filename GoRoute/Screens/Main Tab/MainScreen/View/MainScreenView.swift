@@ -74,6 +74,11 @@ private extension MainScreenView {
     func destinationView(for destination: MainNavigationModel) -> some View {
         switch destination {
             
+        case .reelDetail:
+            EmptyView()
+                .navigationBackButton(coordinator: coordinator)
+                .toolbar(.hidden, for: .tabBar)
+            
         case .cityList:
             CitiesListView(cities: mainViewModel.filteredCities)
                 .navigationBackButton(coordinator: coordinator)

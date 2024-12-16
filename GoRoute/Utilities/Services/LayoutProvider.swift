@@ -2,7 +2,7 @@
 //  LayoutProvider.swift
 //  GoRoute
 //
-//  Created by АAleksandr Moskovtsev on 06.12.2024.
+//  Created by Аleksandr Moskovtsev on 06.12.2024.
 //
 
 import SwiftUI
@@ -16,6 +16,7 @@ enum LayoutProvider {
     
     enum Padding {
         static let small: CGFloat = 8
+        static let semiSmall: CGFloat = 12
         static let medium: CGFloat = 16
         static let large: CGFloat = 24
         
