@@ -18,7 +18,7 @@ final class ReelsViewModel: ObservableObject {
     @Published var selectedReelGroup: ReelGroupModel? {
         didSet {
             resetReelProgress()
-            configureTimer()
+            resetTimer()
             addReelGroupToSeenList()
         }
     }
@@ -58,7 +58,7 @@ private extension ReelsViewModel {
         }
     }
     
-    func configureTimer() {
+    func resetTimer() {
         stopTimer()
         
         timer = Timer.publish(every: timerConfiguration.timerTickInterval, on: .main, in: .common)
@@ -71,7 +71,6 @@ extension ReelsViewModel {
     
     func selectReelGroup(_ reelGroup: ReelGroupModel) {
         selectedReelGroup = reelGroup
-//        resetReelProgress()
     }
     
     func markGroupsAsSeen() {
@@ -95,6 +94,8 @@ extension ReelsViewModel {
         
         previousReelIndex = currentReelIndex
         currentReelIndex = min(currentReelIndex + 1, reels.count - 1)
+        
+        resetTimer()
     }
     
     func updateCurrentReelIndex(newIndex: Int) {
