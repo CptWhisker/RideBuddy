@@ -5,7 +5,7 @@
 //  Created by Aleksandr Moskovtsev on 16.12.2024.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 final class ReelsViewModel: ObservableObject {
@@ -44,7 +44,7 @@ private extension ReelsViewModel {
 
 // MARK: - Private Methods
 private extension ReelsViewModel {
- 
+    
     func resetReelProgress() {
         currentReelIndex = 0
         currentProgress = 0
@@ -63,6 +63,19 @@ private extension ReelsViewModel {
         
         timer = Timer.publish(every: timerConfiguration.timerTickInterval, on: .main, in: .common)
         timerCancellable = timer.connect()
+    }
+    
+    func proceedToNextReelGroup() {
+        guard let currentGroup = selectedReelGroup,
+              let currentIndex = reelGroups.firstIndex(of: currentGroup) else { return }
+        
+        let nextIndex = currentIndex + 1
+        
+        if nextIndex < reelGroups.count {
+            selectReelGroup(reelGroups[nextIndex])
+        } else if let firstGroup = reelGroups.first {
+            selectReelGroup(firstGroup)
+        }
     }
 }
 
@@ -93,9 +106,13 @@ extension ReelsViewModel {
         guard let reels = selectedReelGroup?.reels else { return }
         
         previousReelIndex = currentReelIndex
-        currentReelIndex = min(currentReelIndex + 1, reels.count - 1)
         
-        resetTimer()
+        if currentReelIndex < reels.count - 1 {
+            currentReelIndex += 1
+            resetTimer()
+        } else {
+            proceedToNextReelGroup()
+        }
     }
     
     func updateCurrentReelIndex(newIndex: Int) {
@@ -122,5 +139,9 @@ extension ReelsViewModel {
     
     func timerTick() {
         currentProgress = timerConfiguration.nextProgress(progress: currentProgress)
+        
+        if currentProgress >= 1.0 {
+            proceedToNextReelGroup()
+        }
     }
 }
