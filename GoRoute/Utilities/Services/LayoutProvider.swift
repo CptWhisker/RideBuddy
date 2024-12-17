@@ -11,6 +11,7 @@ enum LayoutProvider {
     
     // MARK: - Global layout constants
     enum Screen {
+        static let height: CGFloat = UIScreen.main.bounds.height
         static let width: CGFloat = UIScreen.main.bounds.width
     }
     
@@ -91,6 +92,24 @@ enum LayoutProvider {
         static let invisible: CGFloat = 0.0
         static let halfVisible: CGFloat = 0.5
         static let visible: CGFloat = 1.0
+        
+        /*
+         Calculates the opacity dynamically based on the drag offset.
+         
+         - Parameter dragOffset: The vertical drag offset.
+         - Returns: A `Double` representing the opacity, ranging from 1.0 (fully visible) to 0.25 (minimum visible).
+         
+         The opacity decreases as the absolute drag offset increases, but will not go below 0.25.
+         */
+        static func calculateOpacity(for dragOffset: CGFloat) -> Double {
+            let maxDrag: CGFloat = Threshold.dragToClose
+            let opacity = 1.0 - min(abs(dragOffset) / maxDrag, 0.75)
+            return opacity
+        }
+    }
+    
+    enum Threshold {
+        static let dragToClose: CGFloat = Screen.height / 3
     }
     
     //MARK: - Component-specific dimensions
