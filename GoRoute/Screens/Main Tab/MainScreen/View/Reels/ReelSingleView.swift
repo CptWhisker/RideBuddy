@@ -13,17 +13,7 @@ struct ReelSingleView: View {
     
     var body: some View {
         Image(reel.contentImage)
-            .resizable()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.extraLarge))
-            .padding(
-                .init(
-                    top: LayoutProvider.Padding.Reel.top,
-                    leading: LayoutProvider.Padding.Reel.horizontal,
-                    bottom: LayoutProvider.Padding.Reel.bottom,
-                    trailing: LayoutProvider.Padding.Reel.horizontal
-                )
-            )
+            .reelStyle()
             .overlay(textOverlay)
     }
 }
@@ -37,14 +27,10 @@ private extension ReelSingleView {
             
             VStack(alignment: .leading, spacing: LayoutProvider.Spacing.large) {
                 Text(reel.title)
-                    .font(ResourcesProvider.FontStyle.largeTitle)
-                    .foregroundStyle(.appWhite)
-                    .lineLimit(ResourcesProvider.TextLineLimit.reelTitle)
+                    .reelTitleStyle()
                 
                 Text(reel.description)
-                    .font(ResourcesProvider.FontStyle.subtitle)
-                    .foregroundStyle(.appWhite)
-                    .lineLimit(ResourcesProvider.TextLineLimit.reelDescription)
+                    .reelDescriptionStyle()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(

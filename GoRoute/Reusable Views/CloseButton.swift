@@ -17,6 +17,8 @@ struct CloseButton: View {
         } label: {
             Image(.closeButton)
         }
+        .padding(.top, LayoutProvider.Padding.CloseButton.top)
+        .padding(.trailing, LayoutProvider.Padding.CloseButton.trailing)
     }
 }
 

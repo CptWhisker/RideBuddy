@@ -21,9 +21,6 @@ struct ReelsTabView: View {
         }
         .ignoresSafeArea()
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .onChange(of: reelsViewModel.selectedReelGroup) { _ in
-            reelsViewModel.currentReelIndex = 0
-        }
     }
 }
 

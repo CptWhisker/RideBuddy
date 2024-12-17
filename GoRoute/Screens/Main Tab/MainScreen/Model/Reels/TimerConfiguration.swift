@@ -11,18 +11,18 @@ struct TimerConfiguration {
     
     // MARK: Properties
     let storiesCount: Int
-    let timerTickInternal: TimeInterval
+    let timerTickInterval: TimeInterval
     let progressPerTick: CGFloat
 
     // MARK: Initialization
     init(
         storiesCount: Int,
         secondsPerStory: TimeInterval = 5,
-        timerTickInternal: TimeInterval = 0.25
+        timerTickInterval: TimeInterval = 0.02
     ) {
         self.storiesCount = storiesCount
-        self.timerTickInternal = timerTickInternal
-        self.progressPerTick = 1.0 / CGFloat(storiesCount) / secondsPerStory * timerTickInternal
+        self.timerTickInterval = timerTickInterval
+        self.progressPerTick = 1.0 / CGFloat(storiesCount) / secondsPerStory * timerTickInterval
     }
 }
 

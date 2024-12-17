@@ -21,10 +21,22 @@ struct ReelGroupDetailView: View {
                 .onTapGesture {
                     reelsViewModel.proceedToNextReel()
                 }
+                .onChange(of: reelsViewModel.currentReelIndex) { newValue in
+                    withAnimation {
+                        reelsViewModel.updateCurrentReelIndex(newIndex: newValue)
+                    }
+                }
             
-            CloseButton(action: { closeView() })
-                .padding(.top, LayoutProvider.Padding.CLoseButton.top)
-                .padding(.trailing, LayoutProvider.Padding.CLoseButton.trailing)
+            ReelsProgressBar()
+                .onChange(of: reelsViewModel.currentProgress) { newValue in
+                    withAnimation {
+                        reelsViewModel.updateReelProgress(newProgress: newValue)
+                    }
+                }
+            
+            CloseButton() {
+                closeView()
+            }
         }
     }
 }

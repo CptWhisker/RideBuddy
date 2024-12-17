@@ -34,7 +34,15 @@ enum LayoutProvider {
             }
         }
         
-        enum CLoseButton {
+        enum ProgressBar {
+            static let bottom: CGFloat = 12
+            static let horizontal: CGFloat = 12
+            static var top: CGFloat {
+                Padding.Reel.top + 28
+            }
+        }
+        
+        enum CloseButton {
             static let top: CGFloat = 57
             static let trailing: CGFloat = 12
         }
@@ -69,6 +77,8 @@ enum LayoutProvider {
         static let medium: CGFloat = 20
         static let large: CGFloat = 24
         static let extraLarge: CGFloat = 40
+        
+        static let progressBar: CGFloat = 6
     }
     
     enum BorderWidth {
@@ -126,6 +136,10 @@ enum LayoutProvider {
         enum Reel {
             static let height: CGFloat = 140
             static let width: CGFloat = 92
+        }
+        
+        enum ProgressBar {
+            static let height: CGFloat = 6
         }
         
         enum Carrier {

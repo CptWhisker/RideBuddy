@@ -13,7 +13,7 @@ struct ReelPreview: View {
     
     var body: some View {
         Image(reelGroup.thumbnail)
-            .reelPreviewStyle(isSeen: reelGroup.isSeen)
+            .reelThumbnailStyle(isSeen: reelGroup.isSeen)
             .overlay(alignment: .bottom) {
                 Text(reelGroup.description)
                     .font(ResourcesProvider.FontStyle.captionText)
