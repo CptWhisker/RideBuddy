@@ -24,15 +24,6 @@ struct ReelsProgressBar: View {
                 trailing: LayoutProvider.Padding.ProgressBar.horizontal
             )
         )
-        .onAppear {
-            reelsViewModel.startTimer()
-        }
-        .onDisappear {
-            reelsViewModel.stopTimer()
-        }
-        .onReceive(reelsViewModel.timer) { _ in
-            reelsViewModel.timerTick()
-        }
     }
 }
 

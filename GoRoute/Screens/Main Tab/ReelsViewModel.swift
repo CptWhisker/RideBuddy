@@ -11,10 +11,9 @@ import Combine
 final class ReelsViewModel: ObservableObject {
     
     // MARK: Properties
-    @Published var timer: Timer.TimerPublisher = Timer.publish(every: 1.0, on: .main, in: .common)
-    @Published var reelGroups = [ReelGroupModel]()
-    @Published var currentReelIndex: Int = 0
-    @Published var currentProgress: CGFloat = 0
+    @Published private(set) var reelGroups = [ReelGroupModel]()
+    @Published private(set) var currentReelIndex: Int = 0
+    @Published private(set) var currentProgress: CGFloat = 0
     @Published var selectedReelGroup: ReelGroupModel? {
         didSet {
             resetReelProgress()
@@ -23,13 +22,16 @@ final class ReelsViewModel: ObservableObject {
         }
     }
     
+    private let timerManager: TimerManager
     private var groupsMarkedAsSeen = [ReelGroupModel]()
     private var timerConfiguration: TimerConfiguration { .init(storiesCount: selectedReelGroup?.reels.count ?? 0) }
     private var previousReelIndex: Int = 0
     private var timerCancellable: Cancellable?
     
     // MARK: Initialization
-    init() {
+    init(timerManager: TimerManager = TimerManager()) {
+        self.timerManager = timerManager
+        
         getReels()
     }
 }
@@ -59,10 +61,9 @@ private extension ReelsViewModel {
     }
     
     func resetTimer() {
-        stopTimer()
-        
-        timer = Timer.publish(every: timerConfiguration.timerTickInterval, on: .main, in: .common)
-        timerCancellable = timer.connect()
+        timerManager.start(with: timerConfiguration.timerTickInterval) { [weak self] in
+            self?.timerTick()
+        }
     }
     
     func proceedToNextReelGroup() {
@@ -75,6 +76,14 @@ private extension ReelsViewModel {
             selectReelGroup(reelGroups[nextIndex])
         } else if let firstGroup = reelGroups.first {
             selectReelGroup(firstGroup)
+        }
+    }
+    
+    func timerTick() {
+        currentProgress = timerConfiguration.nextProgress(progress: currentProgress)
+        
+        if currentProgress >= 1.0 {
+            proceedToNextReelGroup()
         }
     }
 }
@@ -126,22 +135,5 @@ extension ReelsViewModel {
         let index = timerConfiguration.index(for: newProgress)
         guard index != currentReelIndex else { return }
         currentReelIndex = index
-    }
-    
-    func startTimer() {
-        timer = Timer.publish(every: timerConfiguration.timerTickInterval, on: .main, in: .common)
-        timerCancellable = timer.connect()
-    }
-    
-    func stopTimer() {
-        timerCancellable?.cancel()
-    }
-    
-    func timerTick() {
-        currentProgress = timerConfiguration.nextProgress(progress: currentProgress)
-        
-        if currentProgress >= 1.0 {
-            proceedToNextReelGroup()
-        }
     }
 }
