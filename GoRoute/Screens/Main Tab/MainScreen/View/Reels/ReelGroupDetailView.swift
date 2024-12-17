@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReelGroupDetailView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @EnvironmentObject var reelsViewModel: ReelsViewModel
     @EnvironmentObject var coordinator: MainScreenCoordinator
     
@@ -58,6 +60,8 @@ struct ReelGroupDetailView: View {
             CloseButton() {
                 closeView()
             }
+            
+            ErrorViewFactory.errorView(for: appState.errorState)
         }
     }
 }
@@ -82,10 +86,12 @@ private extension ReelGroupDetailView {
 
 // MARK: - Preview
 #Preview {
+    let appState = AppState()
     let reelsViewModel = ReelsViewModel()
     let coordinator = MainScreenCoordinator()
     
     ReelGroupDetailView()
+        .environmentObject(appState)
         .environmentObject(reelsViewModel)
         .environmentObject(coordinator)
 }
