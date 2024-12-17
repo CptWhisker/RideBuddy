@@ -26,10 +26,3 @@ struct ReelsProgressBar: View {
         )
     }
 }
-
-#Preview {
-    let reelsViewModel = ReelsViewModel()
-    
-    ReelsProgressBar()
-        .environmentObject(reelsViewModel)
-}
