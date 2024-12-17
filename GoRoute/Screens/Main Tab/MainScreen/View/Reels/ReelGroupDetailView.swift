@@ -19,33 +19,34 @@ struct ReelGroupDetailView: View {
             Color.appBlack
                 .ignoresSafeArea()
             
-            ReelsTabView()
-                .offset(y: dragOffset)
-                .opacity(LayoutProvider.Opacity.calculateOpacity(for: dragOffset))
-                .onChange(of: reelsViewModel.currentReelIndex) { newValue in
-                    withAnimation {
-                        reelsViewModel.updateCurrentReelIndex(newIndex: newValue)
-                    }
-                }
-                .gesture(
-                    TapGesture()
-                        .onEnded { reelsViewModel.proceedToNextReel() }
-                )
-                .gesture(
-                    DragToCloseGesture(
-                        onDrag: { newOffset in
-                            dragOffset = newOffset
-                        },
-                        onComplete: {
-                            closeView()
-                        },
-                        onCancel: {
-                            withAnimation {
-                                dragOffset = .zero
-                            }
+            GeometryReader { geometry in
+                ReelsTabView()
+                    .offset(y: dragOffset)
+                    .opacity(LayoutProvider.Opacity.calculateOpacity(for: dragOffset))
+                    .onChange(of: reelsViewModel.currentReelIndex) { newValue in
+                        withAnimation {
+                            reelsViewModel.updateCurrentReelIndex(newIndex: newValue)
                         }
+                    }
+                    .gesture(
+                        DragToCloseGesture(
+                            onDrag: { newOffset in
+                                dragOffset = newOffset
+                            },
+                            onComplete: {
+                                closeView()
+                            },
+                            onCancel: {
+                                withAnimation {
+                                    dragOffset = .zero
+                                }
+                            }
+                        )
                     )
-                )
+                    .onTapGesture { location in
+                        handleTapGesture(at: location, in: geometry)
+                    }
+            }
             
             ReelsProgressBar()
                 .onChange(of: reelsViewModel.currentProgress) { newValue in
@@ -63,6 +64,15 @@ struct ReelGroupDetailView: View {
 
 // MARK: - Private Methods
 private extension ReelGroupDetailView {
+    
+    func handleTapGesture(at location: CGPoint, in geometry: GeometryProxy) {
+        let width = geometry.size.width
+        if location.x < width / 2 {
+            reelsViewModel.proceedToPreviousReel()
+        } else {
+            reelsViewModel.proceedToNextReel()
+        }
+    }
     
     func closeView() {
         reelsViewModel.markGroupsAsSeen()

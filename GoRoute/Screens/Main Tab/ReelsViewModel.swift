@@ -124,11 +124,20 @@ extension ReelsViewModel {
         }
     }
     
-    func updateCurrentReelIndex(newIndex: Int) {
-        guard previousReelIndex != newIndex else { return }
+    func proceedToPreviousReel() {
+        if currentReelIndex > 0 {
+            updateCurrentReelIndex(newIndex: currentReelIndex - 1, backwards: true)
+        }
+    }
+    
+    func updateCurrentReelIndex(newIndex: Int, backwards: Bool = false) {
+        guard backwards || previousReelIndex != newIndex else { return }
+        
         let progress = timerConfiguration.progress(for: newIndex)
         guard abs(progress - currentProgress) >= 0.01 else { return }
+        
         currentProgress = progress
+        previousReelIndex = newIndex
     }
     
     func updateReelProgress(newProgress: CGFloat) {
