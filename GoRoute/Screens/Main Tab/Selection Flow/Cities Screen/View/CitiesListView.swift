@@ -24,9 +24,12 @@ struct CitiesListView: View {
             
             citiesList
             
-            if viewModel.filteredCities.isEmpty {
-                PlaceholderTextView(title: "Город не найден")
-            }
+            PlaceholderTextView(title: "Город не найден")
+                .opacity(
+                    viewModel.filteredCities.isEmpty ?
+                    LayoutProvider.Opacity.visible : LayoutProvider.Opacity.invisible
+                )
+
             
             ErrorViewFactory.errorView(for: appState.errorState)
         }

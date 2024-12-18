@@ -39,9 +39,7 @@ struct MainScreenView: View {
                         destinationTo: $mainViewModel.destinationTo
                     )
                     
-                    if mainViewModel.isShowingSearchButton {
-                        searchButton
-                    }
+                    searchButton
                     
                     Spacer()
                 }
@@ -67,6 +65,10 @@ private extension MainScreenView {
             action: {
                 searchButtonTapped()
             }
+        )
+        .opacity(
+            mainViewModel.isShowingSearchButton ?
+            LayoutProvider.Opacity.visible : LayoutProvider.Opacity.invisible
         )
     }
     

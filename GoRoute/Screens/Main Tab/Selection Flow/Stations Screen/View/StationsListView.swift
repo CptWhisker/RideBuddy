@@ -24,9 +24,11 @@ struct StationsListView: View {
             
             stationsList
             
-            if viewModel.filteredStations.isEmpty {
-                PlaceholderTextView(title: "Станция не найдена")
-            }
+            PlaceholderTextView(title: "Станция не найдена")
+                .opacity(
+                    viewModel.filteredStations.isEmpty ?
+                    LayoutProvider.Opacity.visible : LayoutProvider.Opacity.invisible
+                )
             
             ErrorViewFactory.errorView(for: appState.errorState)
         }

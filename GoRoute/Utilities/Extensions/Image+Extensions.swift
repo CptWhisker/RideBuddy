@@ -64,13 +64,15 @@ extension Image {
             .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small))
             .opacity(isSeen ? LayoutProvider.Opacity.halfVisible : LayoutProvider.Opacity.visible)
             .overlay {
-                if !isSeen {
-                    RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small)
-                        .strokeBorder(
-                            Color.appBlue,
-                            lineWidth: LayoutProvider.BorderWidth.large
-                        )
-                }
+                RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small)
+                    .strokeBorder(
+                        Color.appBlue,
+                        lineWidth: LayoutProvider.BorderWidth.large
+                    )
+                    .opacity(
+                        isSeen ?
+                        LayoutProvider.Opacity.invisible : LayoutProvider.Opacity.visible
+                    )
             }
     }
     

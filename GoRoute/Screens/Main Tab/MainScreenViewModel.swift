@@ -114,6 +114,15 @@ private extension MainScreenViewModel {
     }
 }
 
+// MARK: - Private Methods
+private extension MainScreenViewModel {
+    
+    func resetSearchText() {
+        searchCityText = ""
+        searchStationText = ""
+    }
+}
+
 // MARK: - Public Methods
 extension MainScreenViewModel {
     
@@ -122,18 +131,21 @@ extension MainScreenViewModel {
     }
     
     func selectStation(_ station: StationModel, for navigationSource: NavigationSource) {
+        resetSearchText()
+        
         switch navigationSource {
-            
         case .from:
             destinationFrom = SelectionModel(
                 cityName: selectedCity?.name,
                 station: station
             )
+            
         case .to:
             destinationTo = SelectionModel(
                 cityName: selectedCity?.name,
                 station: station
             )
+            
         case .none:
             break
         }
