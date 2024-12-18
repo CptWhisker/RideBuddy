@@ -52,4 +52,39 @@ extension Image {
             .scaledToFit()
             .frame(maxWidth: .infinity)
     }
+    
+    func reelThumbnailStyle(isSeen: Bool) -> some View {
+        self
+            .resizable()
+            .scaledToFill()
+            .frame(
+                width: LayoutProvider.Dimensions.Reel.width,
+                height: LayoutProvider.Dimensions.Reel.height
+            )
+            .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small))
+            .opacity(isSeen ? LayoutProvider.Opacity.halfVisible : LayoutProvider.Opacity.visible)
+            .overlay {
+                RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.small)
+                    .strokeBorder(
+                        Color.appBlue,
+                        lineWidth: LayoutProvider.BorderWidth.large
+                    )
+                    .hidden(isSeen)
+            }
+    }
+    
+    func reelStyle() -> some View {
+        self
+            .resizable()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .clipShape(RoundedRectangle(cornerRadius: LayoutProvider.CornerRadius.extraLarge))
+            .padding(
+                .init(
+                    top: LayoutProvider.Padding.Reel.top,
+                    leading: LayoutProvider.Padding.Reel.horizontal,
+                    bottom: LayoutProvider.Padding.Reel.bottom,
+                    trailing: LayoutProvider.Padding.Reel.horizontal
+                )
+            )
+    }
 }

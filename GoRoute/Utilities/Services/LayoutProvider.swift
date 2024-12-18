@@ -2,7 +2,7 @@
 //  LayoutProvider.swift
 //  GoRoute
 //
-//  Created by АAleksandr Moskovtsev on 06.12.2024.
+//  Created by Аleksandr Moskovtsev on 06.12.2024.
 //
 
 import SwiftUI
@@ -11,13 +11,42 @@ enum LayoutProvider {
     
     // MARK: - Global layout constants
     enum Screen {
+        static let height: CGFloat = UIScreen.main.bounds.height
         static let width: CGFloat = UIScreen.main.bounds.width
     }
     
     enum Padding {
         static let small: CGFloat = 8
+        static let semiSmall: CGFloat = 12
         static let medium: CGFloat = 16
         static let large: CGFloat = 24
+        
+        enum Reel {
+            static let top: CGFloat = 7
+            static let bottom: CGFloat = 17
+            static let horizontal: CGFloat = 0
+        }
+        
+        enum ReelText {
+            static let top: CGFloat = 0
+            static let horizontal: CGFloat = 16
+            static var bottom: CGFloat {
+                Padding.Reel.bottom + 40
+            }
+        }
+        
+        enum ProgressBar {
+            static let bottom: CGFloat = 12
+            static let horizontal: CGFloat = 12
+            static var top: CGFloat {
+                Padding.Reel.top + 28
+            }
+        }
+        
+        enum CloseButton {
+            static let top: CGFloat = 57
+            static let trailing: CGFloat = 12
+        }
         
         /*
          A computed value representing the bottom inset for a scroll view.
@@ -48,12 +77,39 @@ enum LayoutProvider {
         static let small: CGFloat = 16
         static let medium: CGFloat = 20
         static let large: CGFloat = 24
+        static let extraLarge: CGFloat = 40
+        
+        static let progressBar: CGFloat = 6
     }
     
     enum BorderWidth {
         static let small: CGFloat = 1
         static let medium: CGFloat = 2
         static let large: CGFloat = 4
+    }
+    
+    enum Opacity {
+        static let invisible: CGFloat = 0.0
+        static let halfVisible: CGFloat = 0.5
+        static let visible: CGFloat = 1.0
+        
+        /*
+         Calculates the opacity dynamically based on the drag offset.
+         
+         - Parameter dragOffset: The vertical drag offset.
+         - Returns: A `Double` representing the opacity, ranging from 1.0 (fully visible) to 0.25 (minimum visible).
+         
+         The opacity decreases as the absolute drag offset increases, but will not go below 0.25.
+         */
+        static func calculateOpacity(for dragOffset: CGFloat) -> Double {
+            let maxDrag: CGFloat = Threshold.dragToClose
+            let opacity = 1.0 - min(abs(dragOffset) / maxDrag, 0.75)
+            return opacity
+        }
+    }
+    
+    enum Threshold {
+        static let dragToClose: CGFloat = Screen.height / 3
     }
     
     //MARK: - Component-specific dimensions
@@ -99,6 +155,10 @@ enum LayoutProvider {
         enum Reel {
             static let height: CGFloat = 140
             static let width: CGFloat = 92
+        }
+        
+        enum ProgressBar {
+            static let height: CGFloat = 6
         }
         
         enum Carrier {

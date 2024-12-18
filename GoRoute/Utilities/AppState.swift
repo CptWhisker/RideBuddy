@@ -14,7 +14,7 @@ enum ErrorState {
 
 // MARK: - AppState
 final class AppState: ObservableObject {
-    
+        
     @Published var errorState: ErrorState = .none
 }
 

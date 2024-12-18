@@ -24,9 +24,8 @@ struct CitiesListView: View {
             
             citiesList
             
-            if viewModel.filteredCities.isEmpty {
-                PlaceholderTextView(title: "Город не найден")
-            }
+            PlaceholderTextView(title: "Город не найден")
+                .hidden(!viewModel.filteredCities.isEmpty)
             
             ErrorViewFactory.errorView(for: appState.errorState)
         }

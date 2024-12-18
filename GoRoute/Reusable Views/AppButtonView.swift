@@ -23,10 +23,9 @@ struct AppButtonView: View {
                 Text(title)
                     .font(ResourcesProvider.FontStyle.buttonLabel)
                 
-                if isNotificationPresented {
-                    Circle()
-                        .notificationStyle()
-                }
+                Circle()
+                    .notificationStyle()
+                    .hidden(!isNotificationPresented)
             }
         }
         .appButtonStandardStyle(width: width)

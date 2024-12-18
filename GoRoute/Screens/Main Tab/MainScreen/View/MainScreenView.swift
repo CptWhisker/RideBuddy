@@ -23,7 +23,7 @@ struct MainScreenView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: LayoutProvider.Spacing.extraLarge) {
-                    ReelsView(reels: mainViewModel.reels)
+                    ReelsCarouselView()
                     
                     DestinationSelectionView(
                         actionFrom: {
@@ -39,9 +39,7 @@ struct MainScreenView: View {
                         destinationTo: $mainViewModel.destinationTo
                     )
                     
-                    if mainViewModel.isShowingSearchButton {
-                        searchButton
-                    }
+                    searchButton
                     
                     Spacer()
                 }
@@ -68,11 +66,17 @@ private extension MainScreenView {
                 searchButtonTapped()
             }
         )
+        .hidden(!mainViewModel.isShowingSearchButton)
     }
     
     @ViewBuilder
     func destinationView(for destination: MainNavigationModel) -> some View {
         switch destination {
+            
+        case .reelDetail:
+            ReelGroupDetailView()
+                .toolbar(.hidden, for: .navigationBar)
+                .toolbar(.hidden, for: .tabBar)
             
         case .cityList:
             CitiesListView(cities: mainViewModel.filteredCities)
@@ -131,12 +135,14 @@ private extension MainScreenView {
 #Preview {
     let appState = AppState()
     let mainViewModel = MainScreenViewModel()
+    let reelsViewModel = ReelsViewModel()
     let routeViewModel = RouteListViewModel()
     let coordinator = MainScreenCoordinator()
     
     MainScreenView()
         .environmentObject(appState)
         .environmentObject(mainViewModel)
+        .environmentObject(reelsViewModel)
         .environmentObject(routeViewModel)
         .environmentObject(coordinator)
 }

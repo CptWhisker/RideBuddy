@@ -16,4 +16,11 @@ extension View {
     func listStandardStyle(searchText: Binding<String>, title: String) -> some View {
         self.modifier(ListStandardStyleModifier(searchText: searchText, title: title))
     }
+    
+    func hidden(_ shouldHide: Bool) -> some View {
+        opacity(
+            shouldHide ?
+            LayoutProvider.Opacity.invisible : LayoutProvider.Opacity.visible
+        )
+    }
 }

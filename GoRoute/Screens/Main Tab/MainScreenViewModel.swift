@@ -11,7 +11,6 @@ import Combine
 final class MainScreenViewModel: ObservableObject {
     
     // MARK: Properties
-    @Published private(set) var reels = [ReelModel]()
     @Published private(set) var filteredCities = [CityModel]()
     @Published private(set) var filteredStations = [StationModel]()
     @Published var destinationFrom: SelectionModel?
@@ -41,12 +40,7 @@ private extension MainScreenViewModel {
     
     // MARK: Data Acquisition
     func getData() {
-        getReels()
         getCities()
-    }
-    
-    func getReels() {
-        reels = (0..<10).map { _ in ReelModel() }
     }
     
     func getCities() {
@@ -120,6 +114,15 @@ private extension MainScreenViewModel {
     }
 }
 
+// MARK: - Private Methods
+private extension MainScreenViewModel {
+    
+    func resetSearchText() {
+        searchCityText = ""
+        searchStationText = ""
+    }
+}
+
 // MARK: - Public Methods
 extension MainScreenViewModel {
     
@@ -128,18 +131,21 @@ extension MainScreenViewModel {
     }
     
     func selectStation(_ station: StationModel, for navigationSource: NavigationSource) {
+        resetSearchText()
+        
         switch navigationSource {
-            
         case .from:
             destinationFrom = SelectionModel(
                 cityName: selectedCity?.name,
                 station: station
             )
+            
         case .to:
             destinationTo = SelectionModel(
                 cityName: selectedCity?.name,
                 station: station
             )
+            
         case .none:
             break
         }

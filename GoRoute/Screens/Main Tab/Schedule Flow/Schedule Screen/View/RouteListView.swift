@@ -25,9 +25,8 @@ struct RouteListView: View {
                     filterButton
                 }
             
-            if viewModel.filteredRoutes.isEmpty {
-                PlaceholderTextView(title: "Вариантов нет")
-            }
+            PlaceholderTextView(title: "Вариантов нет")
+                .hidden(!viewModel.filteredRoutes.isEmpty)
             
             ErrorViewFactory.errorView(for: appState.errorState)
         }
