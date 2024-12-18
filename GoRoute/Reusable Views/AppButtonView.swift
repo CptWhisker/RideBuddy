@@ -25,10 +25,7 @@ struct AppButtonView: View {
                 
                 Circle()
                     .notificationStyle()
-                    .opacity(
-                        isNotificationPresented ?
-                        LayoutProvider.Opacity.visible : LayoutProvider.Opacity.invisible
-                    )
+                    .hidden(!isNotificationPresented)
             }
         }
         .appButtonStandardStyle(width: width)

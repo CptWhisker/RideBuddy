@@ -25,11 +25,7 @@ struct CitiesListView: View {
             citiesList
             
             PlaceholderTextView(title: "Город не найден")
-                .opacity(
-                    viewModel.filteredCities.isEmpty ?
-                    LayoutProvider.Opacity.visible : LayoutProvider.Opacity.invisible
-                )
-
+                .hidden(!viewModel.filteredCities.isEmpty)
             
             ErrorViewFactory.errorView(for: appState.errorState)
         }

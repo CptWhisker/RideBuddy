@@ -69,10 +69,7 @@ extension Image {
                         Color.appBlue,
                         lineWidth: LayoutProvider.BorderWidth.large
                     )
-                    .opacity(
-                        isSeen ?
-                        LayoutProvider.Opacity.invisible : LayoutProvider.Opacity.visible
-                    )
+                    .hidden(isSeen)
             }
     }
     

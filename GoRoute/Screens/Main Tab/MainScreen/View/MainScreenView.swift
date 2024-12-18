@@ -66,10 +66,7 @@ private extension MainScreenView {
                 searchButtonTapped()
             }
         )
-        .opacity(
-            mainViewModel.isShowingSearchButton ?
-            LayoutProvider.Opacity.visible : LayoutProvider.Opacity.invisible
-        )
+        .hidden(!mainViewModel.isShowingSearchButton)
     }
     
     @ViewBuilder

@@ -26,10 +26,7 @@ struct RouteListView: View {
                 }
             
             PlaceholderTextView(title: "Вариантов нет")
-                .opacity(
-                    viewModel.filteredRoutes.isEmpty ?
-                    LayoutProvider.Opacity.visible : LayoutProvider.Opacity.invisible
-                )
+                .hidden(!viewModel.filteredRoutes.isEmpty)
             
             ErrorViewFactory.errorView(for: appState.errorState)
         }
