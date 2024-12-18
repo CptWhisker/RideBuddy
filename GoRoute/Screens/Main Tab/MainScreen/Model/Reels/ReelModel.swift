@@ -7,12 +7,21 @@
 
 import SwiftUI
 
-struct ReelModel: Identifiable {
+struct ReelModel: Codable, Identifiable {
     
-    let id = UUID()
-    let contentImage: ImageResource
+    // MARK: Properties
+    let id: UUID
+    let contentImage: String
     let title: String
     let description: String
+    
+    // MARK: Initialization
+    init(id: UUID = UUID(), contentImage: String, title: String, description: String) {
+        self.id = id
+        self.contentImage = contentImage
+        self.title = title
+        self.description = description
+    }
 }
 
 //MARK: - Equatable

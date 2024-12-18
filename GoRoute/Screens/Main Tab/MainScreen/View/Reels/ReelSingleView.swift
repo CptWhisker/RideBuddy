@@ -14,7 +14,9 @@ struct ReelSingleView: View {
     var body: some View {
         Image(reel.contentImage)
             .reelStyle()
-            .overlay(textOverlay)
+            .overlay(alignment: .bottom) {
+                textOverlay
+            }
     }
 }
 
@@ -22,26 +24,22 @@ struct ReelSingleView: View {
 private extension ReelSingleView {
     
     var textOverlay: some View {
-        VStack {
-            Spacer()
+        VStack(alignment: .leading, spacing: LayoutProvider.Spacing.large) {
+            Text(reel.title)
+                .reelTitleStyle()
             
-            VStack(alignment: .leading, spacing: LayoutProvider.Spacing.large) {
-                Text(reel.title)
-                    .reelTitleStyle()
-                
-                Text(reel.description)
-                    .reelDescriptionStyle()
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(
-                .init(
-                    top: LayoutProvider.Padding.ReelText.top,
-                    leading: LayoutProvider.Padding.ReelText.horizontal,
-                    bottom: LayoutProvider.Padding.ReelText.bottom,
-                    trailing: LayoutProvider.Padding.ReelText.horizontal
-                )
-            )
+            Text(reel.description)
+                .reelDescriptionStyle()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(
+            .init(
+                top: LayoutProvider.Padding.ReelText.top,
+                leading: LayoutProvider.Padding.ReelText.horizontal,
+                bottom: LayoutProvider.Padding.ReelText.bottom,
+                trailing: LayoutProvider.Padding.ReelText.horizontal
+            )
+        )
     }
 }
 
@@ -49,7 +47,7 @@ private extension ReelSingleView {
 #Preview {
     ReelSingleView(
         reel: ReelModel(
-            contentImage: .reelBig11,
+            contentImage: ResourcesProvider.ReelGroup.Reel1.reelImage1,
             title: "Title",
             description: "Description"
         )

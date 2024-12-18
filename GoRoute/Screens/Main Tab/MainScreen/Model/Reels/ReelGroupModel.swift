@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct ReelGroupModel: Identifiable {
+struct ReelGroupModel: Codable, Identifiable {
     
-    let id = UUID()
-    let thumbnail: ImageResource
+    // MARK: Properties
+    let id: UUID
+    let thumbnail: String
     let reels: [ReelModel]
     var isSeen: Bool = false
     
@@ -18,6 +19,14 @@ struct ReelGroupModel: Identifiable {
         guard let firstReel = reels.first else { return "" }
         
         return firstReel.description
+    }
+    
+    // MARK: Initialization
+    init(id: UUID = UUID(), thumbnail: String, reels: [ReelModel], isSeen: Bool = false) {
+        self.id = id
+        self.thumbnail = thumbnail
+        self.reels = reels
+        self.isSeen = isSeen
     }
 }
 

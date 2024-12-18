@@ -16,7 +16,7 @@ struct ReelsCarouselView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: LayoutProvider.Spacing.large) {
                 ForEach(reelsViewModel.reelGroups) { reelGroup in
-                    ReelPreview(reelGroup: reelGroup)
+                    ReelThumbnail(reelGroup: reelGroup)
                         .onTapGesture {
                             selectReelGroup(reelGroup)
                         }

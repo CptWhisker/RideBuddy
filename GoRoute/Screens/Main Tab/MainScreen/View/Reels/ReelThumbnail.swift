@@ -1,5 +1,5 @@
 //
-//  ReelPreview.swift
+//  ReelThumbnail.swift
 //  GoRoute
 //
 //  Created by Aleksandr Moskovtsev on 16.12.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReelPreview: View {
+struct ReelThumbnail: View {
     
     let reelGroup: ReelGroupModel
     
@@ -27,9 +27,9 @@ struct ReelPreview: View {
 
 // MARK: - Preview
 #Preview {
-    ReelPreview(
+    ReelThumbnail(
         reelGroup: ReelGroupModel(
-            thumbnail: .reelPreview1,
+            thumbnail: ResourcesProvider.ReelGroup.Reel1.thumbnailImage,
             reels: []
         )
     )

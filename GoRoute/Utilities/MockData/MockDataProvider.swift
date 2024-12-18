@@ -13,66 +13,66 @@ struct MockDataProvider {
     // MARK: Reels
     static let mockReelGroups: [ReelGroupModel] = [
         ReelGroupModel(
-            thumbnail: .reelPreview1,
+            thumbnail: ResourcesProvider.ReelGroup.Reel1.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig11, title: "Reel 1_1", description: "Description 1_1"),
-                ReelModel(contentImage: .reelBig12, title: "Reel 1_2", description: "Description 1_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel1.reelImage1, title: "Reel 1_1", description: "Description 1_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel1.reelImage2, title: "Reel 1_2", description: "Description 1_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview2,
+            thumbnail: ResourcesProvider.ReelGroup.Reel2.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig21, title: "Reel 2_1", description: "Description 2_1"),
-                ReelModel(contentImage: .reelBig22, title: "Reel 2_2", description: "Description 2_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel2.reelImage1, title: "Reel 2_1", description: "Description 2_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel2.reelImage2, title: "Reel 2_2", description: "Description 2_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview3,
+            thumbnail: ResourcesProvider.ReelGroup.Reel3.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig31, title: "Reel 3_1", description: "Description 3_1"),
-                ReelModel(contentImage: .reelBig32, title: "Reel 3_2", description: "Description 3_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel3.reelImage1, title: "Reel 3_1", description: "Description 3_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel3.reelImage2, title: "Reel 3_2", description: "Description 3_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview4,
+            thumbnail: ResourcesProvider.ReelGroup.Reel4.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig41, title: "Reel 4_1", description: "Description 4_1"),
-                ReelModel(contentImage: .reelBig42, title: "Reel 4_2", description: "Description 4_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel4.reelImage1, title: "Reel 4_1", description: "Description 4_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel4.reelImage2, title: "Reel 4_2", description: "Description 4_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview5,
+            thumbnail: ResourcesProvider.ReelGroup.Reel5.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig51, title: "Reel 5_1", description: "Description 5_1"),
-                ReelModel(contentImage: .reelBig52, title: "Reel 5_2", description: "Description 5_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel5.reelImage1, title: "Reel 5_1", description: "Description 5_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel5.reelImage2, title: "Reel 5_2", description: "Description 5_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview6,
+            thumbnail: ResourcesProvider.ReelGroup.Reel6.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig61, title: "Reel 6_1", description: "Description 6_1"),
-                ReelModel(contentImage: .reelBig62, title: "Reel 6_2", description: "Description 6_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel6.reelImage1, title: "Reel 6_1", description: "Description 6_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel6.reelImage2, title: "Reel 6_2", description: "Description 6_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview7,
+            thumbnail: ResourcesProvider.ReelGroup.Reel7.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig71, title: "Reel 7_1", description: "Description 7_1"),
-                ReelModel(contentImage: .reelBig72, title: "Reel 7_2", description: "Description 7_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel7.reelImage1, title: "Reel 7_1", description: "Description 7_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel7.reelImage2, title: "Reel 7_2", description: "Description 7_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview8,
+            thumbnail: ResourcesProvider.ReelGroup.Reel8.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig81, title: "Reel 8_1", description: "Description 8_1"),
-                ReelModel(contentImage: .reelBig82, title: "Reel 8_2", description: "Description 8_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel8.reelImage1, title: "Reel 8_1", description: "Description 8_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel8.reelImage2, title: "Reel 8_2", description: "Description 8_2")
             ]
         ),
         ReelGroupModel(
-            thumbnail: .reelPreview9,
+            thumbnail: ResourcesProvider.ReelGroup.Reel9.thumbnailImage,
             reels: [
-                ReelModel(contentImage: .reelBig91, title: "Reel 9_1", description: "Description 9_1"),
-                ReelModel(contentImage: .reelBig92, title: "Reel 9_2", description: "Description 9_2")
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel9.reelImage1, title: "Reel 9_1", description: "Description 9_1"),
+                ReelModel(contentImage: ResourcesProvider.ReelGroup.Reel9.reelImage2, title: "Reel 9_2", description: "Description 9_2")
             ]
         )
     ]
