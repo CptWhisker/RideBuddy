@@ -79,9 +79,12 @@ private extension MainScreenView {
                 .toolbar(.hidden, for: .tabBar)
             
         case .cityList:
-            CitiesListView(cities: mainViewModel.filteredCities)
-                .navigationBackButton(coordinator: coordinator)
-                .toolbar(.hidden, for: .tabBar)
+                CitiesListView(cities: mainViewModel.filteredCities)
+                    .navigationBackButton(coordinator: coordinator)
+                    .toolbar(.hidden, for: .tabBar)
+                    .applyIf(appState.iOS18OrLater) { view in
+                        view.ios18SearchableNavigationFix()
+                    }
             
         case .stationList:
             StationsListView(stations: mainViewModel.filteredStations)

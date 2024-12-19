@@ -23,4 +23,23 @@ extension View {
             LayoutProvider.Opacity.invisible : LayoutProvider.Opacity.visible
         )
     }
+    
+    // MARK: (iOS 18.0, *) BugFix
+    func ios18SearchableNavigationFix() -> some View {
+        self
+            .modifier(IOS18SearchableNavigationFixModifier())
+    }
+}
+
+// MARK: - Conditional View Modifier
+extension View {
+    
+    @ViewBuilder
+    func applyIf<T: View>(_ condition: Bool, transform: (Self) -> T) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
 }

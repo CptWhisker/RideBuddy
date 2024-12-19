@@ -16,6 +16,13 @@ enum ErrorState {
 final class AppState: ObservableObject {
         
     @Published var errorState: ErrorState = .none
+    
+    var iOS18OrLater: Bool {
+        if #available(iOS 18.0, *) {
+            return true
+        }
+        return false
+    }
 }
 
 // MARK: - Public Methods
